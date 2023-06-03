@@ -127,18 +127,19 @@ def create_profile(request):
     if request.method == "POST":
         username = request.POST.get('username', None)
         email = request.POST.get('email', None)
-        token = request.POST.get('token', None)
+        # token = request.POST.get('token', None)
         languages = request.POST.getlist('languages', None)
 
-        if username and email and token and languages:
+        # if username and email and token and languages:
+        if username and email and languages:
             try:
                 # Check if given invite token is still active.
-                invite = UserInviteToken.objects.filter(token=token)
-                if not invite.exists() or not invite[0].active:
-                    raise ValueError('invalid_token')
+                # invite = UserInviteToken.objects.filter(token=token)
+                # if not invite.exists() or not invite[0].active:
+                    # raise ValueError('invalid_token')
 
                 # We now have a valid invite token...
-                invite = invite[0]
+                # invite = invite[0]
 
                 # Check if desired username is already in use.
                 current_user = User.objects.filter(username=username)
@@ -151,25 +152,30 @@ def create_profile(request):
                     language_group = Group.objects.filter(name=code)
                     if language_group.exists():
                         eval_groups.extend(language_group)
+                
+                # Hardcoded: add to public-users group
+                public_users_group = Group.objects.filter(name="public-users")
+                if public_users_group.exists():
+                    group = public_users_group[0]
 
                 # Create new user account and add to group.
                 password = '{0}{1}'.format(
-                    invite.group.name[:2].upper(),
-                    md5(invite.group.name.encode('utf-8')).hexdigest()[:8],
+                    group.name[:2].upper(),
+                    md5(group.name.encode('utf-8')).hexdigest()[:8],
                 )
                 user = User.objects.create_user(username, email, password)
 
                 # Update group settings for the new user account.
-                user.groups.add(invite.group)
+                user.groups.add(group)
                 for eval_group in eval_groups:
                     user.groups.add(eval_group)
 
                 user.save()
 
                 # Disable invite token and attach to current user.
-                invite.active = False
-                invite.user = user
-                invite.save()
+                # invite.active = False
+                # invite.user = user
+                # invite.save()
 
                 # Login user and redirect to dashboard page.
                 user = authenticate(username=username, password=password)
@@ -181,13 +187,13 @@ def create_profile(request):
                 if issue.args[0] == 'invalid_username':
                     username = None
 
-                elif issue.args[0] == 'invalid_token':
-                    token = None
+                # elif issue.args[0] == 'invalid_token':
+                    # token = None
 
                 else:
                     username = None
                     email = None
-                    token = None
+                    # token = None
                     languages = None
 
             # For any other exception, clean up and ask user to retry.
@@ -197,7 +203,7 @@ def create_profile(request):
                 print(format_exc())  # TODO: need logger here!
                 username = None
                 email = None
-                token = None
+                # token = None
                 languages = None
 
         # Detect which input should get focus for next page rendering.
@@ -209,9 +215,9 @@ def create_profile(request):
             focus_input = 'id_email'
             errors = ['invalid_email']
 
-        elif not token:
-            focus_input = 'id_token'
-            errors = ['invalid_token']
+        # elif not token:
+            # focus_input = 'id_token'
+            # errors = ['invalid_token']
 
         elif not languages:
             focus_input = 'id_languages'
@@ -223,7 +229,7 @@ def create_profile(request):
         'focus_input': focus_input,
         'username': username,
         'email': email,
-        'token': token,
+        # 'token': token,
         'languages': languages,
         'language_choices': language_choices,
         'title': 'Create profile',
@@ -430,13 +436,13 @@ def dashboard(request):
                     _languages = languages_map[task_cls]
                     break
 
-            print(
-                "campaign = {0}, type = {1}, languages = {2}".format(
-                    campaign.campaignName,
-                    _type,
-                    _languages.get(campaign.campaignName, 'none'),
-                )
-            )
+            # print(
+            #     "campaign = {0}, type = {1}, languages = {2}".format(
+            #         campaign.campaignName,
+            #         _type,
+            #         _languages.get(campaign.campaignName, 'none'),
+            #     )
+            # )
 
     _t3 = datetime.now()
 
