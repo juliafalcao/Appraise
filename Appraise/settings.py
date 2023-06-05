@@ -115,7 +115,7 @@ if DEBUG:
         import debug_toolbar  # type: ignore
 
         INSTALLED_APPS.append('debug_toolbar')
-        warnings.warn('Enabled Django Debug Toolbar in installed apps')
+        # warnings.warn('Enabled Django Debug Toolbar in installed apps')
     except ImportError:
         warnings.warn('Django Debug Toolbar not installed')
 
