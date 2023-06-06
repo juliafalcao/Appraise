@@ -38,7 +38,7 @@ from deprecated import add_deprecated_method
 
 LOGGER = _get_logger(name=__name__)
 
-HITS_REQUIRED_BEFORE_ENGLISH_ALLOWED = 5
+HITS_REQUIRED_BEFORE_ENGLISH_ALLOWED = 0
 
 
 # HTTP error handlers supporting COMMIT_TAG.
@@ -388,9 +388,9 @@ def dashboard(request):
                 if not code in languages:
                     languages.append(code)
 
-        if hits < HITS_REQUIRED_BEFORE_ENGLISH_ALLOWED:
-            if len(languages) > 1 and 'eng' in languages:
-                languages.remove('eng')
+        # if hits < HITS_REQUIRED_BEFORE_ENGLISH_ALLOWED:
+            # if len(languages) > 1 and 'eng' in languages:
+                # languages.remove('eng')
 
         # Remove any language for which no free task is available.
         from Campaign.models import Campaign
