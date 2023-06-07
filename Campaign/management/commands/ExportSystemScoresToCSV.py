@@ -59,5 +59,13 @@ class Command(BaseCommand):
                 )
                 system_scores.extend(_scores)
 
+        fields = ['username', 'targetID', 'itemID', 'itemType', 'sourceLanguageCode', 'targetLanguageCode', 'score', 'startTime', 'endTime']
+        if options['batch_info']:
+            fields += ['batchNo', 'realItemID']
+
+        # write header
+        csv_writer.writerow(fields)
+
+        # write rows of scores
         for system_score in system_scores:
             csv_writer.writerow([str(x) for x in system_score])
