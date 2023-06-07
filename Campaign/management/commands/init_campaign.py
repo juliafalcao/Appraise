@@ -138,6 +138,7 @@ def _init_campaign(
     if stdout is not None:
         stdout.write('Processed Market/Metadata instances')
 
+    """
     # Create User accounts for all language pairs. We collect the
     # resulting user credentials for later print out/CSV export.
     credentials = _process_users(ALL_LANGUAGES, context)
@@ -181,6 +182,7 @@ def _init_campaign(
     else:
         if stdout is not None:
             stdout.write('Processing campaign agendas was not requested')
+    """
 
     return context
 

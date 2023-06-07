@@ -221,8 +221,9 @@ class Command(BaseCommand):
             self.stdout.write('Done. Credentials exported to a CSV/XLSX file.')
         else:
             self.stdout.write(
-                'Done. Re-run providing --csv-output or --xlsx-output '
-                'to export credentials.'
+                'Done.'
+                # 'Done. Re-run providing --csv-output or --xlsx-output '
+                # 'to export credentials.'
             )
 
 
@@ -253,12 +254,12 @@ def _create_campaign(
 ):
     """Create a new campaign."""
     # The team is already created in one of the previous steps
-    team = CampaignTeam.objects.get(teamName=campaign_name)
+    # team = CampaignTeam.objects.get(teamName=campaign_name)
     campaign = Campaign(campaignName=campaign_name, createdBy=owner)
     if campaign_options:
         campaign.campaignOptions = campaign_options
     campaign.save()
-    campaign.teams.add(team)
+    # campaign.teams.add(team)
     for _campaign_data in campaign_data:
         campaign.batches.add(_campaign_data)
     campaign.save()
