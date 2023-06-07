@@ -40,7 +40,7 @@ class BaseMetadataAdmin(admin.ModelAdmin):
         (
             'Advanced options',
             {
-                'classes': ('collapse',),
+                'classes': (),
                 'fields': ('activated', 'completed', 'retired'),
             },
         ),
