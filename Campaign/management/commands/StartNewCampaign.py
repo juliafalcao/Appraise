@@ -5,6 +5,7 @@ See LICENSE for usage details
 """
 from datetime import datetime
 from os import path
+import re
 
 from django.core.files import File
 from django.core.files.base import ContentFile
@@ -140,6 +141,11 @@ class Command(BaseCommand):
         batches_json = options['batches_json']
         campaign_name = context['CAMPAIGN_NAME']
         campaign_opts = context.get('TASK_OPTIONS', '')
+
+        # Validate that campaign name is alphanumeric
+        if not re.match(r"[a-zA-Z0-9]+$", campaign_name):
+            raise CommandError("Campaign name must contain only letters and numbers.")
+
         if batches_json:
             # Get markets and metad data for batches
             markets_and_metadata = _process_market_and_metadata(
