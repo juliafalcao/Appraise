@@ -23,7 +23,7 @@
 {% if request.user.is_authenticated %}
             <a class="btn btn-primary btn-lg btn-block" href="{% url 'update-profile' %}" role="button">Update profile &raquo;</a>
 {% else %}
-            <a class="btn btn-primary btn-lg btn-block" href="{% url 'create-profile' %}" role="button">Create profile &raquo;</a>
+            <a class="btn btn-primary btn-lg btn-block" href="{% url 'create-profile' %}" role="button">Register &raquo;</a>
 {% endif %}
           </div>
         </div>
