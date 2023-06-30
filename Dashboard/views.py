@@ -109,6 +109,18 @@ def frontpage(request, extra_context=None):
 
     return render(request, 'Dashboard/frontpage.html', context)
 
+def _validate_passwords(password1, password2):
+    if (not password1 or not password2):
+        return (False, "missing_password")
+
+    if password1 != password2:
+        return (False, "passwords_not_matching")
+
+    # password rules
+    if len(password1) < 4:
+        return (False, "password_too_short")
+
+    return (True, None)
 
 def create_profile(request):
     """
@@ -116,8 +128,8 @@ def create_profile(request):
     """
     errors = None
     username = None
-    email = None
-    token = None
+    # email = None
+    # token = None
     languages = []
     language_choices = [x for x in LANGUAGE_CODES_AND_NAMES.items()]
     language_choices.sort(key=lambda x: x[1])
@@ -126,12 +138,16 @@ def create_profile(request):
 
     if request.method == "POST":
         username = request.POST.get('username', None)
-        email = request.POST.get('email', None)
+        # email = request.POST.get('email', None)
         # token = request.POST.get('token', None)
         languages = request.POST.getlist('languages', None)
+        password1 = request.POST.get('password1', None)
+        password2 = request.POST.get('password2', None)
+
+        _password_ok, _password_error = _validate_passwords(password1, password2)
 
         # if username and email and token and languages:
-        if username and email and languages:
+        if username and languages and _password_ok:
             try:
                 # Check if given invite token is still active.
                 # invite = UserInviteToken.objects.filter(token=token)
@@ -158,12 +174,16 @@ def create_profile(request):
                 if public_users_group.exists():
                     group = public_users_group[0]
 
+                # Create password (outdated)
+                # password = '{0}{1}'.format(
+                #     group.name[:2].upper(),
+                #     md5(group.name.encode('utf-8')).hexdigest()[:8],
+                # )
+
+                password = password1
+
                 # Create new user account and add to group.
-                password = '{0}{1}'.format(
-                    group.name[:2].upper(),
-                    md5(group.name.encode('utf-8')).hexdigest()[:8],
-                )
-                user = User.objects.create_user(username, email, password)
+                user = User.objects.create_user(username=username, password=password)
 
                 # Update group settings for the new user account.
                 user.groups.add(group)
@@ -192,7 +212,7 @@ def create_profile(request):
 
                 else:
                     username = None
-                    email = None
+                    # email = None
                     # token = None
                     languages = None
 
@@ -202,7 +222,7 @@ def create_profile(request):
 
                 print(format_exc())  # TODO: need logger here!
                 username = None
-                email = None
+                # email = None
                 # token = None
                 languages = None
 
@@ -211,9 +231,9 @@ def create_profile(request):
             focus_input = 'id_username'
             errors = ['invalid_username']
 
-        elif not email:
-            focus_input = 'id_email'
-            errors = ['invalid_email']
+        # elif not email:
+            # focus_input = 'id_email'
+            # errors = ['invalid_email']
 
         # elif not token:
             # focus_input = 'id_token'
@@ -223,16 +243,20 @@ def create_profile(request):
             focus_input = 'id_languages'
             errors = ['invalid_languages']
 
+        elif not _password_ok:
+            focus_input = 'password1'
+            errors = [_password_error]
+
     context = {
         'active_page': "OVERVIEW",  # TODO: check
         'errors': errors,
         'focus_input': focus_input,
         'username': username,
-        'email': email,
+        # 'email': email,
         # 'token': token,
         'languages': languages,
         'language_choices': language_choices,
-        'title': 'Create profile',
+        'title': 'Register',
     }
     context.update(BASE_CONTEXT)
 
