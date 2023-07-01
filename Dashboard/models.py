@@ -14,10 +14,13 @@ from django.db.utils import ProgrammingError
 # pylint: disable=import-error
 
 LANGUAGE_CODES_AND_NAMES = {
+    'mlt': 'Maltese',
+    'eng': 'English',
+    'eus': 'Basque',
+    'spa': 'Spanish',
     # 'aeb': 'Tunisian Arabic (تونسي)',
     # 'ces': 'Czech (čeština)',
     # 'zho': 'Chinese (中文)',
-    'eng': 'English',
     # 'fin': 'Finnish (suomi)',
     # 'deu': 'German (Deutsch)',
     # 'lav': 'Latvian (latviešu)',
@@ -28,7 +31,6 @@ LANGUAGE_CODES_AND_NAMES = {
     # 'plk': 'Polish (polski)',
     # 'por': 'Portuguese (português)',
     # 'ron': 'Romanian (română)',
-    'spa': 'Spanish',
     # 'swe': 'Swedish (svenska)',
     # 'ara': 'Arabic (العربية)',
     # 'ita': 'Italian (italiano)',
@@ -65,7 +67,6 @@ LANGUAGE_CODES_AND_NAMES = {
     # 'ayn': 'Yemeni Arabic (يمني - yamani)',
     # 'fas': 'Farsi (فارسی)',
     # 'afr': 'Afrikaans',
-    'mlt': 'Maltese',
     # 'sin': 'Sinhalese (සිංහල sinhala)',
     # 'smo': 'Samoan (Gagana faʻa Sāmoa)',
     # 'mlg': 'Malagasy',
@@ -106,7 +107,6 @@ LANGUAGE_CODES_AND_NAMES = {
     # 'ltz': 'Luxembourgish (Lëtzebuergesch)',
     # 'lao': 'Lao (ພາສາລາວ)',
     # 'khm': 'Khmer (ភាសាខ្មែរ)',
-    'eus': 'Basque',
     # 'hye': 'Armenian (հայերեն hayeren)',
     # 'mon': 'Mongolian (монгол хэл)',
     # 'mkd': 'Macedonian (македонски)',
