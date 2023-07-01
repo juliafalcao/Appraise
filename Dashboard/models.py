@@ -217,12 +217,27 @@ LANGUAGE_CODES_AND_NAMES = {
 # SIGN_LANGUAGE_CODES = set([LANGUAGE_CODES_AND_NAMES['sgg']])
 SIGN_LANGUAGE_CODES = set([])
 
+PROFICIENCY_LEVELS = [
+    "beginner",
+    "intermediate",
+    "advanced",
+    "fluent",
+    "native",
+]
+
 # Ensure that all languages have a corresponding group.
 try:
     for code in LANGUAGE_CODES_AND_NAMES:
         if not Group.objects.filter(name=code).exists():
             new_language_group = Group(name=code)
             new_language_group.save()
+
+        # create also a group for each language + proficiency level combination
+        for level in PROFICIENCY_LEVELS:
+            group_name = code + "-" + level
+            if not Group.objects.filter(name=group_name).exists():
+                new_group = Group(name=group_name)
+                new_group.save()
 
 except (OperationalError, ProgrammingError):
     pass

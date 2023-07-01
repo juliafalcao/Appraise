@@ -20,7 +20,7 @@ from django.template.defaulttags import register
 
 from Appraise.settings import BASE_CONTEXT
 from Appraise.utils import _get_logger
-from Dashboard.models import LANGUAGE_CODES_AND_NAMES
+from Dashboard.models import LANGUAGE_CODES_AND_NAMES, PROFICIENCY_LEVELS
 from Dashboard.models import UserInviteToken
 from Dashboard.utils import generate_confirmation_token
 from EvalData.models import DirectAssessmentTask
@@ -119,7 +119,7 @@ def frontpage(request, extra_context=None):
 
     return render(request, 'Dashboard/frontpage.html', context)
 
-def _validate_passwords(password1, password2):
+def _validate_passwords(password1: str, password2: str) -> (bool, str):
     if (not password1 or not password2):
         return (False, "missing_password")
 
@@ -132,6 +132,16 @@ def _validate_passwords(password1, password2):
 
     return (True, None)
 
+def _validate_languages(languages: list, proficiency_levels: dict) -> (bool, str):
+    if not languages:
+        return (False, "no_language_selected")
+
+    for lang in languages:
+        if proficiency_levels.get(lang, None) in [None, ""]:
+            return (False, "missing_proficiency_level")
+
+    return (True, None)
+
 def create_profile(request):
     """
     Renders the create profile view.
@@ -141,7 +151,8 @@ def create_profile(request):
     # email = None
     # token = None
     languages = []
-    language_choices = [x for x in LANGUAGE_CODES_AND_NAMES.items()]
+    language_choices = list(LANGUAGE_CODES_AND_NAMES.items())
+    proficiency_level_choices = PROFICIENCY_LEVELS
     # language_choices.sort(key=lambda x: x[1])
     proficiency_levels = {}
 
@@ -157,14 +168,12 @@ def create_profile(request):
         _password_ok, _password_error = _validate_passwords(password1, password2)
 
         languages = request.POST.getlist('languages', None)
-        proficiency_levels = {}
-        for language in languages:
-            proficiency_levels[language] = request.POST.get(f'proficiency-level-{language}', None)
+        proficiency_levels = { language : request.POST.get(f'proficiency-level-{language}', None) for language in languages }
 
-        # TODO: validate
+        _languages_ok, _languages_error = _validate_languages(languages, proficiency_levels)
 
         # if username and email and token and languages:
-        if username and languages and _password_ok:
+        if username and languages and _password_ok and _languages_ok:
             try:
                 # Check if given invite token is still active.
                 # invite = UserInviteToken.objects.filter(token=token)
@@ -178,18 +187,26 @@ def create_profile(request):
                 current_user = User.objects.filter(username=username)
                 if current_user.exists():
                     raise ValueError('invalid_username')
+                    # TODO: make it clear that the user already exists, not just invalid
+
+                # Set password
+                password = password1
 
                 # Compute set of evaluation languages for this user.
-                eval_groups = []
+                user_groups = []
                 for code in languages:
                     language_group = Group.objects.filter(name=code)
                     if language_group.exists():
-                        eval_groups.extend(language_group)
-                
+                        user_groups.extend(language_group)
+
+                    language_level_group = Group.objects.filter(name=f"{code}-{proficiency_levels[code]}")
+                    if language_level_group.exists():
+                        user_groups.extend(language_level_group)
+
                 # Hardcoded: add to public-users group
                 public_users_group = Group.objects.filter(name="public-users")
                 if public_users_group.exists():
-                    group = public_users_group[0]
+                    user_groups.extend(public_users_group)
 
                 # Create password (outdated)
                 # password = '{0}{1}'.format(
@@ -197,15 +214,12 @@ def create_profile(request):
                 #     md5(group.name.encode('utf-8')).hexdigest()[:8],
                 # )
 
-                password = password1
-
-                # Create new user account and add to group.
+                # Create new user account
                 user = User.objects.create_user(username=username, password=password)
 
                 # Update group settings for the new user account.
-                user.groups.add(group)
-                for eval_group in eval_groups:
-                    user.groups.add(eval_group)
+                for group in user_groups:
+                    user.groups.add(group)
 
                 user.save()
 
@@ -256,13 +270,13 @@ def create_profile(request):
             # focus_input = 'id_token'
             # errors = ['invalid_token']
 
-        elif not languages:
-            focus_input = 'id_languages'
-            errors = ['invalid_languages']
-
         elif not _password_ok:
             focus_input = 'password1'
-            errors = [_password_error]
+            errors = ['general_password_error', _password_error]
+
+        elif not _languages_ok:
+            focus_input = 'id_languages'
+            errors = [_languages_error]
 
     context = {
         'active_page': "OVERVIEW",  # TODO: check
@@ -272,8 +286,9 @@ def create_profile(request):
         # 'email': email,
         # 'token': token,
         'languages': languages,
-        'language_choices': language_choices,
         'proficiency_levels': proficiency_levels,
+        'language_choices': language_choices,
+        'proficiency_level_choices': proficiency_level_choices,
         'title': 'Register',
     }
     context.update(BASE_CONTEXT)
@@ -303,8 +318,6 @@ def update_profile(request):
                         language_group = language_group[0]
                         if code in languages:
                             language_group.user_set.add(request.user)
-                        else:
-                            language_group.user_set.remove(request.user)
                         language_group.save()
 
                 # Redirect to dashboard.
