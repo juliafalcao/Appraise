@@ -70,11 +70,11 @@ urlpatterns = [
         ),
         name='change-password',
     ),
-    re_path(
-        r'^dashboard/update-profile/$',
-        dashboard_views.update_profile,
-        name='update-profile',
-    ),  # TODO: remove?
+    # re_path(
+    #     r'^dashboard/update-profile/$',
+    #     dashboard_views.update_profile,
+    #     name='update-profile',
+    # ),
     re_path(r'^dashboard/$', dashboard_views.dashboard, name='dashboard'),
     re_path(
         r'^data-assessment/$',
