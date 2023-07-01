@@ -1,7 +1,7 @@
 {% extends "Dashboard/base.html" %}
+{% load static %}
 
-{% block content %}
-
+{% block head %}
 <style>
   .required::after {
     content: " *";
@@ -12,7 +12,56 @@
   .input-group {
     width: 100%;
   }
+
+  input[type=checkbox] {
+    margin-top: 4px;
+    margin-right: 6px;
+    margin-left: 0px;
+  }
+
+  .language-choices-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0.2em;
+  }
+
+  .language-choices-td {
+    width: 40%;
+    padding-left: 20px; /* to make up for the checkbox -20px margin */
+  }
 </style>
+
+<link rel="stylesheet" href="{% static 'Dashboard/css/jquery-ui.css' %}">
+<script src="{% static 'Dashboard/js/jquery-ui.min.js' %}"></script>
+<script>
+
+  $(document).ready(function () {
+
+    function checkbox_change() {
+      var lang_code = $(this).val();
+      var id_select = "#proficiency-level-" + lang_code;
+
+      // when the language checkbox is checked, activate the corresponding dropdown menu for the proficiency level
+      if ($(this).is(":checked")) {
+        $(id_select).prop("disabled", false);
+        return;
+      }
+
+      // when it's unchecked, reset the dropdown menu value and deactivate it
+      $(id_select).prop("selectedIndex", 0);
+      $(id_select).prop("disabled", true);
+    }
+
+    $(".language-checkbox").change(checkbox_change);
+  })
+
+
+
+</script>
+
+{% endblock %}
+
+{% block content %}
 
   {% if errors %}
   <div class="alert alert-danger alert-dismissible" role="alert">
@@ -111,7 +160,7 @@
       </div>
     </div>
 
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label for="id_languages" class="col-sm-4 control-label required">Languages</label>
       <div class="col-sm-4">
         <div class="input-group">
@@ -123,6 +172,42 @@
         </div>
         <span id="helpLanguages" class="help-block">Which languages will you evaluate?</span>
       </div>
+    </div> -->
+
+    <div class="form-group">
+      <label for="id_languages" class="col-sm-4 control-label required">Languages</label>
+      <div class="col-sm-4">
+        <table class="language-choices-table">
+          {% for code, name in language_choices %}
+          <tr>
+            <td class="language-choices-td">
+              <div class="input-group checkbox">
+                <input type="checkbox" {% if code in languages %} checked=true {% endif %} name="languages" class="language-checkbox" value="{{code}}">{{name}}</input>
+              </div>
+            </td>
+            <td style="width:60%;">
+              <div class="input-group">
+                <select class="col-sm-2 form-control" name="proficiency-level-{{code}}" id="proficiency-level-{{code}}" {% if code not in languages %} disabled {% endif %}>
+                  {% with level=proficiency_levels|get_value_from_dict:code %}
+                  <option {% if level == None %} selected {% endif %} value=""></option>
+                  <option {% if level == 'native' %} selected {% endif %} value="native">Native speaker</option>
+                  <option {% if level == 'fluent' %} selected {% endif %} value="fluent">Fluent</option>
+                  <option {% if level == 'intermediate' %} selected {% endif %} value="intermediate">Intermediate</option>
+                  <option {% if level == 'beginner' %} selected {% endif %} value="beginner">Beginner</option>
+                  {% endwith %}
+                </select>
+              </div>
+            </td>
+    
+          </tr>
+          {% endfor %}
+        </table>
+        <span id="helpLanguages" class="help-block">Please select the languages you speak, and tell us what you believe is
+          your proficiency level in each</span>
+          <span></span>
+
+      </div>
+    </div>
     </div>
 
     <button type="submit" class="col-sm-offset-4 btn btn-primary">Create profile</button>

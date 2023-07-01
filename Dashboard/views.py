@@ -16,6 +16,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.shortcuts import render
+from django.template.defaulttags import register
 
 from Appraise.settings import BASE_CONTEXT
 from Appraise.utils import _get_logger
@@ -25,6 +26,15 @@ from Dashboard.utils import generate_confirmation_token
 from EvalData.models import DirectAssessmentTask
 from EvalData.models import TASK_DEFINITIONS
 from EvalData.models import TaskAgenda
+
+@register.filter
+def get_value_from_dict(dict_data, key):
+    """
+    usage example {{ your_dict|get_value_from_dict:your_key }}
+    """
+    if key:
+        return dict_data.get(key)
+
 
 TASK_TYPES = tuple([tup[1] for tup in TASK_DEFINITIONS])
 TASK_RESULTS = tuple([tup[2] for tup in TASK_DEFINITIONS])
@@ -132,7 +142,8 @@ def create_profile(request):
     # token = None
     languages = []
     language_choices = [x for x in LANGUAGE_CODES_AND_NAMES.items()]
-    language_choices.sort(key=lambda x: x[1])
+    # language_choices.sort(key=lambda x: x[1])
+    proficiency_levels = {}
 
     focus_input = 'id_username'
 
@@ -140,11 +151,17 @@ def create_profile(request):
         username = request.POST.get('username', None)
         # email = request.POST.get('email', None)
         # token = request.POST.get('token', None)
-        languages = request.POST.getlist('languages', None)
         password1 = request.POST.get('password1', None)
         password2 = request.POST.get('password2', None)
 
         _password_ok, _password_error = _validate_passwords(password1, password2)
+
+        languages = request.POST.getlist('languages', None)
+        proficiency_levels = {}
+        for language in languages:
+            proficiency_levels[language] = request.POST.get(f'proficiency-level-{language}', None)
+
+        # TODO: validate
 
         # if username and email and token and languages:
         if username and languages and _password_ok:
@@ -256,6 +273,7 @@ def create_profile(request):
         # 'token': token,
         'languages': languages,
         'language_choices': language_choices,
+        'proficiency_levels': proficiency_levels,
         'title': 'Register',
     }
     context.update(BASE_CONTEXT)
