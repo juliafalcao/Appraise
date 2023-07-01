@@ -173,8 +173,7 @@ def create_profile(request):
                 # Check if desired username is already in use.
                 current_user = User.objects.filter(username=username)
                 if current_user.exists():
-                    raise ValueError('invalid_username')
-                    # TODO: make it clear that the user already exists, not just invalid
+                    raise ValueError('username_already_exists')
 
                 # Set password
                 password = password1
