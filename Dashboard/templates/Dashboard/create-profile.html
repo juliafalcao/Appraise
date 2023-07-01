@@ -78,10 +78,6 @@
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     {% if 'invalid_username' in errors %}
     <p><strong>Warning!</strong> Invalid or missing username. Please provide a new username.</p>
-    <!-- {% elif 'invalid_email' in errors %} -->
-    <!-- <p><strong>Warning!</strong> Invalid or missing email address. Please provide your email address. It will never be shared.</p> -->
-    <!-- {% elif 'invalid_token' in errors %} -->
-    <!-- <p><strong>Warning!</strong> Invalid or inactive invite token. Please try again and contact your team lead if the problem persists.</p> -->
     {% elif 'missing_password' in errors %}
     <p><strong>Warning!</strong> Missing password. Please type your desired password twice, in both fields.</p>
     {% elif 'passwords_not_matching' in errors %}
@@ -124,28 +120,6 @@
       </div>
     </div>
 
-    <!-- <div class="form-group">
-      <label for="id_email" class="col-sm-4 control-label required">Email</label>
-      <div class="col-sm-4">
-        <div class="input-group">
-          <div class="input-group-addon">required</div>
-          <input class="form-control" name="email" id="id_email" type="text" value="{% if email %}{{email}}{% endif %}" aria-describedby="helpEmail" />
-        </div>
-        <span id="helpEmail" class="help-block">Please enter your email address</span>
-      </div>
-    </div> -->
-
-    <!-- <div class="form-group">
-      <label for="id_token" class="col-sm-4 control-label">Token</label>
-      <div class="col-sm-4">
-        <div class="input-group">
-          <div class="input-group-addon">required</div>
-          <input class="form-control" name="token" id="id_token" type="text" size="30" value="{% if token %}{{token}}{% endif %}" aria-describedby="helpToken" />
-        </div>
-        <span id="helpToken" class="help-block">And also provide your invite token</span>
-      </div>
-    </div> -->
-
     <div class="form-group">
       <label for="id_password1" class="col-sm-4 control-label required">Password</label>
       <div class="col-sm-4">
@@ -153,12 +127,6 @@
           <input class="form-control" name="password1" id="password1" type="password" />
         </div>
         <p class="help-block">Please enter your desired password</p>
-        <!-- <ul class="help-block">
-          <li><small>Can't be too similar to your other personal information;</small></li>
-          <li><small>Must contain at least 8 characters;</small></li>
-          <li><small>Can't be a commonly used password;</small></li>
-          <li><small>Can't be entirely numeric.</small></li>
-        </ul> -->
       </div>
     </div>
 
@@ -171,20 +139,6 @@
         <p class="help-block">Please re-type your password</p>
       </div>
     </div>
-
-    <!-- <div class="form-group">
-      <label for="id_languages" class="col-sm-4 control-label required">Languages</label>
-      <div class="col-sm-4">
-        <div class="input-group">
-          <select class="form-control" name="languages" id="id_languages" multiple="multiple" width="100%">
-{% for code, name in language_choices %}
-            <option {% if code in languages %}selected="selected"{% endif %}value="{{code}}">{{name}}</option>
-{% endfor %}
-          </select>
-        </div>
-        <span id="helpLanguages" class="help-block">Which languages will you evaluate?</span>
-      </div>
-    </div> -->
 
     <div class="form-group">
       <label for="id_languages" class="col-sm-4 control-label required">Languages</label>

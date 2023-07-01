@@ -148,8 +148,6 @@ def create_profile(request):
     """
     errors = None
     username = None
-    # email = None
-    # token = None
     languages = []
     language_choices = list(LANGUAGE_CODES_AND_NAMES.items())
     proficiency_level_choices = PROFICIENCY_LEVELS
@@ -160,8 +158,6 @@ def create_profile(request):
 
     if request.method == "POST":
         username = request.POST.get('username', None)
-        # email = request.POST.get('email', None)
-        # token = request.POST.get('token', None)
         password1 = request.POST.get('password1', None)
         password2 = request.POST.get('password2', None)
 
@@ -172,17 +168,8 @@ def create_profile(request):
 
         _languages_ok, _languages_error = _validate_languages(languages, proficiency_levels)
 
-        # if username and email and token and languages:
         if username and languages and _password_ok and _languages_ok:
             try:
-                # Check if given invite token is still active.
-                # invite = UserInviteToken.objects.filter(token=token)
-                # if not invite.exists() or not invite[0].active:
-                    # raise ValueError('invalid_token')
-
-                # We now have a valid invite token...
-                # invite = invite[0]
-
                 # Check if desired username is already in use.
                 current_user = User.objects.filter(username=username)
                 if current_user.exists():
@@ -208,12 +195,6 @@ def create_profile(request):
                 if public_users_group.exists():
                     user_groups.extend(public_users_group)
 
-                # Create password (outdated)
-                # password = '{0}{1}'.format(
-                #     group.name[:2].upper(),
-                #     md5(group.name.encode('utf-8')).hexdigest()[:8],
-                # )
-
                 # Create new user account
                 user = User.objects.create_user(username=username, password=password)
 
@@ -222,11 +203,6 @@ def create_profile(request):
                     user.groups.add(group)
 
                 user.save()
-
-                # Disable invite token and attach to current user.
-                # invite.active = False
-                # invite.user = user
-                # invite.save()
 
                 # Login user and redirect to dashboard page.
                 user = authenticate(username=username, password=password)
@@ -238,13 +214,8 @@ def create_profile(request):
                 if issue.args[0] == 'invalid_username':
                     username = None
 
-                # elif issue.args[0] == 'invalid_token':
-                    # token = None
-
                 else:
                     username = None
-                    # email = None
-                    # token = None
                     languages = None
 
             # For any other exception, clean up and ask user to retry.
@@ -253,22 +224,12 @@ def create_profile(request):
 
                 print(format_exc())  # TODO: need logger here!
                 username = None
-                # email = None
-                # token = None
                 languages = None
 
         # Detect which input should get focus for next page rendering.
         if not username:
             focus_input = 'id_username'
             errors = ['invalid_username']
-
-        # elif not email:
-            # focus_input = 'id_email'
-            # errors = ['invalid_email']
-
-        # elif not token:
-            # focus_input = 'id_token'
-            # errors = ['invalid_token']
 
         elif not _password_ok:
             focus_input = 'password1'
@@ -283,8 +244,6 @@ def create_profile(request):
         'errors': errors,
         'focus_input': focus_input,
         'username': username,
-        # 'email': email,
-        # 'token': token,
         'languages': languages,
         'proficiency_levels': proficiency_levels,
         'language_choices': language_choices,
@@ -490,14 +449,6 @@ def dashboard(request):
                     _type = TASK_NAMES[task_cls]
                     _languages = languages_map[task_cls]
                     break
-
-            # print(
-            #     "campaign = {0}, type = {1}, languages = {2}".format(
-            #         campaign.campaignName,
-            #         _type,
-            #         _languages.get(campaign.campaignName, 'none'),
-            #     )
-            # )
 
     _t3 = datetime.now()
 
