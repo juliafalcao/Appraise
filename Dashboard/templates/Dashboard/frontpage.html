@@ -1,10 +1,42 @@
 {% extends 'Dashboard/base.html' %}
 
+
 {% block content %}
+<style>
+.uni-logos {
+  display: flow-root;
+}
+
+.uni-logo {
+  pointer-events: none;
+  user-select: none;
+}
+
+.um-logo {
+  float: left;
+  height: 4.5em;
+  filter: grayscale(100%);
+  opacity: 0.8;
+  margin-top: 1em; /* to make up for the difference in size */
+}
+
+.upv-logo {
+  float: right;
+  height: 6em;
+  opacity: 0.7;
+}
+
+</style>
       <!-- Main jumbotron for a primary marketing message or call to action -->
+
       <div class="jumbotron">
-        <h1>Welcome to Appraise!</h1>
-        <h3>An open-source system for manual evaluation of MT output</h3>
+        <div class="uni-logos">
+          <img class="uni-logo um-logo" src="https://www.qualiaanalytics.org/app/uploads/2021/04/uom-logo.png">
+          <img class="uni-logo upv-logo" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/39/Ehu_logo.svg/1200px-Ehu_logo.svg.png">
+        </div>
+
+        <h1>Welcome!</h1>
+        <h3>A crowd-sourced campaign for evaluation of translations</h3>
 
         <div class="panel panel-primary" style="margin-top: 20px;">
           <div class="panel-heading">
