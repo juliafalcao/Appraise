@@ -4,7 +4,11 @@
 {% block content %}
 <style>
 .uni-logos {
-  display: flow-root;
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: center;
+  align-content: center;
+  grid-gap: 1.5em;
 }
 
 .uni-logo {
@@ -13,28 +17,28 @@
 }
 
 .um-logo {
-  float: left;
-  height: 4.5em;
+  height: 3.5em;
   filter: grayscale(100%);
   opacity: 0.8;
   margin-top: 1em; /* to make up for the difference in size */
 }
 
 .upv-logo {
-  float: right;
-  height: 6em;
+  height: 5em;
   opacity: 0.7;
+}
+
+@media (max-width: 460px) {
+  .uni-logos {
+    grid-auto-flow: row;
+    grid-gap: 0.5em;
+  }
 }
 
 </style>
       <!-- Main jumbotron for a primary marketing message or call to action -->
 
       <div class="jumbotron">
-        <div class="uni-logos">
-          <img class="uni-logo um-logo" src="https://www.qualiaanalytics.org/app/uploads/2021/04/uom-logo.png">
-          <img class="uni-logo upv-logo" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/39/Ehu_logo.svg/1200px-Ehu_logo.svg.png">
-        </div>
-
         <h1>Welcome!</h1>
         <h3>A crowd-sourced campaign for evaluation of translations</h3>
 
@@ -61,5 +65,12 @@
         </div>
 
         <div>&nbsp;</div>
+
+      </div> <!-- jumbotron -->
+
+      <div class="uni-logos">
+        <img class="uni-logo um-logo" src="https://www.qualiaanalytics.org/app/uploads/2021/04/uom-logo.png">
+        <br>
+        <img class="uni-logo upv-logo" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/39/Ehu_logo.svg/1200px-Ehu_logo.svg.png">
       </div>
 {% endblock %}
