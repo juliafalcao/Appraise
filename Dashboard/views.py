@@ -327,7 +327,6 @@ def update_profile(request):
 
     return render(request, 'Dashboard/update-profile.html', context)
 
-
 @login_required
 def dashboard(request):
     """
@@ -523,6 +522,7 @@ def dashboard(request):
             'current_task': current_task,
             'current_type': current_type,
             'current_url': current_url,
+            'languages': languages,
             'all_languages': all_languages,
             'debug_times': (_t2 - _t1, _t3 - _t2, _t4 - _t3, _t4 - _t1),
             'template_debug': 'debug' in request.GET,
