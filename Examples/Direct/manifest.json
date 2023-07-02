@@ -1,11 +1,11 @@
 {
     "CAMPAIGN_URL": "http://127.0.0.1:8000/dashboard/sso/",
-    "CAMPAIGN_NAME": "example1",
-    "CAMPAIGN_KEY": "c1",
-    "CAMPAIGN_NO": 1,
+    "CAMPAIGN_NAME": "example16mlteng",
+    "CAMPAIGN_KEY": "16",
+    "CAMPAIGN_NO": 16,
     "REDUNDANCY": 1,
 
     "TASKS_TO_ANNOTATORS": [
-        ["eng", "deu", "uniform",  1, 1]
+        ["mlt", "eng", "uniform",  1, 1]
     ]
 }
