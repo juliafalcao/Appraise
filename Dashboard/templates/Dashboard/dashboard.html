@@ -73,8 +73,8 @@
 
     /* loop over languages (in list ordered by priority of what to show, local languages first!) */
     for (const lang_code of ["mlt", "eus", "spa", "eng"]) {
-      if (languages.includes("mlt")) {
-        openTab(null, "mlt");
+      if (languages.includes(lang_code)) {
+        openTab(null, lang_code);
         break;
       }
     }
