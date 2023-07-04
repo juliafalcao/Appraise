@@ -21,7 +21,15 @@ from sys import exit as sys_exit
 from django.core.management.base import BaseCommand
 from django.core.management.base import CommandError
 
-from Dashboard.models import LANGUAGE_CODES_AND_NAMES
+try:
+    from Dashboard.models import LANGUAGE_CODES_AND_NAMES
+except: # when debugging, the import doesn't work
+    LANGUAGE_CODES_AND_NAMES = {
+        'mlt': 'Maltese',
+        'eng': 'English',
+        'eus': 'Basque',
+        'spa': 'Spanish',
+    }
 
 # pylint: disable=E0401,W0611
 
@@ -295,7 +303,7 @@ class Command(BaseCommand):
 
         systems_files = []
         systems_path = options['systems_path']
-        systems_glob = '{0}{1}{2}'.format(systems_path, path_sep, "*.txt")
+        systems_glob = '{0}{1}{2}'.format(systems_path, path_sep, "*") # all files in the folder
 
         for system_file in iglob(systems_glob):
             if '+' in basename(system_file):
@@ -577,6 +585,9 @@ class Command(BaseCommand):
             # Determine segment ids for redundant quality controls.
             chk_items, ref_items, bad_items = items_per_batch[1:]
             print(chk_items, ref_items, bad_items)
+            print("chk_items:", chk_items)
+            print("ref_items:", ref_items)
+            print("bad_items:", bad_items)
 
             start_index = 0
             end_index = chk_items
@@ -590,7 +601,10 @@ class Command(BaseCommand):
             end_index += bad_items
             bad_ids = check_ids[start_index:end_index]
 
-            print(chk_ids, ref_ids, bad_ids)
+            print("chk_ids:", chk_ids)
+            print("ref_ids:", ref_ids)
+            print("bad_ids:", bad_ids)
+
             batch_items = [None for _ in range(100)]
             for index, item_hash in enumerate(block_hashes[:50]):
                 batch_items[index] = (item_hash, 'TGT')
@@ -616,8 +630,8 @@ class Command(BaseCommand):
             for index, item_hash in zip(emtpy_slots, block_hashes[50:]):
                 batch_items[index] = (item_hash, 'TGT')
 
-            print(len(batch_items))
-            print(len([x for x in batch_items if x is None]))
+            print("len(batch_items):", len(batch_items))
+            print("len(batch_items) == None:", len([x for x in batch_items if x is None]))
 
             # Ensure randomness of TGT, CHK, REF, BAD items.
             # We do this by randomly swapping pairs at positions (x, x+50).
@@ -677,7 +691,7 @@ class Command(BaseCommand):
                     item_url = item_data.get('segment_url')
                     item_systems = item_data['systems']
 
-                    target_id = '+'.join(sorted(set(item_systems)))
+                    target_id = '+'.join(sorted(set(item_systems))) # if the same item is present in more than one system, its targetID will have all these systems' IDs separated by "+"
                     target_text = item_text
                     if current_type == 'REF':
                         target_id = basename(options['reference_file'])
