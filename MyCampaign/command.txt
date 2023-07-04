@@ -1,0 +1,3 @@
+python manage.py StartNewCampaign \
+/home/falcao/Appraise/MyCampaign/manifest.json \
+--batches-json /netscratch/falcao/data/appraise-batches/es-eu/batches.json

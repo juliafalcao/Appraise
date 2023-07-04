@@ -1,0 +1,1014 @@
+[
+  {
+    "items": [
+      {
+        "_item": 0,
+        "_block": 0,
+        "itemID": 89,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "B\u0127al kull medi\u010bina o\u0127ra , xi w\u0127ud min - nies jistg\u0127u jesperjenzaw effetti sekondarji mit - tilqima , i\u017cda dawn ikunu \u0121eneralment \u0127fief u ma jdumux .",
+        "targetID": "hyp-mstrans.en",
+        "targetText": "Like all medicines, some people may experience side effects from vaccination , but these are generally mild and short-lived."
+      },
+      {
+        "_item": 1,
+        "_block": 0,
+        "itemID": 23,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Dawn jistg\u0127u wkoll jag\u0127mlu testijiet biex ji\u017cguraw li l - lottijiet tal - va\u010b\u010bini rilaxxati fis - suq ikunu tal - kwalit\u00e0 mistennija u jkunu \u0121ew manifatturati kif suppost .",
+        "targetID": "hyp-mstrans.en",
+        "targetText": "They may also carry out tests to ensure that batches of vaccines released on the market are of expected quality and have been properly manufactured."
+      },
+      {
+        "_item": 2,
+        "_block": 0,
+        "itemID": 85,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "It - tilqima tkun qed ti\u0121i ssorveljata kontinwament biex ji\u0121i \u017cgurat li tibqa ' sikura u effettiva .",
+        "targetID": "hyp-mstrans.en",
+        "targetText": "The vaccine is constantly being monitored to ensure that it remains safe and effective ."
+      },
+      {
+        "_item": 3,
+        "_block": 0,
+        "itemID": 13,
+        "itemType": "REF",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Dan il - programm g\u0127andu jsegwi l - pro\u010beduri u l - protokolli stabbiliti mir - regolaturi :",
+        "targetID": "mt-en.en",
+        "targetText": "This programme has to follow the procedures and protocols set by the regulators :"
+      },
+      {
+        "_item": 4,
+        "_block": 0,
+        "itemID": 6,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Dan jinvolvi testijiet fil - laboratorju u fl - annimali .",
+        "targetID": "hyp-mstrans.en",
+        "targetText": "This involves laboratory and animal tests ."
+      },
+      {
+        "_item": 5,
+        "_block": 0,
+        "itemID": 27,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "It - tilqim jipprote\u0121i lill - persuni mlaqqma u lill - persuni ta ' madwarhom li huma vulnerabbli g\u0127all - mard , inaqqas ir - riskju li l - mard jinfirex fost il - membri tal - familja , \u0127bieb tal - iskola , kollegi , \u0127bieb , \u0121irien u persuni o\u0127rajn fil - komunit\u00e0 .",
+        "targetID": "hyp-mstrans.en",
+        "targetText": "Vaccination protects vaccinated people and their entourage who are vulnerable to diseases, reduces the risk of disease spreading among family members , school friends , colleagues , friends , neighbours and others in the community ."
+      },
+      {
+        "_item": 6,
+        "_block": 0,
+        "itemID": 76,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Il - Kummissjoni hija maqsuma f'dipartimenti li ji\u017cviluppaw politiki f'oqsma spe\u010bifi\u010bi .",
+        "targetID": "hyp-mstrans.en",
+        "targetText": "The Commission is divided into departments that develop policies in specific areas ."
+      },
+      {
+        "_item": 7,
+        "_block": 0,
+        "itemID": 73,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Il - pertussis hija marda batterika infettiva \u0127afna li tinvolvi l - pulmun u l - passa\u0121\u0121i tan - nifs .",
+        "targetID": "hyp-gtrans.en",
+        "targetText": "Pertussis is a highly infectious bacterial disease involving the lungs and airways."
+      },
+      {
+        "_item": 8,
+        "_block": 0,
+        "itemID": 75,
+        "itemType": "REF",
+        "sourceID": "mt-en.mt",
+        "sourceText": "F'individwi b'sa\u0127\u0127ithom din normalment tkun marda \u0127afifa .",
+        "targetID": "mt-en.en",
+        "targetText": "The main purpose of this website is to provide accurate , objective , up-to-date evidence on vaccines and vaccination in general ."
+      },
+      {
+        "_item": 9,
+        "_block": 0,
+        "itemID": 42,
+        "itemType": "REF",
+        "sourceID": "mt-en.mt",
+        "sourceText": "X'inhuma s - sintomi tar - rubella ?",
+        "targetID": "mt-en.en",
+        "targetText": "What are the symptoms of rubella ?"
+      },
+      {
+        "_item": 10,
+        "_block": 1,
+        "itemID": 66,
+        "itemType": "REF",
+        "sourceID": "mt-en.mt",
+        "sourceText": "It - tilqim jipprote\u0121i lill - persuni mlaqqma u lill - persuni ta ' madwarhom li huma vulnerabbli . . .",
+        "targetID": "mt-en.en",
+        "targetText": "Vaccination protects the vaccinated persons and those around them who are vulnerable to the diseases ..."
+      },
+      {
+        "_item": 11,
+        "_block": 1,
+        "itemID": 47,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Il - konsegwenzi g\u0127an - nisa tqal li mhumiex imlaqqma li taqbadhom ir - rubella huma partikolarment severi , probabbli min\u0127abba l - fatt li l - marda waqt it - tqala tista ' twassal g\u0127al korriment jew CRS fit - trabi tag\u0127hom .",
+        "targetID": "hyp-mstrans.en",
+        "targetText": "The consequences for the purposes of pregnant women who are unvaccinated to catch them in rubella are particularly severe , likely due to the fact that the disease during pregnancy can lead to miscarriage or CRS in their babies."
+      },
+      {
+        "_item": 12,
+        "_block": 1,
+        "itemID": 99,
+        "itemType": "REF",
+        "sourceID": "mt-en.mt",
+        "sourceText": "it - tilqim kontra l - epatite B jista ' jipprevjeni l - kan\u010ber tal - fwied ikkaw\u017cat minn infezzjoni tal - epatite B fit - tul .",
+        "targetID": "mt-en.en",
+        "targetText": "vaccinating against hepatitis B can help prevent liver cancer caused by long-term hepatitis B infection ."
+      },
+      {
+        "_item": 13,
+        "_block": 1,
+        "itemID": 58,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "G\u0127all - protezzjoni massima huma me\u0127tie\u0121a \u017cew\u0121 do\u017ci tal - va\u010b\u010bin .",
+        "targetID": "hyp-gtrans.en",
+        "targetText": "For maximum protection two doses of the vaccine are required."
+      },
+      {
+        "_item": 14,
+        "_block": 1,
+        "itemID": 22,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "X'inhi l - a\u0127jar do\u017ca ?",
+        "targetID": "hyp-mstrans.en",
+        "targetText": "What is the best dose ?"
+      },
+      {
+        "_item": 15,
+        "_block": 1,
+        "itemID": 78,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Sikurezza , kwalit\u00e0 ustandards",
+        "targetID": "hyp-gtrans.en",
+        "targetText": "Safety, quality and standards"
+      },
+      {
+        "_item": 16,
+        "_block": 1,
+        "itemID": 11,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "L - awtoritajiet regolatorji tal - medi\u010bini jistg\u0127u jag\u0127mlu spezzjonijiet biex ji\u017cguraw li l - informazzjoni li jipprovdi l - i\u017cviluppatur tal - va\u010b\u010bin hija ta ' min joqg\u0127od fuqha .",
+        "targetID": "hyp-gtrans.en",
+        "targetText": "Medicines regulatory authorities can carry out inspections to ensure that the information provided by the vaccine developer is reliable."
+      },
+      {
+        "_item": 17,
+        "_block": 1,
+        "itemID": 67,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Tag\u0127bija aktar",
+        "targetID": "hyp-mstrans.en",
+        "targetText": "Load more"
+      },
+      {
+        "_item": 18,
+        "_block": 1,
+        "itemID": 20,
+        "itemType": "REF",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Approvazzjoni tal - va\u010b\u010bini fl - Unjoni Ewropea",
+        "targetID": "mt-en.en",
+        "targetText": "Benefits of vaccinating"
+      },
+      {
+        "_item": 19,
+        "_block": 1,
+        "itemID": 29,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Barra minn hekk , il - programmi tal - immunizzazzjoni jg\u0127inu biex inaqqsu l - pi\u017cijiet so\u010bjali , psikolo\u0121i\u010bi u finanzjarji tal - mard fuq in - nies u l - gvernijiet , inaqqsu l - pressjonijiet fuq is - sistemi tal - kura tas - sa\u0127\u0127a u tal - kura so\u010bjali u jippermettu lin - nies iwettqu attivitajiet produttivi li jinkludu l - edukazzjoni u l - impjieg .",
+        "targetID": "hyp-gtrans.en",
+        "targetText": "In addition, immunization programs help to reduce the social, psychological and financial burdens of disease on people and governments, reducing the pressures on health and care systems. social and allow people to carry out productive activities that include education and employment."
+      },
+      {
+        "_item": 20,
+        "_block": 2,
+        "itemID": 27,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "It - tilqim jipprote\u0121i lill - persuni mlaqqma u lill - persuni ta ' madwarhom li huma vulnerabbli g\u0127all - mard , inaqqas ir - riskju li l - mard jinfirex fost il - membri tal - familja , \u0127bieb tal - iskola , kollegi , \u0127bieb , \u0121irien u persuni o\u0127rajn fil - komunit\u00e0 .",
+        "targetID": "hyp-gtrans.en",
+        "targetText": "Vaccination protects the vaccinated people and the people around them who are vulnerable to the disease, it reduces the risk of the disease spreading among family members, school friends, colleagues, friends, neighbors and other people in the community."
+      },
+      {
+        "_item": 21,
+        "_block": 2,
+        "itemID": 10,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Liema huma l - effetti sekondarji l - aktar komuni ?",
+        "targetID": "hyp-mstrans.en",
+        "targetText": "What are the most common side effects ?"
+      },
+      {
+        "_item": 22,
+        "_block": 2,
+        "itemID": 51,
+        "itemType": "REF",
+        "sourceID": "mt-en.mt",
+        "sourceText": "g\u0127oqiedi limfati\u010bi minfu\u0127a madwar il - widnejn u f'wara tar - ras ;",
+        "targetID": "mt-en.en",
+        "targetText": "swollen lymph glands around the ears and the back of the head ;"
+      },
+      {
+        "_item": 23,
+        "_block": 2,
+        "itemID": 12,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Il - kumpaniji huma me\u0127tie\u0121a jwettqu ttestjar strin\u0121enti , li g\u0127alih , il - kriterji tal - a\u010b\u010bettazzjoni tieg\u0127u ji\u0121u definiti minn qabel mill - awtoritajiet , fuq kull lott ta ' va\u010b\u010bini rilaxxat fis - suq tal - UE .",
+        "targetID": "hyp-gtrans.en",
+        "targetText": "The companies are required to carry out stringent testing, for which the acceptance criteria are defined in advance by the authorities, on each batch of vaccines released on the EU market."
+      },
+      {
+        "_item": 24,
+        "_block": 2,
+        "itemID": 5,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Is - sistemi immuni tal - parte\u010bipanti kif jirrispondu g\u0127all - va\u010b\u010bin ?",
+        "targetID": "hyp-mstrans.en",
+        "targetText": "How do participants' immune systems respond to the vaccine ?"
+      },
+      {
+        "_item": 25,
+        "_block": 2,
+        "itemID": 18,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "L - i\u017cviluppatur tal - va\u010b\u010bin jittestja l - va\u010b\u010bin fi tliet fa\u017cijiet ta ' provi klini\u010bi , b'numri akbar ta ' persuni f'kull fa\u017ci .",
+        "targetID": "hyp-gtrans.en",
+        "targetText": "The vaccine developer tests the vaccine in three phases of clinical trials, with larger numbers of people in each phase."
+      },
+      {
+        "_item": 26,
+        "_block": 2,
+        "itemID": 97,
+        "itemType": "REF",
+        "sourceID": "mt-en.mt",
+        "sourceText": "L - Influwenza",
+        "targetID": "mt-en.en",
+        "targetText": "1-4 people"
+      },
+      {
+        "_item": 27,
+        "_block": 2,
+        "itemID": 90,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "B'hekk biss , wara l - approvazzjoni , tista ' tilqima ti\u0121imanifatturata , titqieg\u0127ed fis - suq u tintu\u017ca biex tipprote\u0121i lin - nies .",
+        "targetID": "hyp-gtrans.en",
+        "targetText": "Only then, after approval, can a vaccine be manufactured, placed on the market and used to protect people."
+      },
+      {
+        "_item": 28,
+        "_block": 2,
+        "itemID": 93,
+        "itemType": "REF",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Il - \u0121idri , illum il - \u0121urnatanqerdet mid - dinja kollha fil - bnedmin bis - sa\u0127\u0127a tat - tilqim .",
+        "targetID": "mt-en.en",
+        "targetText": "They can include mild fever , or pain or redness at the injection site ."
+      },
+      {
+        "_item": 29,
+        "_block": 2,
+        "itemID": 84,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "It - tilqim ja\u0127dem billi \u2018 jg\u0127allem ' lis - sistema immunitarja ( id - difi\u017ci naturali tal - \u0121isem ) biex tiddefendi ru\u0127ha kontra marda spe\u010bifika .",
+        "targetID": "hyp-mstrans.en",
+        "targetText": "Vaccination works by teaching the immune system ( the body's natural defences) to defend itself against a specific disease."
+      },
+      {
+        "_item": 30,
+        "_block": 3,
+        "itemID": 39,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Il - va\u010b\u010bin MMR ( il - \u0127osba , il - gattone u r - rubella ) huwa va\u010b\u010bin ikkombinat li jipprote\u0121i kontra l - \u0127osba , il - gattone u r - rubella .",
+        "targetID": "hyp-mstrans.en",
+        "targetText": "The MMR vaccine (measles, mumps and rubella ) is a combined vaccine that protects against measles , mumps and rubella ."
+      },
+      {
+        "_item": 31,
+        "_block": 3,
+        "itemID": 48,
+        "itemType": "REF",
+        "sourceID": "mt-en.mt",
+        "sourceText": "L - unika protezzjoni kontra r - rubella hija t - tilqim .",
+        "targetID": "mt-en.en",
+        "targetText": "The only protection against rubella is vaccination ."
+      },
+      {
+        "_item": 32,
+        "_block": 3,
+        "itemID": 29,
+        "itemType": "REF",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Barra minn hekk , il - programmi tal - immunizzazzjoni jg\u0127inu biex inaqqsu l - pi\u017cijiet so\u010bjali , psikolo\u0121i\u010bi u finanzjarji tal - mard fuq in - nies u l - gvernijiet , inaqqsu l - pressjonijiet fuq is - sistemi tal - kura tas - sa\u0127\u0127a u tal - kura so\u010bjali u jippermettu lin - nies iwettqu attivitajiet produttivi li jinkludu l - edukazzjoni u l - impjieg .",
+        "targetID": "mt-en.en",
+        "targetText": "Furthermore , immunisation programmes help reduce the social , psychological and financial burdens of disease on people and governments , reducing pressures on healthcare and social care systems and enabling people to pursue productive activities including education and employment ."
+      },
+      {
+        "_item": 33,
+        "_block": 3,
+        "itemID": 59,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Kif tista ' ti\u0121i pprevenuta r - rubella ?",
+        "targetID": "hyp-gtrans.en",
+        "targetText": "How can rubella be prevented?"
+      },
+      {
+        "_item": 34,
+        "_block": 3,
+        "itemID": 51,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "g\u0127oqiedi limfati\u010bi minfu\u0127a madwar il - widnejn u f'wara tar - ras ;",
+        "targetID": "hyp-gtrans.en",
+        "targetText": "swollen lymph nodes around the ears and at the back of the head;"
+      },
+      {
+        "_item": 35,
+        "_block": 3,
+        "itemID": 88,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "L - esperti xjentifi\u010bi li jevalwaw it - tilqim dejjem iqisu l - benefi\u010b\u010bji u kwalunkwe riskju potenzjali b'attenzjoni kbira , b'mod partikolari min\u0127abba tilqim li jing\u0127ata lil nies f'sa\u0127\u0127ithom .",
+        "targetID": "hyp-gtrans.en",
+        "targetText": "Scientific experts who evaluate vaccinations always consider the benefits and any potential risks very carefully, particularly due to vaccinations given to healthy people."
+      },
+      {
+        "_item": 36,
+        "_block": 3,
+        "itemID": 95,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "it - tilqim kontra l - virus tal - papilloma umana ( HPV ) jista ' jg\u0127in biex jipprevjeni kan\u010ber \u010bervikali u kan\u010bers o\u0127rajn ikkaw\u017cati mill - infezzjoni tal - HPV ;",
+        "targetID": "hyp-gtrans.en",
+        "targetText": "vaccination against the human papilloma virus (HPV) can help prevent cervical cancer and other cancers caused by HPV infection;"
+      },
+      {
+        "_item": 37,
+        "_block": 3,
+        "itemID": 64,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "It - tilqim jipprote\u0121i lill - individwi kontra mard li jista ' jkollu konsegwenzi serji g\u0127al . . .",
+        "targetID": "hyp-mstrans.en",
+        "targetText": "Vaccination protects individuals against diseases that can have serious consequences for . . ."
+      },
+      {
+        "_item": 38,
+        "_block": 3,
+        "itemID": 80,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "L - a\u0127\u0127ar ka\u017c mag\u0127ruf li se\u0127\u0127 b'mod naturali \u0121ie rre\u0121istrat fl - 1977 fis - Somalja .",
+        "targetID": "hyp-gtrans.en",
+        "targetText": "The last known case that occurred naturally was recorded in 1977 in Somalia."
+      },
+      {
+        "_item": 39,
+        "_block": 3,
+        "itemID": 17,
+        "itemType": "REF",
+        "sourceID": "mt-en.mt",
+        "sourceText": "L - ittestjar jinkludi li ti\u0121i \u010b\u010bekkjata l - kwalit\u00e0 tal - va\u010b\u010bin :",
+        "targetID": "mt-en.en",
+        "targetText": "Testing includes checking the vaccine 's quality :"
+      },
+      {
+        "_item": 40,
+        "_block": 4,
+        "itemID": 21,
+        "itemType": "REF",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Imbag\u0127ad l - i\u017cviluppatur tal - va\u010b\u010bin jittestja l - effetti tal - va\u010b\u010bin .",
+        "targetID": "mt-en.en",
+        "targetText": "Then the vaccine developer tests the vaccine 's effects ."
+      },
+      {
+        "_item": 41,
+        "_block": 4,
+        "itemID": 28,
+        "itemType": "REF",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Din hija mag\u0127rufa b\u0127ala \" immunit\u00e0 komunitarja \" ( li tissejja\u0127 ukoll \" immunit\u00e0 b\u0127ala grupp \" ) .",
+        "targetID": "mt-en.en",
+        "targetText": "This is known as ' community immunity ' ( also referred to as ' herd immunity ' ) ."
+      },
+      {
+        "_item": 42,
+        "_block": 4,
+        "itemID": 91,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Qabel kwalunkwe tilqima \u0121dida tkun tista ' tintu\u017ca , irid isirilha ttestjar rigoru\u017c .",
+        "targetID": "hyp-mstrans.en",
+        "targetText": "Before any new vaccine can be used , it must undergo rigorous testing ."
+      },
+      {
+        "_item": 43,
+        "_block": 4,
+        "itemID": 4,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Il - va\u010b\u010bin huwa sikur ?",
+        "targetID": "hyp-gtrans.en",
+        "targetText": "Is the vaccine safe?"
+      },
+      {
+        "_item": 44,
+        "_block": 4,
+        "itemID": 70,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Qabel ma va\u010b\u010bin ikun jista ' ji\u0121i approvat fl - UE , irid jg\u0127addi minn ittestjar rigoru\u017c mill - i\u017cviluppatur . . .",
+        "targetID": "hyp-gtrans.en",
+        "targetText": "Before a vaccine can be approved in the EU, it must undergo rigorous testing by the developer. . ."
+      },
+      {
+        "_item": 45,
+        "_block": 4,
+        "itemID": 22,
+        "itemType": "REF",
+        "sourceID": "mt-en.mt",
+        "sourceText": "X'inhi l - a\u0127jar do\u017ca ?",
+        "targetID": "mt-en.en",
+        "targetText": "What is the optimal dose ?"
+      },
+      {
+        "_item": 46,
+        "_block": 4,
+        "itemID": 49,
+        "itemType": "REF",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Xi re\u010bipjenti tal - va\u010b\u010bin ji\u017cviluppaw raxx \u0127afif mhux infettiv li jixbah lill - \u0127osba , tipikament bejn sebat ijiem u 14 - il jum wara t - tilqima , li jisparixxi bejn jum u tlett ijiem wara .",
+        "targetID": "mt-en.en",
+        "targetText": "Some vaccine recipients develop a non-infectious mild measles-like rash , typically 7-14 days after vaccination , which disappears within 1-3 days ."
+      },
+      {
+        "_item": 47,
+        "_block": 4,
+        "itemID": 61,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Fl - Ewropa , l - influwenza sse\u0127\u0127 . . .",
+        "targetID": "hyp-mstrans.en",
+        "targetText": "In Europe , influence occurs . . ."
+      },
+      {
+        "_item": 48,
+        "_block": 4,
+        "itemID": 16,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Benefi\u010b\u010bji tat - tlaqqim",
+        "targetID": "hyp-gtrans.en",
+        "targetText": "Benefits of vaccination"
+      },
+      {
+        "_item": 49,
+        "_block": 4,
+        "itemID": 8,
+        "itemType": "REF",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Fl - a\u0127\u0127ar tal - programm ta ' ttestjar , l - i\u017cviluppatur tal - va\u010b\u010bin jissottometti r - ri\u017cultati lill - awtoritajiet regolatorji tal - medi\u010bini fl - Ewropa b\u0127ala parti minn applikazzjoni ta ' \" awtorizzazzjoni g\u0127at - tqeg\u0127id fis - suq \" .",
+        "targetID": "mt-en.en",
+        "targetText": "At the end of the testing programme , the vaccine developer submits the results to the medicines regulatory authorities in Europe as part of a \u2018 marketing authorisation ' application ."
+      },
+      {
+        "_item": 50,
+        "_block": 5,
+        "itemID": 0,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "il - purit\u00e0 tieg\u0127u ;",
+        "targetID": "hyp-gtrans.en",
+        "targetText": "his purity;"
+      },
+      {
+        "_item": 51,
+        "_block": 5,
+        "itemID": 84,
+        "itemType": "REF",
+        "sourceID": "mt-en.mt",
+        "sourceText": "It - tilqim ja\u0127dem billi \u2018 jg\u0127allem ' lis - sistema immunitarja ( id - difi\u017ci naturali tal - \u0121isem ) biex tiddefendi ru\u0127ha kontra marda spe\u010bifika .",
+        "targetID": "mt-en.en",
+        "targetText": "Vaccines work by \u2018 teaching ' a person 's immune system ( the body 's natural defences ) to defend itself against a specific disease ."
+      },
+      {
+        "_item": 52,
+        "_block": 5,
+        "itemID": 85,
+        "itemType": "REF",
+        "sourceID": "mt-en.mt",
+        "sourceText": "It - tilqima tkun qed ti\u0121i ssorveljata kontinwament biex ji\u0121i \u017cgurat li tibqa ' sikura u effettiva .",
+        "targetID": "mt-en.en",
+        "targetText": "The vaccine is continuously monitored to ensure it remains safe and effective ."
+      },
+      {
+        "_item": 53,
+        "_block": 5,
+        "itemID": 75,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "F'individwi b'sa\u0127\u0127ithom din normalment tkun marda \u0127afifa .",
+        "targetID": "hyp-mstrans.en",
+        "targetText": "In healthy individuals this is usually a mild disease."
+      },
+      {
+        "_item": 54,
+        "_block": 5,
+        "itemID": 88,
+        "itemType": "REF",
+        "sourceID": "mt-en.mt",
+        "sourceText": "L - esperti xjentifi\u010bi li jevalwaw it - tilqim dejjem iqisu l - benefi\u010b\u010bji u kwalunkwe riskju potenzjali b'attenzjoni kbira , b'mod partikolari min\u0127abba tilqim li jing\u0127ata lil nies f'sa\u0127\u0127ithom .",
+        "targetID": "mt-en.en",
+        "targetText": "The scientific experts evaluating vaccines always consider the benefits and any potential risks very carefully , in particular because vaccines are given to healthy people ."
+      },
+      {
+        "_item": 55,
+        "_block": 5,
+        "itemID": 19,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Ir - regolaturi jistg\u0127u japprovaw il - va\u010b\u010bin biss jekk l - evalwazzjoni xjentifika tar - ri\u017cultati tat - testijiet tieg\u0127u turi li l - benefi\u010b\u010bji tal - va\u010b\u010bin huma akbar mir - riskji tieg\u0127u .",
+        "targetID": "hyp-mstrans.en",
+        "targetText": "Regulators can only approve the vaccine if the scientific evaluation of the results of its tests shows that the benefits of the vaccine outweigh its risks."
+      },
+      {
+        "_item": 56,
+        "_block": 5,
+        "itemID": 62,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "L - influwenza hija marda respiratorja li tittie\u0127ed ikkaw\u017cata minn infezzjoni b'virus tal - influwenza .",
+        "targetID": "hyp-gtrans.en",
+        "targetText": "Influenza is a contagious respiratory disease caused by infection with an influenza virus."
+      },
+      {
+        "_item": 57,
+        "_block": 5,
+        "itemID": 80,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "L - a\u0127\u0127ar ka\u017c mag\u0127ruf li se\u0127\u0127 b'mod naturali \u0121ie rre\u0121istrat fl - 1977 fis - Somalja .",
+        "targetID": "hyp-mstrans.en",
+        "targetText": "The last known naturally occurring case was recorded in 1977 in Somalia ."
+      },
+      {
+        "_item": 58,
+        "_block": 5,
+        "itemID": 14,
+        "itemType": "REF",
+        "sourceID": "mt-en.mt",
+        "sourceText": "kif ji\u0121i manifatturat .",
+        "targetID": "mt-en.en",
+        "targetText": "how it is manufactured ."
+      },
+      {
+        "_item": 59,
+        "_block": 5,
+        "itemID": 93,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Il - \u0121idri , illum il - \u0121urnatanqerdet mid - dinja kollha fil - bnedmin bis - sa\u0127\u0127a tat - tilqim .",
+        "targetID": "hyp-mstrans.en",
+        "targetText": "Smallpox , nowadays has been destroyed by the whole world in humans by the strength of vaccination ."
+      },
+      {
+        "_item": 60,
+        "_block": 6,
+        "itemID": 58,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "G\u0127all - protezzjoni massima huma me\u0127tie\u0121a \u017cew\u0121 do\u017ci tal - va\u010b\u010bin .",
+        "targetID": "hyp-mstrans.en",
+        "targetText": "For maximum protection, two doses of the vaccine are required ."
+      },
+      {
+        "_item": 61,
+        "_block": 6,
+        "itemID": 50,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Madankollu , jekk mara taqbadha r - rubella matul l - ewwel tliet xhur tat - tqala , x'aktarx li tirri\u017culta f'korriment jew f'tarbija li titwieled b'disturbi kon\u0121enitali mag\u0127rufa b\u0127ala sindrome tar - rubella kon\u0121enitali ( CRS ) .",
+        "targetID": "hyp-mstrans.en",
+        "targetText": "However , if a woman catches her r rubella during the first three months of pregnancy , it is likely to result in miscarriage or in a baby born with congenital disorders known as congenital rubella syndrome ( CRS ) ."
+      },
+      {
+        "_item": 62,
+        "_block": 6,
+        "itemID": 2,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Eluf ta ' voluntiera",
+        "targetID": "hyp-mstrans.en",
+        "targetText": "Thousands of volunteers"
+      },
+      {
+        "_item": 63,
+        "_block": 6,
+        "itemID": 63,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Kull virus u batterju jo\u0127loq reazzjoni unika fis - sistema immunitarja li tinvolvi sett spe\u010bifiku ta ' \u010belloli fid - demm . . .",
+        "targetID": "hyp-mstrans.en",
+        "targetText": "Each virus and bacterium creates a unique reaction in the immune system involving a specific set of cells in the blood . . ."
+      },
+      {
+        "_item": 64,
+        "_block": 6,
+        "itemID": 12,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Il - kumpaniji huma me\u0127tie\u0121a jwettqu ttestjar strin\u0121enti , li g\u0127alih , il - kriterji tal - a\u010b\u010bettazzjoni tieg\u0127u ji\u0121u definiti minn qabel mill - awtoritajiet , fuq kull lott ta ' va\u010b\u010bini rilaxxat fis - suq tal - UE .",
+        "targetID": "hyp-mstrans.en",
+        "targetText": "Companies are required to carry out stringent testing , for which the acceptance criteria of which are pre-defined by the authorities, on each batch of vaccines released to the EU market."
+      },
+      {
+        "_item": 65,
+        "_block": 6,
+        "itemID": 46,
+        "itemType": "REF",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Il - va\u010b\u010bin MMR huwa sikur u effika\u010bi u ma tantx g\u0127andu effetti sekondarji .",
+        "targetID": "mt-en.en",
+        "targetText": "The MMR vaccine is safe and effective and has very few side effects ."
+      },
+      {
+        "_item": 66,
+        "_block": 6,
+        "itemID": 39,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Il - va\u010b\u010bin MMR ( il - \u0127osba , il - gattone u r - rubella ) huwa va\u010b\u010bin ikkombinat li jipprote\u0121i kontra l - \u0127osba , il - gattone u r - rubella .",
+        "targetID": "hyp-gtrans.en",
+        "targetText": "The MMR (measles, mumps and rubella) vaccine is a combined vaccine that protects against measles, mumps and rubella."
+      },
+      {
+        "_item": 67,
+        "_block": 6,
+        "itemID": 70,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Qabel ma va\u010b\u010bin ikun jista ' ji\u0121i approvat fl - UE , irid jg\u0127addi minn ittestjar rigoru\u017c mill - i\u017cviluppatur . . .",
+        "targetID": "hyp-mstrans.en",
+        "targetText": "Before a vaccine can be approved in the EU , it must undergo rigorous testing by the developer . . ."
+      },
+      {
+        "_item": 68,
+        "_block": 6,
+        "itemID": 85,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "It - tilqima tkun qed ti\u0121i ssorveljata kontinwament biex ji\u0121i \u017cgurat li tibqa ' sikura u effettiva .",
+        "targetID": "hyp-gtrans.en",
+        "targetText": "The vaccination will be continuously monitored to ensure that it remains safe and effective."
+      },
+      {
+        "_item": 69,
+        "_block": 6,
+        "itemID": 43,
+        "itemType": "REF",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Min qieg\u0127ed f'riskju li taqbdu r - rubella ?",
+        "targetID": "mt-en.en",
+        "targetText": "Who is at risk of rubella ?"
+      },
+      {
+        "_item": 70,
+        "_block": 7,
+        "itemID": 82,
+        "itemType": "REF",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Fatti dwar it - tilqim",
+        "targetID": "mt-en.en",
+        "targetText": "Twitter Facebook Linked In Mail"
+      },
+      {
+        "_item": 71,
+        "_block": 7,
+        "itemID": 17,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "L - ittestjar jinkludi li ti\u0121i \u010b\u010bekkjata l - kwalit\u00e0 tal - va\u010b\u010bin :",
+        "targetID": "hyp-gtrans.en",
+        "targetText": "The testing includes checking the quality of the vaccine:"
+      },
+      {
+        "_item": 72,
+        "_block": 7,
+        "itemID": 11,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "L - awtoritajiet regolatorji tal - medi\u010bini jistg\u0127u jag\u0127mlu spezzjonijiet biex ji\u017cguraw li l - informazzjoni li jipprovdi l - i\u017cviluppatur tal - va\u010b\u010bin hija ta ' min joqg\u0127od fuqha .",
+        "targetID": "hyp-mstrans.en",
+        "targetText": "Medicines regulatory authorities may carry out inspections to ensure that the information provided by the vaccine developer is reliable."
+      },
+      {
+        "_item": 73,
+        "_block": 7,
+        "itemID": 31,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Madankollu , in - nies ma jistg\u0127ux jiddependu fuq l - immunit\u00e0 komunitarja g\u0127al xi mard infettiv .",
+        "targetID": "hyp-mstrans.en",
+        "targetText": "However , people cannot rely on community immunity to some infectious diseases ."
+      },
+      {
+        "_item": 74,
+        "_block": 7,
+        "itemID": 42,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "X'inhuma s - sintomi tar - rubella ?",
+        "targetID": "hyp-gtrans.en",
+        "targetText": "What are the symptoms of rubella?"
+      },
+      {
+        "_item": 75,
+        "_block": 7,
+        "itemID": 8,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Fl - a\u0127\u0127ar tal - programm ta ' ttestjar , l - i\u017cviluppatur tal - va\u010b\u010bin jissottometti r - ri\u017cultati lill - awtoritajiet regolatorji tal - medi\u010bini fl - Ewropa b\u0127ala parti minn applikazzjoni ta ' \" awtorizzazzjoni g\u0127at - tqeg\u0127id fis - suq \" .",
+        "targetID": "hyp-mstrans.en",
+        "targetText": "At the end of the testing programme, the vaccine developer submits the results to the medicines regulatory authorities in Europe as part of a \"marketing authorisation\" application."
+      },
+      {
+        "_item": 76,
+        "_block": 7,
+        "itemID": 92,
+        "itemType": "REF",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Huwa jimmira l - aktar lejn mard ikkaw\u017cat minn viruses jew batterji .",
+        "targetID": "mt-en.en",
+        "targetText": "It was a vaccine against smallpox , a deadly disease ."
+      },
+      {
+        "_item": 77,
+        "_block": 7,
+        "itemID": 5,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Is - sistemi immuni tal - parte\u010bipanti kif jirrispondu g\u0127all - va\u010b\u010bin ?",
+        "targetID": "hyp-gtrans.en",
+        "targetText": "How do the participants' immune systems respond to the vaccine?"
+      },
+      {
+        "_item": 78,
+        "_block": 7,
+        "itemID": 89,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "B\u0127al kull medi\u010bina o\u0127ra , xi w\u0127ud min - nies jistg\u0127u jesperjenzaw effetti sekondarji mit - tilqima , i\u017cda dawn ikunu \u0121eneralment \u0127fief u ma jdumux .",
+        "targetID": "hyp-gtrans.en",
+        "targetText": "As with any other medicine, some people may experience side effects from the vaccine, but these are usually mild and do not last long."
+      },
+      {
+        "_item": 79,
+        "_block": 7,
+        "itemID": 38,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Sa 50 % tal - persuni infettati bir - rubella ma jesperjenzawx sintomi .",
+        "targetID": "hyp-gtrans.en",
+        "targetText": "Up to 50% of people infected with rubella do not experience symptoms."
+      },
+      {
+        "_item": 80,
+        "_block": 8,
+        "itemID": 74,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "L - iskop ewlieni ta ' dan is - sit web huwa li jipprovdi evidenza pre\u010bi\u017ca , o\u0121\u0121ettiva u a\u0121\u0121ornata dwar il - va\u010b\u010bini u t - tilqim .",
+        "targetID": "hyp-mstrans.en",
+        "targetText": "The main purpose of this website is to provide accurate, objective and up-to-date evidence on vaccines and vaccines."
+      },
+      {
+        "_item": 81,
+        "_block": 8,
+        "itemID": 67,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Tag\u0127bija aktar",
+        "targetID": "hyp-gtrans.en",
+        "targetText": "Load more"
+      },
+      {
+        "_item": 82,
+        "_block": 8,
+        "itemID": 56,
+        "itemType": "REF",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Is - CRS tista ' twassal g\u0127al truxija , katarretti u di\u017cabilitajiet fit - tag\u0127lim fit - tarbija .",
+        "targetID": "mt-en.en",
+        "targetText": "CRS can lead to deafness , cataracts and learning disabilities in the baby ."
+      },
+      {
+        "_item": 83,
+        "_block": 8,
+        "itemID": 7,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Dawn jinkludu l - A\u0121enzija Ewropea g\u0127all - Medi\u010bini u regolaturi o\u0127rajn fil - pajji\u017ci tal - UE / ta\u017c - \u017bEE .",
+        "targetID": "hyp-mstrans.en",
+        "targetText": "These include the European Medicines Agency and other regulators in EU/EEA countries."
+      },
+      {
+        "_item": 84,
+        "_block": 8,
+        "itemID": 34,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Benefi\u010b\u010bji tat - tilqim g\u0127all - individwi",
+        "targetID": "hyp-gtrans.en",
+        "targetText": "Benefits of vaccination for individuals"
+      },
+      {
+        "_item": 85,
+        "_block": 8,
+        "itemID": 81,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Dan l - a\u0127\u0127ar , \u0121iet \u017cviluppata tilqima kontra l - virus tal - marda tal - Ebola , u qed issir ri\u010berka dwar tilqim li jipprote\u0121u kontra l - virus tal - immunodefi\u010bjenza umana ( HIV ) .",
+        "targetID": "hyp-mstrans.en",
+        "targetText": "Recently, a vaccine against Ebola disease virus has been developed , and research is being carried out into vaccines protecting against human immunodeficiency virus ( HIV ) ."
+      },
+      {
+        "_item": 86,
+        "_block": 8,
+        "itemID": 90,
+        "itemType": "REF",
+        "sourceID": "mt-en.mt",
+        "sourceText": "B'hekk biss , wara l - approvazzjoni , tista ' tilqima ti\u0121imanifatturata , titqieg\u0127ed fis - suq u tintu\u017ca biex tipprote\u0121i lin - nies .",
+        "targetID": "mt-en.en",
+        "targetText": "Only then , after approval , can a vaccine be manufactured , marketed and used to protect people ."
+      },
+      {
+        "_item": 87,
+        "_block": 8,
+        "itemID": 44,
+        "itemType": "REF",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Il - virus tar - rubella jinfirex minn taqtiriet fl - arja li ji\u0121u prodotti meta l - persuna infettata tisg\u0127ol u tag\u0127tas .",
+        "targetID": "mt-en.en",
+        "targetText": "The rubella virus is spread via airborne droplets produced when the infected person coughs and sneezes ."
+      },
+      {
+        "_item": 88,
+        "_block": 8,
+        "itemID": 97,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "L - Influwenza",
+        "targetID": "hyp-mstrans.en",
+        "targetText": "The Influence"
+      },
+      {
+        "_item": 89,
+        "_block": 8,
+        "itemID": 79,
+        "itemType": "REF",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Effetti sekondarji serji huma rari \u0127afna .",
+        "targetID": "mt-en.en",
+        "targetText": "Serious side effects are very rare ."
+      },
+      {
+        "_item": 90,
+        "_block": 9,
+        "itemID": 53,
+        "itemType": "REF",
+        "sourceID": "mt-en.mt",
+        "sourceText": "F'individwi b'sa\u0127\u0127ithom din normalment tkun marda \u0127afifa .",
+        "targetID": "mt-en.en",
+        "targetText": "In healthy individuals it is usually a mild disease ."
+      },
+      {
+        "_item": 91,
+        "_block": 9,
+        "itemID": 19,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Ir - regolaturi jistg\u0127u japprovaw il - va\u010b\u010bin biss jekk l - evalwazzjoni xjentifika tar - ri\u017cultati tat - testijiet tieg\u0127u turi li l - benefi\u010b\u010bji tal - va\u010b\u010bin huma akbar mir - riskji tieg\u0127u .",
+        "targetID": "hyp-gtrans.en",
+        "targetText": "The regulators can approve the vaccine only if the scientific evaluation of the results of its tests shows that the benefits of the vaccine are greater than its risks."
+      },
+      {
+        "_item": 92,
+        "_block": 9,
+        "itemID": 14,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "kif ji\u0121i manifatturat .",
+        "targetID": "hyp-gtrans.en",
+        "targetText": "how it is manufactured."
+      },
+      {
+        "_item": 93,
+        "_block": 9,
+        "itemID": 91,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Qabel kwalunkwe tilqima \u0121dida tkun tista ' tintu\u017ca , irid isirilha ttestjar rigoru\u017c .",
+        "targetID": "hyp-gtrans.en",
+        "targetText": "Before any new vaccine can be used, it must undergo rigorous testing."
+      },
+      {
+        "_item": 94,
+        "_block": 9,
+        "itemID": 96,
+        "itemType": "REF",
+        "sourceID": "mt-en.mt",
+        "sourceText": "It - tikek mag\u0127qudin jindikaw in - numru massimu u minimu ta ' persuni mhux infettati u mhux imlaqqma pre\u010bedentement li jistg\u0127u ji\u0121u infettati minn persuna bil - marda .",
+        "targetID": "mt-en.en",
+        "targetText": "The connected dots indicate the maximum and minimum number of previously uninfected and unvaccinated people who could get infected by a person with the disease ."
+      },
+      {
+        "_item": 95,
+        "_block": 9,
+        "itemID": 68,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Il - va\u010b\u010bini jipprote\u0121u lin - nies matul stadji differenti tal - \u0127ajja .",
+        "targetID": "hyp-mstrans.en",
+        "targetText": "Vaccines protect people during different stages of life ."
+      },
+      {
+        "_item": 96,
+        "_block": 9,
+        "itemID": 44,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Il - virus tar - rubella jinfirex minn taqtiriet fl - arja li ji\u0121u prodotti meta l - persuna infettata tisg\u0127ol u tag\u0127tas .",
+        "targetID": "hyp-gtrans.en",
+        "targetText": "The rubella virus is spread by droplets in the air that are produced when the infected person coughs and sneezes."
+      },
+      {
+        "_item": 97,
+        "_block": 9,
+        "itemID": 80,
+        "itemType": "REF",
+        "sourceID": "mt-en.mt",
+        "sourceText": "L - a\u0127\u0127ar ka\u017c mag\u0127ruf li se\u0127\u0127 b'mod naturali \u0121ie rre\u0121istrat fl - 1977 fis - Somalja .",
+        "targetID": "mt-en.en",
+        "targetText": "The last known naturally occurring case was recorded in 1977 in Somalia ."
+      },
+      {
+        "_item": 98,
+        "_block": 9,
+        "itemID": 38,
+        "itemType": "REF",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Sa 50 % tal - persuni infettati bir - rubella ma jesperjenzawx sintomi .",
+        "targetID": "mt-en.en",
+        "targetText": "Up to 50 % of people infected with rubella do not experience symptoms ."
+      },
+      {
+        "_item": 99,
+        "_block": 9,
+        "itemID": 20,
+        "itemType": "TGT",
+        "sourceID": "mt-en.mt",
+        "sourceText": "Approvazzjoni tal - va\u010b\u010bini fl - Unjoni Ewropea",
+        "targetID": "hyp-mstrans.en",
+        "targetText": "Approval of vaccines in the European Union"
+      }
+    ],
+    "task": {
+      "batchNo": 1,
+      "batchSize": 10,
+      "randomSeed": 1,
+      "requiredAnnotations": 1,
+      "sourceLanguage": "mlt",
+      "targetLanguage": "eng"
+    }
+  }
+]
