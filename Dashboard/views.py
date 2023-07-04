@@ -364,6 +364,12 @@ def dashboard(request):
 
     print('  Current task: {0}'.format(current_task))
 
+    languages = []
+    for code in LANGUAGE_CODES_AND_NAMES:
+        if request.user.groups.filter(name=code).exists():
+            if not code in languages:
+                languages.append(code)
+
     _t2 = datetime.now()
 
     # If there is no current task, check if user is done with work agenda.
@@ -410,11 +416,10 @@ def dashboard(request):
     languages_map = {task_cls: {} for task_cls in TASK_TYPES}
 
     if not current_task and not work_completed:
-        languages = []
-        for code in LANGUAGE_CODES_AND_NAMES:
-            if request.user.groups.filter(name=code).exists():
-                if not code in languages:
-                    languages.append(code)
+        # for code in LANGUAGE_CODES_AND_NAMES:
+        #     if request.user.groups.filter(name=code).exists():
+        #         if not code in languages:
+        #             languages.append(code)
 
         # if hits < HITS_REQUIRED_BEFORE_ENGLISH_ALLOWED:
             # if len(languages) > 1 and 'eng' in languages:
