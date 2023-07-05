@@ -1,0 +1,32 @@
+.uni-logos {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: center;
+    align-content: center;
+    grid-gap: 1.5em;
+}
+
+.uni-logo {
+    pointer-events: none;
+    user-select: none;
+}
+
+.um-logo {
+    height: 3.5em;
+    filter: grayscale(100%);
+    opacity: 0.8;
+    margin-top: 1em;
+    /* to make up for the difference in size */
+}
+
+.upv-logo {
+    height: 5em;
+    opacity: 0.7;
+}
+
+@media (max-width: 460px) {
+    .uni-logos {
+        grid-auto-flow: row;
+        grid-gap: 0.5em;
+    }
+}
