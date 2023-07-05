@@ -937,5 +937,5 @@ admin.site.register(DirectAssessmentResult, DirectAssessmentResultAdmin)
 # admin.site.register(
     # PairwiseAssessmentDocumentResult, PairwiseAssessmentDocumentResultAdmin
 # )
-admin.site.register(WorkAgenda, WorkAgendaAdmin)
-admin.site.register(TaskAgenda, TaskAgendaAdmin)
+# admin.site.register(WorkAgenda, WorkAgendaAdmin)
+# admin.site.register(TaskAgenda, TaskAgendaAdmin)
