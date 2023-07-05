@@ -2,75 +2,29 @@
 
 
 {% block content %}
-<style>
-.uni-logos {
-  display: grid;
-  grid-auto-flow: column;
-  justify-content: center;
-  align-content: center;
-  grid-gap: 1.5em;
-}
+  <div class="jumbotron">
+    <h1>Welcome!</h1>
+    <h3>A crowd-sourced campaign for evaluation of translations</h3>
 
-.uni-logo {
-  pointer-events: none;
-  user-select: none;
-}
-
-.um-logo {
-  height: 3.5em;
-  filter: grayscale(100%);
-  opacity: 0.8;
-  margin-top: 1em; /* to make up for the difference in size */
-}
-
-.upv-logo {
-  height: 5em;
-  opacity: 0.7;
-}
-
-@media (max-width: 460px) {
-  .uni-logos {
-    grid-auto-flow: row;
-    grid-gap: 0.5em;
-  }
-}
-
-</style>
-      <!-- Main jumbotron for a primary marketing message or call to action -->
-
-      <div class="jumbotron">
-        <h1>Welcome!</h1>
-        <h3>A crowd-sourced campaign for evaluation of translations</h3>
-
-        <div class="panel panel-primary" style="margin-top: 20px;">
-          <div class="panel-heading">
-            <h3 class="panel-title"><strong>This is Appraise</strong></h3>
-          </div>
-          <div class="panel-body">
-            <p><small>It supports collaborative collection of human feedback for MT evaluation. It implements tasks such as <em>Translation Quality Checking</em>, <em>Ranking and Error Classification</em>, and <em>Manual Post-Editing</em>. For WMT17, we added support for <em>Direct Assessment</em>.  For WMT19, evaluation is focused on source-based <em>Direct Assessment</em> on document level.</small></p>
-          </div>
-        </div>
-
-        <div class="col-md-12 col-md-offset-1">
-          <div class="col-md-5">
-            <a class="btn btn-default btn-lg btn-block" href="{% url 'dashboard' %}" role="button">Access dashboard &raquo;</a>
-          </div>
-          <div class="col-md-5">
-{% comment %} {% if request.user.is_authenticated %} {% endcomment %}
-            {% comment %} <a class="btn btn-primary btn-lg btn-block" href="{% url 'update-profile' %}" role="button">Update profile &raquo;</a> {% endcomment %}
-{% comment %} {% else %} {% endcomment %}
-            <a class="btn btn-primary btn-lg btn-block" href="{% url 'create-profile' %}" role="button">Register &raquo;</a>
-{% comment %} {% endif %} {% endcomment %}
-          </div>
-        </div>
-
-        <div>&nbsp;</div>
-
-      </div> <!-- jumbotron -->
-
-      <div class="uni-logos">
-        <img class="uni-logo um-logo" src="https://www.qualiaanalytics.org/app/uploads/2021/04/uom-logo.png">
-        <br>
-        <img class="uni-logo upv-logo" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/39/Ehu_logo.svg/1200px-Ehu_logo.svg.png">
+    <div class="panel panel-primary" style="margin-top: 20px;">
+      <div class="panel-heading">
+        <h3 class="panel-title"><strong>This is Appraise</strong></h3>
       </div>
+      <div class="panel-body">
+        <p><small>It supports collaborative collection of human feedback for MT evaluation. It implements tasks such as <em>Translation Quality Checking</em>, <em>Ranking and Error Classification</em>, and <em>Manual Post-Editing</em>. For WMT17, we added support for <em>Direct Assessment</em>.  For WMT19, evaluation is focused on source-based <em>Direct Assessment</em> on document level.</small></p>
+      </div>
+    </div>
+
+    <div class="col-md-12 col-md-offset-1">
+      <div class="col-md-5">
+        <a class="btn btn-default btn-lg btn-block" href="{% url 'dashboard' %}" role="button">Access dashboard &raquo;</a>
+      </div>
+      <div class="col-md-5">
+        <a class="btn btn-primary btn-lg btn-block" href="{% url 'create-profile' %}" role="button">Register &raquo;</a>
+      </div>
+    </div>
+
+    <div>&nbsp;</div>
+
+  </div> <!-- jumbotron -->
 {% endblock %}
