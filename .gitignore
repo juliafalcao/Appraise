@@ -22,3 +22,7 @@ appraise.log
 .venv
 venv
 db.sqlite3*
+
+MyCampaign/output.csv
+MyCampaign/results.csv
+
