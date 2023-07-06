@@ -62,7 +62,7 @@
                 <li class="dropdown-header">Account</li>
                 {% comment %} <li><a href="{% url 'update-profile' %}">Update profile</a></li> {% endcomment %}
                 {% comment %} <li><a href="{% url 'change-password' %}">Change password</a></li> {% endcomment %}
-                <li><a href="{% url 'sign-out' %}">Sign out "{{ request.user.username }}"</a></li>
+                <li><a href="{% url 'sign-out' %}">Sign out</a></li>
 {% if request.user.is_staff %}
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Management</li>
