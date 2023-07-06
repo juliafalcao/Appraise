@@ -3,7 +3,7 @@
     grid-auto-flow: column;
     justify-content: center;
     align-content: center;
-    grid-gap: 1.5em;
+    gap: 3em;
 }
 
 .uni-logo {
@@ -15,8 +15,7 @@
     height: 3.5em;
     filter: grayscale(100%);
     opacity: 0.8;
-    margin-top: 1em;
-    /* to make up for the difference in size */
+    place-items: center;
 }
 
 .upv-logo {
@@ -27,6 +26,6 @@
 @media (max-width: 460px) {
     .uni-logos {
         grid-auto-flow: row;
-        grid-gap: 0.5em;
+        gap: 0.5em;
     }
 }
