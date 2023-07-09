@@ -20,7 +20,7 @@ from django.template.defaulttags import register
 
 from Appraise.settings import BASE_CONTEXT
 from Appraise.utils import _get_logger
-from Dashboard.models import LANGUAGE_CODES_AND_NAMES, PROFICIENCY_LEVELS
+from Dashboard.models import LANGUAGE_CODES_AND_NAMES, PROFICIENCY_LEVELS, MIN_PROFICIENCY
 from Dashboard.models import UserInviteToken
 from Dashboard.utils import generate_confirmation_token
 from EvalData.models import DirectAssessmentTask
@@ -35,6 +35,9 @@ def get_value_from_dict(dict_data, key):
     if key:
         return dict_data.get(key)
 
+@register.filter
+def index(indexable, i):
+    return indexable[i]
 
 TASK_TYPES = tuple([tup[1] for tup in TASK_DEFINITIONS])
 TASK_RESULTS = tuple([tup[2] for tup in TASK_DEFINITIONS])
@@ -383,6 +386,20 @@ def dashboard(request):
             if not code in languages:
                 languages.append(code)
 
+    language_names = [LANGUAGE_CODES_AND_NAMES[lang_code] for lang_code in languages]
+
+    proficiency_level_accepted = True
+
+    for lang_code in languages:
+        proficiency_group_query_set = request.user.groups.filter(name__contains=f"{lang_code}-")
+        if proficiency_group_query_set.exists():
+            proficiency_group = proficiency_group_query_set[0].name
+            proficiency_level = proficiency_group.split("-")[-1]
+
+            if PROFICIENCY_LEVELS.index(proficiency_level) < PROFICIENCY_LEVELS.index(MIN_PROFICIENCY):
+                LOGGER.info(f"Proficiency level `{proficiency_group}` insufficient")
+                proficiency_level_accepted = False
+
     _t2 = datetime.now()
 
     # If there is no current task, check if user is done with work agenda.
@@ -541,10 +558,12 @@ def dashboard(request):
             'current_type': current_type,
             'current_url': current_url,
             'languages': languages,
+            'language_names': language_names,
             'all_languages': all_languages,
             'debug_times': (_t2 - _t1, _t3 - _t2, _t4 - _t3, _t4 - _t1),
             'template_debug': 'debug' in request.GET,
             'work_completed': work_completed,
+            'proficiency_level_accepted': proficiency_level_accepted,
         }
     )
 

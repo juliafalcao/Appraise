@@ -92,14 +92,19 @@
             <h3 class="panel-title"><strong>Status</strong></h3>
           </div>
           <div class="panel-body">
-            {% if current_task %}
-              <h3>Current task</h3>
+            {% if not proficiency_level_accepted %}
+              <p><strong>No tasks available</strong></p>
+              <p style="font-size:18px">Thank you for your interest in participating in our project. However, in order to evaluate the quality of translations between {{language_names|index:0}} and {{language_names|index:1}}, we are looking for bilingual speakers, who are fluent or near fluent in both languages.</p>
+              <p style="font-size:18px">If you think you made a mistake in the sign up form and you <i>are</i> a fluent/native speaker of both {{language_names|index:0}} and {{language_names|index:1}}, feel free to <a href="{% url 'sign-out' %}">sign out</a> and create a new account.</p>
+
+            {% elif current_task %}
+              <h3><strong>Current task</strong></h3>
               <p>Continue annotation for <a href="{% url current_url %}">{{current_task.marketTargetLanguage}}</a>.</p>
 
             {% elif all_languages %}
               {% for _, languages in all_languages.items %}
                 {% if languages %}
-                  <h3>Tasks</h3>
+                  <h3><strong>Tasks</strong></h3>
                   <p>Start annotation for:
                     {% for code, language, campaign, task_url in languages %}
                       <a href="{% url task_url code campaign %}">{{language}}</a>{% if not forloop.last %} &middot; {% endif %}
@@ -109,48 +114,53 @@
               {% endfor %}
 
             {% else %}
-              <h3>Next task</h3>
+              <h3><strong>Next task</strong></h3>
               <p>We are currently finalising the registration process for annotator accounts. Once this has been completed, direct assessment tasks will be become available from this page. Please check back in a little while.</p>
             {% endif %}
 
-            <h3>User status</h3>
-            <p>Annotations done: {{annotations}}<br>Total annotation duration: {% if days %}{{days|stringformat:"02d"}}d{% endif %}{{hours|stringformat:"02d"}}h{{minutes|stringformat:"02d"}}m{{seconds|stringformat:"02d"}}s</p>
+            {% if proficiency_level_accepted %}
+              <h3><strong>User status</strong></h3>
+              <p>Annotations done: {{annotations}}<br>Total annotation duration: {% if days %}{{days|stringformat:"02d"}}d{% endif %}{{hours|stringformat:"02d"}}h{{minutes|stringformat:"02d"}}m{{seconds|stringformat:"02d"}}s</p>
+            {% endif %}
+
           </div> <!-- panel-body (first panel) -->
         </div> <!-- panel-primary (first panel) -->
 
-        <div class="panel panel-primary" style="margin-top: 20px;"> <!-- data disclaimers panel -->
-          <div class="panel-heading">
-            <h3 class="panel-title"><strong>Disclaimer</strong></h3>
-          </div>
-          <div class="panel-body disclaimer-panel">
+        {% if proficiency_level_accepted %}
+          <div class="panel panel-primary" style="margin-top: 20px;"> <!-- data disclaimers panel -->
+            <div class="panel-heading">
+              <h3 class="panel-title"><strong>Disclaimer</strong></h3>
+            </div>
+            <div class="panel-body disclaimer-panel">
 
-            <!-- language tabs -->
-            <div class="tab">
-              <button class="tablinks" id="tab-button-eng" onclick="openTab(event, 'eng')">ENGLISH</button>
-              <button class="tablinks" id="tab-button-mlt" onclick="openTab(event, 'mlt')">MALTI</button>
-              <button class="tablinks" id="tab-button-spa" onclick="openTab(event, 'spa')">ESPAÑOL</button>
-              <button class="tablinks" id="tab-button-eus" onclick="openTab(event, 'eus')">EUSKARA</button>
-            </div>
-            
-            <!-- language tabs content -->
-            <div id="eng" class="tabcontent">
-              <p>[disclaimer text in English]</p>
-            </div>
-            
-            <div id="mlt" class="tabcontent">
-              <p>[disclaimer text in Maltese]</p>
-            </div>
-            
-            <div id="spa" class="tabcontent">
-              <p>[disclaimer text in Spanish]</p>
-            </div>
+              <!-- language tabs -->
+              <div class="tab">
+                <button class="tablinks" id="tab-button-eng" onclick="openTab(event, 'eng')">ENGLISH</button>
+                <button class="tablinks" id="tab-button-mlt" onclick="openTab(event, 'mlt')">MALTI</button>
+                <button class="tablinks" id="tab-button-spa" onclick="openTab(event, 'spa')">ESPAÑOL</button>
+                <button class="tablinks" id="tab-button-eus" onclick="openTab(event, 'eus')">EUSKARA</button>
+              </div>
+              
+              <!-- language tabs content -->
+              <div id="eng" class="tabcontent">
+                <p>[disclaimer text in English]</p>
+              </div>
+              
+              <div id="mlt" class="tabcontent">
+                <p>[disclaimer text in Maltese]</p>
+              </div>
+              
+              <div id="spa" class="tabcontent">
+                <p>[disclaimer text in Spanish]</p>
+              </div>
 
-            <div id="eus" class="tabcontent">
-              <p>[disclaimer text in Basque]</p>
-            </div>
+              <div id="eus" class="tabcontent">
+                <p>[disclaimer text in Basque]</p>
+              </div>
 
-          </div> <!-- panel-body (data diclaimers panel) -->
-        </div> <!-- panel-primary (data disclaimers panel) -->
+            </div> <!-- panel-body (data diclaimers panel) -->
+          </div> <!-- panel-primary (data disclaimers panel) -->
+        {% endif %}
 
       </div> <!-- jumbotron -->
 

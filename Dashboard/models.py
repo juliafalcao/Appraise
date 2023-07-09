@@ -31,6 +31,8 @@ PROFICIENCY_LEVELS = [
     "native",
 ]
 
+MIN_PROFICIENCY = "intermediate"
+
 # Ensure that all languages have a corresponding group.
 try:
     for code in LANGUAGE_CODES_AND_NAMES:
