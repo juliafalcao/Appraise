@@ -42,12 +42,16 @@
     margin-top: -1em; /* no spacing on top of the first item */
   }
 
-  .proficiency-level-table td.language {
-    width: 30%;
+  span.form-instructions {
+    display: block;
+    color: #737373;
+    margin: 2em 0em;
   }
 
-  .proficiency-level-table td.dropdown {
-    width: 70%;
+  @media(min-width: 768px) {
+    span.form-instructions {
+      margin: 2em 10em;
+    }
   }
 </style>
 
@@ -123,15 +127,6 @@
 <div class="page-header">
   <h1>Register to participate</h1>
   <p>Please create an username and a password, and then tell us which languages you can evaluate.</p>
-
-  <!-- <div class="panel panel-primary" style="margin-top: 20px;">
-      <div class="panel-heading">
-        <h3 class="panel-title"><strong>Note</strong></h3>
-      </div>
-      <div class="panel-body">
-        <p>Each invite token can only be used once. After submitting this form you will be redirected to the front page. If successful you will be automatically logged into a new browser session. No confirmation message will be shown. If you provided a wrong value for the invite token field you will see an error message.</p>
-      </div>
-    </div> -->
 </div>
 
 <form class="form-horizontal" method="post" action="{% url 'create-profile' %}">
@@ -204,6 +199,8 @@
     </div>
     </div> -->
 
+  <span class="form-instructions">For this project, we wish to evaluate of translations between two pairs of languages: from English into Maltese, and from Spanish into Basque. Please select below which language pair you would like to contribute with, and tell us your proficiency level in each language.</span>
+
   <div class="form-group">
     <label for="id_languages" class="col-sm-4 control-label required">Language pair</label>
     <div class="col-sm-4">
@@ -216,8 +213,6 @@
         </label>
       </div>
       {% endfor %}
-
-      <!-- <span id="helpLanguages" class="help-block">Please select the language pair you wish to evaluate</span> -->
     </div>
   </div>
 
@@ -254,12 +249,8 @@
         </tr>
         </table>
       </div>
-
-      <span id="helpLanguages" class="help-block">TO-DO</span>
     </div>
   </div>
-
-
 
   <button type="submit" class="col-sm-offset-4 btn btn-primary">Create profile</button>
 
