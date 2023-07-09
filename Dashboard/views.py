@@ -164,11 +164,17 @@ def create_profile(request):
     """
     errors = None
     username = None
+    lp_code = None
     languages = []
-    language_choices = list(LANGUAGE_CODES_AND_NAMES.items())
-    proficiency_level_choices = PROFICIENCY_LEVELS
-    # language_choices.sort(key=lambda x: x[1])
     proficiency_levels = {}
+
+    language_pairs = [
+        ("eng-mlt", "Maltese and English"),
+        ("spa-eus", "Basque and Spanish"),
+    ]
+
+    language_names = LANGUAGE_CODES_AND_NAMES
+    proficiency_level_choices = PROFICIENCY_LEVELS
 
     focus_input = 'id_username'
 
@@ -179,10 +185,16 @@ def create_profile(request):
 
         _password_ok, _password_error = _validate_passwords(password1, password2)
 
-        languages = request.POST.getlist('languages', None)
-        proficiency_levels = { language : request.POST.get(f'proficiency-level-{language}', None) for language in languages }
+        lp_code = request.POST.get("lp_code", None)
+        languages = lp_code.split("-")
+        (src, tgt) = languages
 
-        _languages_ok, _languages_error = _validate_languages(languages, proficiency_levels)
+        proficiency_levels = {
+            src: request.POST.get("proficiency-level-src", None),
+            tgt: request.POST.get("proficiency-level-tgt", None),
+        }
+
+        _languages_ok, _languages_error = _validate_languages(languages, proficiency_levels) # TODO
 
         if username and languages and _password_ok and _languages_ok:
             try:
@@ -261,7 +273,8 @@ def create_profile(request):
         'username': username,
         'languages': languages,
         'proficiency_levels': proficiency_levels,
-        'language_choices': language_choices,
+        'language_pairs': language_pairs,
+        'language_names': language_names,
         'proficiency_level_choices': proficiency_level_choices,
         'title': 'Register',
     }

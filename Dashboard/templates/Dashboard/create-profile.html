@@ -19,26 +19,36 @@
     margin-left: 0px;
   }
 
-  input[type=checkbox]:hover {
+  input[type=radio]:hover {
     cursor: pointer;
   }
 
-  .language-choices-table {
+  .language-pair-label {
+    font-weight: normal;
+  }
+
+  .language-pair-label.form-control {
+    margin-bottom: 10px;
+  }
+
+  .proficiency-level-field:disabled {
+    display: none;
+  }
+
+  .proficiency-level-table {
     width: 100%;
-    border-collapse: separate;
-    border-spacing: 0.2em;
+    border-collapse: separate; 
+    border-spacing: 0 1em;
+    margin-top: -1em; /* no spacing on top of the first item */
   }
 
-  .language-choices-td {
-    width: 40%;
-    padding-left: 20px; /* to make up for the checkbox -20px margin */
+  .proficiency-level-table td.language {
+    width: 30%;
   }
 
-
-  .checkbox label:hover {
-    cursor: pointer;
+  .proficiency-level-table td.dropdown {
+    width: 70%;
   }
-  
 </style>
 
 <link rel="stylesheet" href="{% static 'Dashboard/css/jquery-ui.css' %}">
@@ -47,22 +57,35 @@
 
   $(document).ready(function () {
 
-    function checkbox_change() {
-      var lang_code = $(this).val();
-      var id_select = "#proficiency-level-" + lang_code;
+    var language_names = "{{language_names}}";
+    language_names = JSON.parse(language_names.replaceAll("&#x27;", '"'))
 
-      // when the language checkbox is checked, activate the corresponding dropdown menu for the proficiency level
-      if ($(this).is(":checked")) {
-        $(id_select).prop("disabled", false);
-        return;
-      }
+    function radio_change() {
+      var lp_code = $(this).val();
+      console.log("radio_change(): ", lp_code);
 
-      // when it's unchecked, reset the dropdown menu value and deactivate it
-      $(id_select).prop("selectedIndex", 0);
-      $(id_select).prop("disabled", true);
+      var [src, tgt] = lp_code.split("-");
+
+      var id_select = "#proficiency-level-src";
+
+      // un-hide the div
+      $(".proficiency-level-field").prop("hidden", false);
+      
+      // enable the dropdowns
+      $("#proficiency-level-src").prop("disabled", false);
+      $("#proficiency-level-tgt").prop("disabled", false);
+
+      // set the language as the "first" (disabled) option of the dropdowns
+      $(".src-language").text(language_names[src] + ":");
+      $(".tgt-language").text(language_names[tgt] + ":");
+
+      // reset selected index to this first option
+      $("#proficiency-level-src").prop("selectedIndex", 0);
+      $("#proficiency-level-tgt").prop("selectedIndex", 0);
+
     }
 
-    $(".language-checkbox").change(checkbox_change);
+    $(".language-pair-radio").change(radio_change);
   })
 
 
@@ -73,34 +96,35 @@
 
 {% block content %}
 
-  {% if errors %}
-  <div class="alert alert-danger alert-dismissible" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    {% if 'invalid_username' in errors %}
-    <p><strong>Warning!</strong> Invalid or missing username. Please provide a new username.</p>
-    {% elif 'username_already_exists' in errors %}
-    <p><strong>Warning!</strong> The username you have entered already exists. Please choose a new username.</p>
-    {% elif 'missing_password' in errors %}
-    <p><strong>Warning!</strong> Missing password. Please type your desired password twice, in both fields.</p>
-    {% elif 'passwords_not_matching' in errors %}
-    <p><strong>Warning!</strong> The passwords don't match. Please type the desired password in both fields.</p>
-    {% elif 'password_too_short' in errors %}
-    <p><strong>Warning!</strong> The password must be at least 4 characters long. Please try again.</p>
-    {% elif 'no_language_selected' in errors %}
-    <p><strong>Warning!</strong> Please choose at least one language for evaluation.</p>
-    {% elif 'missing_proficiency_level' in errors %}
-    <p><strong>Warning!</strong> Please select your proficiency level in all the languages you've marked.</p>
-    {% else %}
-    <p><strong>Warning!</strong> Something bad happened. Please try again.</p>
-    {% endif %}
-  </div>
+{% if errors %}
+<div class="alert alert-danger alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+      aria-hidden="true">&times;</span></button>
+  {% if 'invalid_username' in errors %}
+  <p><strong>Warning!</strong> Invalid or missing username. Please provide a new username.</p>
+  {% elif 'username_already_exists' in errors %}
+  <p><strong>Warning!</strong> The username you have entered already exists. Please choose a new username.</p>
+  {% elif 'missing_password' in errors %}
+  <p><strong>Warning!</strong> Missing password. Please type your desired password twice, in both fields.</p>
+  {% elif 'passwords_not_matching' in errors %}
+  <p><strong>Warning!</strong> The passwords don't match. Please type the desired password in both fields.</p>
+  {% elif 'password_too_short' in errors %}
+  <p><strong>Warning!</strong> The password must be at least 4 characters long. Please try again.</p>
+  {% elif 'no_language_selected' in errors %}
+  <p><strong>Warning!</strong> Please choose at least one language for evaluation.</p>
+  {% elif 'missing_proficiency_level' in errors %}
+  <p><strong>Warning!</strong> Please select your proficiency level in all the languages you've marked.</p>
+  {% else %}
+  <p><strong>Warning!</strong> Something bad happened. Please try again.</p>
   {% endif %}
+</div>
+{% endif %}
 
-  <div class="page-header">
-    <h1>Register to participate</h1>
-    <p>Please create an username and a password, and then tell us which languages you can evaluate.</p>
-    
-    <!-- <div class="panel panel-primary" style="margin-top: 20px;">
+<div class="page-header">
+  <h1>Register to participate</h1>
+  <p>Please create an username and a password, and then tell us which languages you can evaluate.</p>
+
+  <!-- <div class="panel panel-primary" style="margin-top: 20px;">
       <div class="panel-heading">
         <h3 class="panel-title"><strong>Note</strong></h3>
       </div>
@@ -108,41 +132,43 @@
         <p>Each invite token can only be used once. After submitting this form you will be redirected to the front page. If successful you will be automatically logged into a new browser session. No confirmation message will be shown. If you provided a wrong value for the invite token field you will see an error message.</p>
       </div>
     </div> -->
-  </div>
-  <form class="form-horizontal" method="post" action="{% url 'create-profile' %}">
+</div>
+
+<form class="form-horizontal" method="post" action="{% url 'create-profile' %}">
   {% csrf_token %}
 
-    <div class="form-group">
-      <label for="id_username" class="col-sm-4 control-label required">Username</label>
-      <div class="col-sm-4">
-        <div class="input-group">
-          <input class="form-control" name="username" id="id_username" type="text" aria-describedby="helpUsername" />
-        </div>
-        <span id="helpUsername" class="help-block">Please create an username</span>
+  <div class="form-group">
+    <label for="id_username" class="col-sm-4 control-label required">Username</label>
+    <div class="col-sm-4">
+      <div class="input-group">
+        <input class="form-control" name="username" id="id_username" type="text" aria-describedby="helpUsername" />
       </div>
+      <span id="helpUsername" class="help-block">Please create an username</span>
     </div>
+  </div>
 
-    <div class="form-group">
-      <label for="id_password1" class="col-sm-4 control-label required">Password</label>
-      <div class="col-sm-4">
-        <div class="input-group">
-          <input class="form-control" name="password1" id="password1" type="password" />
-        </div>
-        <p class="help-block">Please enter your desired password</p>
+  <div class="form-group">
+    <label for="id_password1" class="col-sm-4 control-label required">Password</label>
+    <div class="col-sm-4">
+      <div class="input-group">
+        <input class="form-control" name="password1" id="password1" type="password" />
       </div>
+      <p class="help-block">Please enter your desired password</p>
     </div>
+  </div>
 
-    <div class="form-group">
-      <label for="id_password2" class="col-sm-4 control-label required">Password (again)</label>
-      <div class="col-sm-4">
-        <div class="input-group">
-          <input class="form-control" name="password2" id="password2" type="password" value="{% if password2 %}{{password2}}{% endif %}" />
-        </div>
-        <p class="help-block">Please re-type your password</p>
+  <div class="form-group">
+    <label for="id_password2" class="col-sm-4 control-label required">Password (again)</label>
+    <div class="col-sm-4">
+      <div class="input-group">
+        <input class="form-control" name="password2" id="password2" type="password"
+          value="{% if password2 %}{{password2}}{% endif %}" />
       </div>
+      <p class="help-block">Please re-type your password</p>
     </div>
+  </div>
 
-    <div class="form-group">
+  <!-- <div class="form-group">
       <label for="id_languages" class="col-sm-4 control-label required">Languages</label>
       <div class="col-sm-4">
         <table class="language-choices-table">
@@ -174,24 +200,80 @@
 
         <span id="helpLanguages" class="help-block">Please select the languages you speak, and tell us what you believe is
           your proficiency level in each of them</span>
-
       </div>
     </div>
+    </div> -->
+
+  <div class="form-group">
+    <label for="id_languages" class="col-sm-4 control-label required">Language pair</label>
+    <div class="col-sm-4">
+      {% for lp_code, lp_name_english in language_pairs %}
+      <div class="input-group">
+        <label class="language-pair-label form-control">
+          <input type="radio" {% if code in languages %} checked=true {% endif %} name="lp_code" class="language-pair-radio" value="{{lp_code}}">
+            {{lp_name_english}}
+          </input>
+        </label>
+      </div>
+      {% endfor %}
+
+      <!-- <span id="helpLanguages" class="help-block">Please select the language pair you wish to evaluate</span> -->
     </div>
+  </div>
 
-    <button type="submit" class="col-sm-offset-4 btn btn-primary">Create profile</button>
+  <div class="form-group proficiency-level-field" hidden>
+    <label for="id_languages" class="col-sm-4 control-label required">Proficiency level</label>
+    <div class="col-sm-4">
+      <div class="input-group">
+        <table class="proficiency-level-table">
+        <tr>
+          <td class="language tgt-language" /> 
+          <td class="dropdown">
+            <select class="col-sm-2 form-control" name="proficiency-level-tgt" id="proficiency-level-tgt" disabled>
+            {% with current_level=proficiency_levels|get_value_from_dict:'mlt' %}
+              <option = disabled {% if level == None %} selected {% endif %}>proficiency level</option>
+              {% for level in proficiency_level_choices %}
+                <option {% if current_level == level %} selected {% endif %} value="{{level}}">{{level}}</option>
+              {% endfor %}
+            {% endwith %}
+          </select>
+        </td>
+        </tr>
+        <tr>
+          <td class="language src-language" />
+          <td class="dropdown">
+          <select class="col-sm-2 form-control" name="proficiency-level-src" id="proficiency-level-src" disabled>
+            {% with current_level=proficiency_levels|get_value_from_dict:'mlt' %}
+              <option disabled {% if level == None %} selected {% endif %}>proficiency level</option>
+              {% for level in proficiency_level_choices %}
+                <option {% if current_level == level %} selected {% endif %} value="{{level}}">{{level}}</option>
+              {% endfor %}
+            {% endwith %}
+          </select>
+        </td>
+        </tr>
+        </table>
+      </div>
 
-  </form>
+      <span id="helpLanguages" class="help-block">TO-DO</span>
+    </div>
+  </div>
+
+
+
+  <button type="submit" class="col-sm-offset-4 btn btn-primary">Create profile</button>
+
+</form>
 {% endblock %}
 
 {% block actions %}
-    <script>
-      {% if focus_input %}
-          // Set focus to given input
-          $('#{{ focus_input }}').focus();
-      {% else %}
-          // by default, set focus on username input
-          $('#id_username').focus();
-      {% endif %}
-    </script>
+<script>
+  {% if focus_input %}
+  // Set focus to given input
+  $('#{{ focus_input }}').focus();
+  {% else %}
+  // by default, set focus on username input
+  $('#id_username').focus();
+  {% endif %}
+</script>
 {% endblock %}
