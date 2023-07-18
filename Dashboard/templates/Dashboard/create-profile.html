@@ -62,12 +62,15 @@
   $(document).ready(function () {
 
     var language_names = "{{language_names}}";
-    language_names = JSON.parse(language_names.replaceAll("&#x27;", '"'))
+    language_names = JSON.parse(language_names.replaceAll("&#x27;", '"'));
 
-    function radio_change() {
-      var lp_code = $(this).val();
-      console.log("radio_change(): ", lp_code);
+    var lp_code = "{{lp_code}}";
+    if (lp_code != "None") {
+      _activate_proficiency_dropdowns(lp_code);
+      _set_proficiency_values(lp_code);
+    }
 
+    function _activate_proficiency_dropdowns(lp_code) {
       var [src, tgt] = lp_code.split("-");
 
       var id_select = "#proficiency-level-src";
@@ -86,7 +89,22 @@
       // reset selected index to this first option
       $("#proficiency-level-src").prop("selectedIndex", 0);
       $("#proficiency-level-tgt").prop("selectedIndex", 0);
+    }
 
+    function _set_proficiency_values(lp_code) {
+      var [src, tgt] = lp_code.split("-");
+    
+      proficiency_levels_str = "{{proficiency_levels}}";
+      console.log(proficiency_levels_str);
+      var proficiency_levels = JSON.parse(proficiency_levels_str.replaceAll("&#x27;", '"'));
+      $("#proficiency-level-src").val(proficiency_levels[src]);
+      $("#proficiency-level-tgt").val(proficiency_levels[tgt]);
+    }
+
+    function radio_change() {
+      var _lp_code = $(this).val();
+      console.log("radio_change(): ", _lp_code);
+      _activate_proficiency_dropdowns(_lp_code);
     }
 
     $(".language-pair-radio").change(radio_change);
@@ -204,11 +222,11 @@
   <div class="form-group">
     <label for="id_languages" class="col-sm-4 control-label required">Language pair</label>
     <div class="col-sm-4">
-      {% for lp_code, lp_name_english in language_pairs %}
+      {% for curr_lp_code, curr_lp_name in language_pairs %}
       <div class="input-group">
         <label class="language-pair-label form-control">
-          <input type="radio" {% if code in languages %} checked=true {% endif %} name="lp_code" class="language-pair-radio" value="{{lp_code}}">
-            {{lp_name_english}}
+          <input type="radio" {% if curr_lp_code == lp_code %} checked=true {% endif %} name="lp_code" class="language-pair-radio" value="{{curr_lp_code}}">
+            <span style="margin-bottom: 2em;">{{curr_lp_name}}</span>
           </input>
         </label>
       </div>
@@ -226,7 +244,7 @@
           <td class="dropdown">
             <select class="col-sm-2 form-control" name="proficiency-level-tgt" id="proficiency-level-tgt" disabled>
             {% with current_level=proficiency_levels|get_value_from_dict:'mlt' %}
-              <option = disabled {% if level == None %} selected {% endif %}>proficiency level</option>
+              <option = disabled {% if level == None %} selected {% endif %}>select</option>
               {% for level in proficiency_level_choices %}
                 <option {% if current_level == level %} selected {% endif %} value="{{level}}">{{level}}</option>
               {% endfor %}
@@ -239,7 +257,7 @@
           <td class="dropdown">
           <select class="col-sm-2 form-control" name="proficiency-level-src" id="proficiency-level-src" disabled>
             {% with current_level=proficiency_levels|get_value_from_dict:'mlt' %}
-              <option disabled {% if level == None %} selected {% endif %}>proficiency level</option>
+              <option disabled {% if level == None %} selected {% endif %}>select</option>
               {% for level in proficiency_level_choices %}
                 <option {% if current_level == level %} selected {% endif %} value="{{level}}">{{level}}</option>
               {% endfor %}
