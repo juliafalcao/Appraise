@@ -3,15 +3,27 @@
 
 {% block content %}
 
+<style>
+    .panel-body li {
+        font-size: 16px;
+    }
+</style>
+
 <div class="jumbotron">
     <h1>Data sources</h1>
-    <h4>Describe the page here</h4>
+    <h4>Here you can see a list of sources from which we obtained the original sentences for each language pair.</h4>
     <div class="panel panel-primary" style="margin-top: 20px;">
         <div class="panel-heading">
             <h3 class="panel-title"><strong>English to Maltese</strong></h3>
         </div>
         <div class="panel-body">
-            [in construction]
+            <p><ul>
+                <li>Web articles</li>
+                <li>Social bias dataset <i>(see <a href="/dashboard#data-warning">this warning</a> for more information)</i></li>
+                <li>TED Talks</li>
+                <li>EU publications<!-- (<a href="https://op.europa.eu/en/web/general-publications">https://op.europa.eu</a>)--></li>
+                <!--<li>European Court of Auditors (ECA) publications(<a href="https://www.eca.europa.eu/">https://www.eca.europa.eu</a>)</li>-->
+            </ul></p>
         </div>
     </div>
 
@@ -20,7 +32,16 @@
             <h3 class="panel-title"><strong>Spanish to Basque</strong></h3>
         </div>
         <div class="panel-body">
-            [in construction]
+            <p><ul>
+                <li>Web articles</li>
+                <li>Wikipedia</li>
+                <li>Books</li>
+                <li>Movie and TV subtitles</li>
+                <li>Educational video subtitles</li>
+                <li>Scientific texts</li>
+                <li>TED Talks</li>
+
+            </ul></p>
         </div>
     </div>
 
