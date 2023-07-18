@@ -29,3 +29,15 @@
         gap: 0.5em;
     }
 }
+
+.jumbotron p {
+    font-size: 20px;
+}
+
+h3 {
+    font-size: 21px;
+}
+
+.jumbotron h1 {
+    font-size: 55px;
+}
