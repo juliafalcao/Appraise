@@ -1,1 +1,1 @@
-python manage.py ExportSystemScoresToCSV example1mlteng --batch-info > MyCampaign/results.csv
+python manage.py ExportSystemScoresToCSV --campaign-name testbilingual --output-dir ~/Appraise
