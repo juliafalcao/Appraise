@@ -20,8 +20,12 @@ LANGUAGE_CODES_AND_NAMES = {
     'spa': 'Spanish',
 }
 
-# All sign language codes
 SIGN_LANGUAGE_CODES = set([])
+
+LANGUAGE_PAIRS = [
+    ["mlt", "eng"],
+    ["spa", "eus"]
+]
 
 PROFICIENCY_LEVELS = [
     "beginner",

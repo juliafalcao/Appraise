@@ -4,6 +4,10 @@
 
 {% block content %}
 <style>
+.jumbotron p {
+  font-size: 18px;
+}
+
 .disclaimer-panel p {
   font-size: 18px;
 }
@@ -38,6 +42,12 @@
   padding: 6px 12px;
   border: none;
   border-top: none;
+}
+
+.btn-block {
+  display: block;
+  width: 50%;
+  margin: 0 auto;
 }
 
 </style>
@@ -85,42 +95,52 @@
 
       <div class="jumbotron">
         <h1>Dashboard</h1>
-        <h4>Evaluation campaign for shared tasks hosted at <a href="https://statmt.org/wmt22">the 7th Conference on Machine Translation</a> (WMT22)</h4>
+
+        {% if proficiency_level_accepted %}
+          <div class="panel panel-primary" style="margin-top: 20px;">
+            <div class="panel-heading">
+              <h3 class="panel-title"><strong>The task</strong></h3>
+            </div>
+            <div class="panel-body">
+              <p>For each item, you will be shown an original sentence in {{language_names|index:0}}, and a translation candidate in {{language_names|index:1}}. You will then be asked to rate the quality of the translation on a scale of 0 to 100, based on how well you believe the translation expresses the full meaning of the original sentence. Let's say a rating of 100 means that the candidate is a perfect translation: it expresses the same thing as the original sentence, in a clear and correct manner. A candidate may "lose points" if it contains grammatical or ortographic mistakes, if it's missing information, if it contains extra information that was not present in the original sentence, if it sounds unnatural or weird, and so on.</p>
+              <p>You cannot edit your rating after you submit it, so please, read both the source sentence and the candidate carefully before you decide on your score.</p>
+
+            </div> <!-- panel-body (first panel) -->
+          </div> <!-- panel-primary (first panel) -->
+
+          {% if current_task %}
+            <a class="btn btn-primary btn-lg btn-block" href="{% url current_url %}" role="button">Go to task &raquo;</a>
+          {% elif all_languages %}
+            {% with task=all_languages|get_value_from_dict:'direct'|index:0 %}
+              {% with tgt=task|index:0 campaign_name=task|index:2 task_type=task|index:3 %}
+                <a class="btn btn-primary btn-lg btn-block" href="{% url task_type tgt campaign_name %}" role="button">Go to task &raquo;</a>
+              {% endwith %}
+            {% endwith %}
+          {% endif %}
+
+          <hr style="margin: 30px 20px;">
+
+        {% endif %}
 
         <div class="panel panel-primary" style="margin-top: 20px;">
           <div class="panel-heading">
-            <h3 class="panel-title"><strong>Status</strong></h3>
+            <h3 class="panel-title"><strong>User status</strong></h3>
           </div>
           <div class="panel-body">
-            {% if not proficiency_level_accepted %}
+            {% if proficiency_level_accepted %}
+              {% if annotations == 0 %}
+                <p><i>Start participating and evaluating translations to be able to see your user status!</i></p>
+              {% else %}
+                <p>
+                  <strong>Evaluations done:</strong> {{annotations}}
+                  <br>
+                  <strong>Total duration:</strong> {% if days %}{{days|stringformat:"02d"}}d{% endif %}{{hours|stringformat:"02d"}}h{{minutes|stringformat:"02d"}}m{{seconds|stringformat:"02d"}}s
+                </p>
+              {% endif %}
+            {% else %}
               <p><strong>No tasks available</strong></p>
               <p style="font-size:18px">Thank you for your interest in participating in our project. However, in order to evaluate the quality of translations between {{language_names|index:0}} and {{language_names|index:1}}, we are looking for bilingual speakers, who are fluent or near fluent in both languages.</p>
               <p style="font-size:18px">If you think you made a mistake in the sign up form and you <i>are</i> a fluent/native speaker of both {{language_names|index:0}} and {{language_names|index:1}}, feel free to <a href="{% url 'sign-out' %}">sign out</a> and create a new account.</p>
-
-            {% elif current_task %}
-              <h3><strong>Current task</strong></h3>
-              <p>Continue annotation for <a href="{% url current_url %}">{{current_task.marketTargetLanguage}}</a>.</p>
-
-            {% elif all_languages %}
-              {% for _, languages in all_languages.items %}
-                {% if languages %}
-                  <h3><strong>Tasks</strong></h3>
-                  <p>Start annotation for:
-                    {% for code, language, campaign, task_url in languages %}
-                      <a href="{% url task_url code campaign %}">{{language}}</a>{% if not forloop.last %} &middot; {% endif %}
-                    {% endfor %}
-                  </p>
-                {% endif %}
-              {% endfor %}
-
-            {% else %}
-              <h3><strong>Next task</strong></h3>
-              <p>We are currently finalising the registration process for annotator accounts. Once this has been completed, direct assessment tasks will be become available from this page. Please check back in a little while.</p>
-            {% endif %}
-
-            {% if proficiency_level_accepted %}
-              <h3><strong>User status</strong></h3>
-              <p>Annotations done: {{annotations}}<br>Total annotation duration: {% if days %}{{days|stringformat:"02d"}}d{% endif %}{{hours|stringformat:"02d"}}h{{minutes|stringformat:"02d"}}m{{seconds|stringformat:"02d"}}s</p>
             {% endif %}
 
           </div> <!-- panel-body (first panel) -->

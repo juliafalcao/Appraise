@@ -20,7 +20,7 @@ from django.template.defaulttags import register
 
 from Appraise.settings import BASE_CONTEXT
 from Appraise.utils import _get_logger
-from Dashboard.models import LANGUAGE_CODES_AND_NAMES, PROFICIENCY_LEVELS, MIN_PROFICIENCY
+from Dashboard.models import LANGUAGE_CODES_AND_NAMES, PROFICIENCY_LEVELS, MIN_PROFICIENCY, LANGUAGE_PAIRS
 from Dashboard.models import UserInviteToken
 from Dashboard.utils import generate_confirmation_token
 from EvalData.models import DirectAssessmentTask
@@ -275,6 +275,7 @@ def create_profile(request):
         'focus_input': focus_input,
         'username': username,
         'languages': languages,
+        'lp_code': lp_code,
         'proficiency_levels': proficiency_levels,
         'language_pairs': language_pairs,
         'language_names': language_names,
@@ -286,62 +287,62 @@ def create_profile(request):
     return render(request, 'Dashboard/create-profile.html', context)
 
 
-@login_required
-def update_profile(request):
-    """
-    Renders the profile update view.
-    """
-    errors = None
-    languages = set()
-    language_choices = [x for x in LANGUAGE_CODES_AND_NAMES.items()]
-    language_choices.sort(key=lambda x: x[1])
-    focus_input = 'id_projects'
+# @login_required
+# def update_profile(request):
+#     """
+#     Renders the profile update view.
+#     """
+#     errors = None
+#     languages = set()
+#     language_choices = [x for x in LANGUAGE_CODES_AND_NAMES.items()]
+#     language_choices.sort(key=lambda x: x[1])
+#     focus_input = 'id_projects'
 
-    if request.method == "POST":
-        languages = set(request.POST.getlist('languages', None))
-        if languages:
-            try:
-                # Compute set of evaluation languages for this user.
-                for code, _ in language_choices:
-                    language_group = Group.objects.filter(name=code)
-                    if language_group.exists():
-                        language_group = language_group[0]
-                        if code in languages:
-                            language_group.user_set.add(request.user)
-                        language_group.save()
+#     if request.method == "POST":
+#         languages = set(request.POST.getlist('languages', None))
+#         if languages:
+#             try:
+#                 # Compute set of evaluation languages for this user.
+#                 for code, _ in language_choices:
+#                     language_group = Group.objects.filter(name=code)
+#                     if language_group.exists():
+#                         language_group = language_group[0]
+#                         if code in languages:
+#                             language_group.user_set.add(request.user)
+#                         language_group.save()
 
-                # Redirect to dashboard.
-                return redirect('dashboard')
+#                 # Redirect to dashboard.
+#                 return redirect('dashboard')
 
-            # For any other exception, clean up and ask user to retry.
-            except Exception:
-                from traceback import format_exc
+#             # For any other exception, clean up and ask user to retry.
+#             except Exception:
+#                 from traceback import format_exc
 
-                print(format_exc())
+#                 print(format_exc())
 
-                languages = set()
+#                 languages = set()
 
-        # Detect which input should get focus for next page rendering.
-        if not languages:
-            focus_input = 'id_languages'
-            errors = ['invalid_languages']
+#         # Detect which input should get focus for next page rendering.
+#         if not languages:
+#             focus_input = 'id_languages'
+#             errors = ['invalid_languages']
 
-    # Determine user target languages
-    for group in request.user.groups.all():
-        if group.name.lower() in [x.lower() for x in LANGUAGE_CODES_AND_NAMES]:
-            languages.add(group.name.lower())
+#     # Determine user target languages
+#     for group in request.user.groups.all():
+#         if group.name.lower() in [x.lower() for x in LANGUAGE_CODES_AND_NAMES]:
+#             languages.add(group.name.lower())
 
-    context = {
-        'active_page': "OVERVIEW",
-        'errors': errors,
-        'focus_input': focus_input,
-        'languages': languages,
-        'language_choices': language_choices,
-        'title': 'Update profile',
-    }
-    context.update(BASE_CONTEXT)
+#     context = {
+#         'active_page': "OVERVIEW",
+#         'errors': errors,
+#         'focus_input': focus_input,
+#         'languages': languages,
+#         'language_choices': language_choices,
+#         'title': 'Update profile',
+#     }
+#     context.update(BASE_CONTEXT)
 
-    return render(request, 'Dashboard/update-profile.html', context)
+#     return render(request, 'Dashboard/update-profile.html', context)
 
 @login_required
 def dashboard(request):
@@ -367,27 +368,30 @@ def dashboard(request):
         if not current_task:
             current_task = task_cls.get_task_for_user(request.user)
 
+
         # Check if marketTargetLanguage for current_task matches user languages.
         if current_task:
             code = current_task.marketTargetLanguageCode()
-            print('  User groups:', request.user.groups.all())
-            if code not in request.user.groups.values_list('name', flat=True):
-                _msg = 'Language %s not specified for user %s. Giving up task %s'
-                LOGGER.info(_msg, code, request.user.username, current_task)
+            # print('  User groups:', request.user.groups.all())
+            # if code not in request.user.groups.values_list('name', flat=True):
+            #     _msg = 'Language %s not specified for user %s. Giving up task %s'
+            #     LOGGER.info(_msg, code, request.user.username, current_task)
 
-                current_task.assignedTo.remove(request.user)
-                current_task = None
+            #     current_task.assignedTo.remove(request.user)
+            #     current_task = None
 
     print('  Current task: {0}'.format(current_task))
 
+    # set languages in order [src, tgt] according to existing language pairs
     languages = []
-    for code in LANGUAGE_CODES_AND_NAMES:
-        if request.user.groups.filter(name=code).exists():
-            if not code in languages:
-                languages.append(code)
+
+    for src, tgt in LANGUAGE_PAIRS:
+        if request.user.groups.filter(name=src).exists() and request.user.groups.filter(name=tgt).exists():
+            languages.extend([src, tgt])
 
     language_names = [LANGUAGE_CODES_AND_NAMES[lang_code] for lang_code in languages]
 
+    # check proficiency levels
     proficiency_level_accepted = True
 
     for lang_code in languages:
@@ -403,6 +407,7 @@ def dashboard(request):
     _t2 = datetime.now()
 
     # If there is no current task, check if user is done with work agenda.
+    """
     work_completed = False
     if not current_task:
         agendas = TaskAgenda.objects.filter(user=request.user)
@@ -439,13 +444,14 @@ def dashboard(request):
         if not current_task and agendas.count() > 0:
             LOGGER.info('Work agendas completed, no more tasks for user')
             work_completed = True
+    """
 
     # Otherwise, compute set of language codes eligible for next task.
 
     # Mapping: task type => campaign name => list of languages
     languages_map = {task_cls: {} for task_cls in TASK_TYPES}
 
-    if not current_task and not work_completed:
+    if not current_task:
         # for code in LANGUAGE_CODES_AND_NAMES:
         #     if request.user.groups.filter(name=code).exists():
         #         if not code in languages:
@@ -545,8 +551,8 @@ def dashboard(request):
     print('  URL: {0}'.format(current_url))
 
     # Provide UUID for the completed task
-    if work_completed:
-        work_completed = generate_confirmation_token(request.user.username, run_qc=True)
+    # if work_completed:
+        # work_completed = generate_confirmation_token(request.user.username, run_qc=True)
 
     template_context.update(times)
     template_context.update(
@@ -562,8 +568,10 @@ def dashboard(request):
             'all_languages': all_languages,
             'debug_times': (_t2 - _t1, _t3 - _t2, _t4 - _t3, _t4 - _t1),
             'template_debug': 'debug' in request.GET,
-            'work_completed': work_completed,
+            # 'work_completed': work_completed,
             'proficiency_level_accepted': proficiency_level_accepted,
+            'src': src,
+            'tgt': tgt,
         }
     )
 
