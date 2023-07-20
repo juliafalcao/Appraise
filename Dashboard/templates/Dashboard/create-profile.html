@@ -224,9 +224,9 @@
     <div class="col-sm-4">
       {% for curr_lp_code, curr_lp_name in language_pairs %}
       <div class="input-group">
-        <label class="language-pair-label form-control">
-          <input type="radio" {% if curr_lp_code == lp_code %} checked=true {% endif %} name="lp_code" class="language-pair-radio" value="{{curr_lp_code}}">
-            <span style="margin-bottom: 2em;">{{curr_lp_name}}</span>
+        <label class="language-pair-label form-control" style="display: inline-block;">
+          <input type="radio" {% if curr_lp_code == lp_code %} checked=true {% endif %} name="lp_code" class="language-pair-radio" value="{{curr_lp_code}}" style="vertical-align: middle; margin: 1px;">
+            <text style="vertical-align: middle;">{{curr_lp_name}}</text>
           </input>
         </label>
       </div>
