@@ -26,3 +26,6 @@ db.sqlite3*
 MyCampaign/output.csv
 MyCampaign/results.csv
 
+**/results.*.csv
+**/users.*.csv
+
