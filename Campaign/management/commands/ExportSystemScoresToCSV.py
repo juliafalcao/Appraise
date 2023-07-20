@@ -1,8 +1,8 @@
 # pylint: disable=C0103,C0111,C0330,E1101
 import sys
 import pandas as pd
-from time import time
 import os
+from datetime import datetime
 
 from django.core.management.base import BaseCommand
 from django.core.management.base import CommandError
@@ -34,7 +34,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-        timestamp = int(time())
+        # create timestamp for the filenames
+        timestamp = datetime.now().strftime("%Y%m%d-%H%M")
 
         # find campaign
         try:
