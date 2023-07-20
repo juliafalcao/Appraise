@@ -132,7 +132,7 @@ class TrustedUserAdmin(admin.ModelAdmin):
     fieldsets = ((None, {'fields': ('user', 'campaign')}),)
 
 
-admin.site.register(CampaignTeam, CampaignTeamAdmin)
+# admin.site.register(CampaignTeam, CampaignTeamAdmin)
 admin.site.register(CampaignData, CampaignDataAdmin)
 admin.site.register(Campaign, CampaignAdmin)
 admin.site.register(TrustedUser, TrustedUserAdmin)

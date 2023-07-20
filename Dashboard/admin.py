@@ -9,5 +9,5 @@ from django.contrib import admin
 from Dashboard.models import TimedKeyValueData
 from Dashboard.models import UserInviteToken
 
-admin.site.register(UserInviteToken)
-admin.site.register(TimedKeyValueData)
+# admin.site.register(UserInviteToken)
+# admin.site.register(TimedKeyValueData)
