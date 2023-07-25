@@ -1,1 +1,0 @@
-python manage.py ExportSystemScoresToCSV --campaign-name testbilingual --output-dir ~/Appraise

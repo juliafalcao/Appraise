@@ -8,10 +8,9 @@ from django.core.management.base import BaseCommand
 from django.core.management.base import CommandError
 from django.contrib.auth.models import User
 
-from Campaign.models import Campaign
-from EvalData.models import TASK_DEFINITIONS
+from Campaign.models import *
+from EvalData.models import *
 from Dashboard.models import LANGUAGE_CODES_AND_NAMES, LANGUAGE_PAIRS, PROFICIENCY_LEVELS
-
 
 CAMPAIGN_TASK_PAIRS = {(tup[1], tup[2]) for tup in TASK_DEFINITIONS}
 
@@ -20,11 +19,6 @@ class Command(BaseCommand):
     help = 'Exports system scores over all results to CSV format'
 
     def add_arguments(self, parser):
-        parser.add_argument(
-            '--campaign-name',
-            type=str,
-            help='Name of the campaign you want to process data for',
-        )
         parser.add_argument(
             '--output-dir',
             type=str,
@@ -37,12 +31,6 @@ class Command(BaseCommand):
         # create timestamp for the filenames
         timestamp = datetime.now().strftime("%Y%m%d-%H%M")
 
-        # find campaign
-        try:
-            campaign = Campaign.get_campaign_or_raise(options['campaign_name'])
-        except LookupError as error:
-            raise CommandError(error)
-
         # check output-dir
         output_path = options["output_dir"]
         print("Output directory:", output_path)
@@ -50,33 +38,50 @@ class Command(BaseCommand):
         if not os.path.isdir(output_path):
             raise CommandError("The given output directory does not exist.")
 
-        # query result scores
-        system_scores = []
-        for task_cls, result_cls in CAMPAIGN_TASK_PAIRS:
-            qs_name = task_cls.__name__.lower()
-            qs_attr = 'evaldata_{0}_campaign'.format(qs_name)
-            qs_obj = getattr(campaign, qs_attr, None)
+        # list campaigns
+        all_campaigns = Campaign.objects.all()
+        dfs_scores = []
 
-            if qs_obj and qs_obj.exists():
-                _scores = result_cls.get_system_data(
-                    campaign.id,
-                    extended_csv=True,
-                    add_batch_info=True,
-                )
-                system_scores.extend(_scores)
-        
-        if len(system_scores) == 0:
-            raise CommandError("No results found in the given campaign.")
+        # loop over campaigns
+        for campaign in all_campaigns:
+            print(f"Querying results for campaign `{campaign}`...")
 
-        # put the scores in a DF
-        columns = ["username", "targetID", "itemID", "itemType", "sourceLanguageCode", "targetLanguageCode", "score", "startTime", "endTime", "batchNo", "realItemID"]
-        df_scores = pd.DataFrame(system_scores, columns=columns)
-        print("Scores found:", len(df_scores))
+            # query result scores
+            system_scores = []
 
-        # create extra fields
-        df_scores["deltaTime"] = df_scores.endTime - df_scores.startTime
+            for task_cls, result_cls in CAMPAIGN_TASK_PAIRS:
+                qs_name = task_cls.__name__.lower()
+                qs_attr = f"evaldata_{qs_name}_campaign"
+                qs_obj = getattr(campaign, qs_attr, None)
 
-        print(df_scores.head().to_string())
+                if qs_obj and qs_obj.exists():
+                    _scores = result_cls.get_system_data(
+                        campaign.id,
+                        extended_csv=True,
+                        add_batch_info=True,
+                    )
+                    system_scores.extend(_scores)
+
+            if len(system_scores) == 0:
+                print(f"No results found in campaign `{campaign.campaignName}`.")
+
+            # put the scores in a DF
+            columns = ["username", "targetID", "itemID", "itemType", "src", "tgt", "score", "startTime", "endTime", "batchNo", "realItemID"]
+            df_scores = pd.DataFrame(system_scores, columns=columns)
+            print("Scores found:", len(df_scores))
+
+            # create extra fields
+            df_scores["deltaTime"] = df_scores.endTime - df_scores.startTime
+            df_scores["campaign"] = campaign.campaignName
+
+            print(df_scores.head().to_string())
+
+            # add to list of DFs per campaign
+            dfs_scores.append(df_scores)
+
+
+        # join all the df_scores of each campaign
+        df_scores = pd.concat(dfs_scores, ignore_index=True)
 
         # save scores DF to CSV
         output_scores_path = os.path.join(output_path, f"results.{timestamp}.csv")
