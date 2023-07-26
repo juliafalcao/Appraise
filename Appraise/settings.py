@@ -16,13 +16,15 @@ from logging.handlers import RotatingFileHandler
 
 from django.core.exceptions import ImproperlyConfigured
 
+from django.utils.translation import ugettext_lazy as _
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
-DEBUG = os.environ.get('APPRAISE_DEBUG', True)
+DEBUG = eval(os.environ.get('APPRAISE_DEBUG')) if os.environ.get('APPRAISE_DEBUG') else True
 TEMPLATE_DEBUG = os.environ.get('APPRAISE_TEMPLATE_DEBUG', DEBUG)
 
 ADMINS = os.environ.get('APPRAISE_ADMINS', ())
@@ -129,6 +131,7 @@ MIDDLEWARE.extend(
         'django.middleware.security.SecurityMiddleware',
         'whitenoise.middleware.WhiteNoiseMiddleware',
         'django.contrib.sessions.middleware.SessionMiddleware',
+        'django.middleware.locale.LocaleMiddleware',
         'django.middleware.common.CommonMiddleware',
         'django.middleware.csrf.CsrfViewMiddleware',
         'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -187,6 +190,15 @@ USE_L10N = True
 
 USE_TZ = True
 
+LANGUAGES = [
+    ("en", _("English")),
+    ("es", _("Spanish")),
+]
+
+LOCALE_PATHS = [
+     os.path.join(BASE_DIR, "locale"),
+]
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
@@ -207,7 +219,7 @@ if MEDIA_ROOT and MEDIA_ROOT[-1] != '/':
 # Base context for all views.
 BASE_CONTEXT = {
     'commit_tag': '#wmt22dev',
-    'title': 'Translation Evaluation Campaign',
+    'title': 'Appraise evaluation system',
     'static_url': STATIC_URL,
 }
 
