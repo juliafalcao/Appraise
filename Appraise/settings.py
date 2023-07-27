@@ -208,8 +208,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # TODO: This is a temporary hack for running Appraise locally for regression
 # testing and development as WhiteNoise staticfiles app does not work.
-if SECRET_KEY != _SECRET_KEY_DEFAULT:
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# if SECRET_KEY != _SECRET_KEY_DEFAULT:
+    # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 # Allow to specify absolute filesystem path to the directory that will hold user-uploaded files.
 MEDIA_ROOT = os.environ.get('APPRAISE_MEDIA_ROOT', '')
