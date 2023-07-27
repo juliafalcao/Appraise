@@ -14,7 +14,6 @@
 
 .tab {
   overflow: hidden;
-  margin-bottom: 1em;
 }
 
 /* Style the buttons that are used to open the tab content */
@@ -25,7 +24,7 @@
   cursor: pointer;
   background-color: transparent;
   font-size: 12px;
-  color: #337ab7;
+  color: #fff;
 }
 
 /* Change background color of buttons on hover */
@@ -49,6 +48,11 @@
   display: block;
   width: 50%;
   margin: 0 auto;
+}
+
+.panel-title-with-langtabs {
+  display: inline-block;
+  position: absolute;
 }
 
 </style>
@@ -150,18 +154,17 @@
         {% if proficiency_level_accepted %}
           <div class="panel panel-primary" style="margin-top: 20px;" id="data-warning"> <!-- data disclaimers panel -->
             <div class="panel-heading">
-              <h3 class="panel-title"><strong>Warning</strong></h3>
+              <h3 class="panel-title panel-title-with-langtabs"><strong>Warning</strong></h3>
+              <!-- language tabs -->
+              <div class="tab">
+                <button class="tablinks" id="tab-button-eng" onclick="openTab(event, 'eng')" title="English">ENG</button>
+                <button class="tablinks" id="tab-button-mlt" onclick="openTab(event, 'mlt')" title="Malti">MLT</button>
+                <button class="tablinks" id="tab-button-spa" onclick="openTab(event, 'spa')" title="Español">SPA</button>
+                <button class="tablinks" id="tab-button-eus" onclick="openTab(event, 'eus')" title="Euskara">EUS</button>
+              </div>
             </div>
             <div class="panel-body disclaimer-panel">
 
-              <!-- language tabs -->
-              <div class="tab">
-                <button class="tablinks" id="tab-button-eng" onclick="openTab(event, 'eng')">ENGLISH</button>
-                <button class="tablinks" id="tab-button-mlt" onclick="openTab(event, 'mlt')">MALTI</button>
-                <button class="tablinks" id="tab-button-spa" onclick="openTab(event, 'spa')">ESPAÑOL</button>
-                <button class="tablinks" id="tab-button-eus" onclick="openTab(event, 'eus')">EUSKARA</button>
-              </div>
-              
               <!-- language tabs content -->
               <div id="eng" class="tabcontent">
                 <p>Some of the sentences you will be shown over the course of this task may contain offensive or otherwise inappropriate statements. Part of the data we used was selected from a social bias dataset, a large collection of texts from the Internet that are offensive to various minority groups, and this dataset was built in order to train applications to <i>detect and mitigate offensive content online</i>. The rest of the sentences were similarly collected from various different sources, publications, media, and the Internet. They may also contain wrong or outdated factual information about various topics. None of the sentences were written by us, and they do not express the views of anyone involved with this project. They also do not need to be factually correct. Our only goal is to analyze the quality of the automatic translations. Thank you for understanding.</p>
