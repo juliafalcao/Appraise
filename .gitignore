@@ -30,7 +30,5 @@ MyCampaign/results.csv
 **/results.*.csv
 **/users.*.csv
 
-
-# .env files
-*.env
-#
+# config file
+config.ini
