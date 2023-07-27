@@ -19,4 +19,16 @@ if __name__ == "__main__":
                 "forget to activate a virtual environment?"
             )
         raise
+    
+    if sys.argv[1] == "runserver":
+        # load dev config into env
+        from configparser import ConfigParser
+
+        cfg = ConfigParser()
+        cfg.read("config.ini")
+        assert len(cfg), "Config was not loaded correctly"
+        
+        for key, val in cfg["dev"].items():
+            os.environ[key.upper()] = val
+
     execute_from_command_line(sys.argv)
