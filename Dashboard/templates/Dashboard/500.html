@@ -1,5 +1,6 @@
 {% extends 'Dashboard/base.html' %}
 
 {% block content %}
-HTTP 500
+<p>{{error_500_text|safe}}</p>
+<a class="btn btn-primary btn-lg btn-block" style="margin: 0;" href="{% url 'frontpage' %}" role="button">&laquo; {{back_to_frontpage_button}}</a>
 {% endblock %}
