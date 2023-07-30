@@ -111,15 +111,15 @@ INSTALLED_APPS = [
     'Campaign',
 ]
 
-if DEBUG:
-    try:
-        # pylint: disable=W0611
-        import debug_toolbar  # type: ignore
+# if DEBUG:
+#     try:
+#         # pylint: disable=W0611
+#         import debug_toolbar  # type: ignore
 
-        INSTALLED_APPS.append('debug_toolbar')
-        # warnings.warn('Enabled Django Debug Toolbar in installed apps')
-    except ImportError:
-        warnings.warn('Django Debug Toolbar not installed')
+#         INSTALLED_APPS.append('debug_toolbar')
+#         # warnings.warn('Enabled Django Debug Toolbar in installed apps')
+#     except ImportError:
+#         warnings.warn('Django Debug Toolbar not installed')
 
 MIDDLEWARE = []
 if DEBUG:
@@ -219,8 +219,7 @@ if MEDIA_ROOT and MEDIA_ROOT[-1] != '/':
 
 # Base context for all views.
 BASE_CONTEXT = {
-    'commit_tag': '#wmt22dev',
-    'title': 'Appraise evaluation system',
+    'title': 'Translation Evaluation',
     'static_url': STATIC_URL,
 }
 
