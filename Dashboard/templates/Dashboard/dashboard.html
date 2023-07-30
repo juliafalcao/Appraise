@@ -135,15 +135,14 @@
                 <p><i>{{user_status_unavailable_text|safe}}</i></p>
               {% else %}
                 <p>
-                  <strong>Evaluations done:</strong> {{annotations}}
+                  <strong>{{evaluations_done}}:</strong> {{annotations}}
                   <br>
-                  <strong>Total duration:</strong> {% if days %}{{days|stringformat:"02d"}}d{% endif %}{{hours|stringformat:"02d"}}h{{minutes|stringformat:"02d"}}m{{seconds|stringformat:"02d"}}s
+                  <strong>{{total_duration}}:</strong> {% if days %}{{days|stringformat:"02d"}}d{% endif %}{{hours|stringformat:"02d"}}h{{minutes|stringformat:"02d"}}m{{seconds|stringformat:"02d"}}s
                 </p>
               {% endif %}
             {% else %}
-              <p><strong>No tasks available</strong></p>
-              <p style="font-size:18px">Thank you for your interest in participating in our project. However, in order to evaluate the quality of translations between {{language_names|index:0}} and {{language_names|index:1}}, we are looking for bilingual speakers, who are fluent or near fluent in both languages.</p>
-              <p style="font-size:18px">If you think you made a mistake in the sign up form and you <i>are</i> a fluent/native speaker of both {{language_names|index:0}} and {{language_names|index:1}}, feel free to <a href="{% url 'sign-out' %}">sign out</a> and create a new account.</p>
+              <p><strong>{{no_tasks_available|safe}}</strong></p>
+              {{insufficient_proficiency_text|safe}}
             {% endif %}
 
           </div> <!-- panel-body (first panel) -->
@@ -152,33 +151,11 @@
         {% if proficiency_level_accepted %}
           <div class="panel panel-primary" style="margin-top: 20px;" id="data-warning"> <!-- data disclaimers panel -->
             <div class="panel-heading">
-              <h3 class="panel-title panel-title-with-langtabs"><strong>{{data_warning_title}}</strong></h3>
-              <!-- language tabs -->
-              <div class="tab">
-                <button class="tablinks" id="tab-button-eng" onclick="openTab(event, 'eng')" title="English">ENG</button>
-                <button class="tablinks" id="tab-button-mlt" onclick="openTab(event, 'mlt')" title="Malti">MLT</button>
-                <button class="tablinks" id="tab-button-spa" onclick="openTab(event, 'spa')" title="Español">SPA</button>
-                <button class="tablinks" id="tab-button-eus" onclick="openTab(event, 'eus')" title="Euskara">EUS</button>
-              </div>
+              <h3 class="panel-title"><strong>{{disclaimer_title}}</strong></h3>
             </div>
             <div class="panel-body disclaimer-panel">
-
-              <!-- language tabs content -->
-              <div id="eng" class="tabcontent">
-                <p>Some of the sentences you will be shown over the course of this task may contain offensive or otherwise inappropriate statements. Part of the data we used was selected from a social bias dataset, a large collection of texts from the Internet that are offensive to various minority groups, and this dataset was built in order to train applications to <i>detect and mitigate offensive content online</i>. The rest of the sentences were similarly collected from various different sources, publications, media, and the Internet. They may also contain wrong or outdated factual information about various topics. None of the sentences were written by us, and they do not express the views of anyone involved with this project. They also do not need to be factually correct. Our only goal is to analyze the quality of the automatic translations. Thank you for understanding.</p>
-              </div>
-              
-              <div id="mlt" class="tabcontent">
-                <p>Uħud mis-sentenzi li se tara matul dan l-istħarriġ jista' jkun fihom dikjarazzjonijiet offensivi jew mhux xierqa. Parti mid-data li użajna ntgħażlet minn sett ta’ data ta' preġudizzju soċjali, ġabra kbira ta' testi mill-Internet li huma offensivi għal diversi gruppi ta' minoranza, <i>u dan is-sett ta' data nbena sabiex iħarreġ software biex jidentifikaw u jtaffu kontenut offensiv online</i>. Il-bqija tas-sentenzi nġabru bl-istess mod minn diversi sorsi, pubblikazzjonijiet, midja, u l-Internet. Dawn ukoll jista’ jkun fihom informazzjoni fattwali żbaljata jew mhux attwali dwar suġġetti varji. L-ebda sentenza ma nkitbet minna, u dawn s-sentenzi ma jesprimux l-fehmiet tal-individwi involuti f’dan il-proġett. Huma wkoll m'għandhomx għalfejn ikunu fattwalment korretti. L-uniku għan tagħna huwa li nanalizzaw il-kwalità tat-traduzzjonijiet awtomatiċi. Grazzi.</p>
-              </div>
-              
-              <div id="spa" class="tabcontent">
-                <p>[disclaimer text in Spanish]</p>
-              </div>
-
-              <div id="eus" class="tabcontent">
-                <p>[disclaimer text in Basque]</p>
-              </div>
+            
+            {{disclaimer_text|safe}}
 
             </div> <!-- panel-body (data diclaimers panel) -->
           </div> <!-- panel-primary (data disclaimers panel) -->

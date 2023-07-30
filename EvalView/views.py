@@ -31,6 +31,8 @@ from EvalData.models import PairwiseAssessmentResult
 from EvalData.models import PairwiseAssessmentTask
 from EvalData.models import TaskAgenda
 
+from Dashboard.views import _get_ui_lang
+
 import translated_texts
 
 # pylint: disable=import-error
@@ -257,7 +259,7 @@ def direct_assessment(request, code=None, campaign_name=None):
         reference_label = 'Reference text in {}'.format(target_language)
         candidate_label = 'Candidate translation in {}'.format(target_language)
 
-    ui_lang = current_task.marketSourceLanguageCode()
+    ui_lang = _get_ui_lang(request)
     lang_texts = translated_texts._get_lang_texts(translated_texts, ui_lang)
 
     context = {
@@ -278,6 +280,7 @@ def direct_assessment(request, code=None, campaign_name=None):
         'campaign': campaign.campaignName,
         'datask_id': current_task.id,
         'trusted_user': current_task.is_trusted_user(request.user),
+        'ui_lang': ui_lang,
         **lang_texts,
     }
     context.update(BASE_CONTEXT)

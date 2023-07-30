@@ -385,8 +385,13 @@ error pages
 """
 
 error_500_text = {
-    ENGLISH: "Oops! There was a server error. We apologize for the inconvenience. Please <a href=\"{% url 'frontpage'}\">go back to the initial page</a> and try again.",
-    SPANISH: "¡Uy! Parece que se ha producido un error en el servidor. Disculpe las molestias. Por favor, <a href=\"{% url 'frontpage'}\">vuelva a la página inicial</a> e inténtelo de nuevo."
+    ENGLISH: "Oops! There was a server error. We apologize for the inconvenience. Please go back to the initial page and try again.",
+    SPANISH: "¡Uy! Parece que se ha producido un error en el servidor. Disculpe las molestias. Por favor, vuelva a la página inicial e inténtelo de nuevo."
+}
+
+back_to_frontpage_button = {
+    ENGLISH: "Back to initial page",
+    SPANISH: "Volver a la página inicial"
 }
 
 """
