@@ -199,22 +199,6 @@ def frontpage(request, extra_context=None):
     response.set_cookie("ui_lang", ui_lang)
     return response
 
-def data_sources(request, extra_context=None):
-    """
-    Data Sources page.
-    """
-    LOGGER.info(
-        'Rendering data-sources view for user "%s".',
-        request.user.username or "Anonymous",
-    )
-
-    context = {'active_page': 'data-sources'}
-    context.update(BASE_CONTEXT)
-    if extra_context:
-        context.update(extra_context)
-
-    return render(request, 'Dashboard/data-sources.html', context)
-
 def _validate_passwords(password1: str, password2: str) -> (bool, str):
     if (not password1 or not password2):
         return (False, "missing_password")
