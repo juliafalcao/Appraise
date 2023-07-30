@@ -18,13 +18,6 @@ from Dashboard import views as dashboard_views
 from EvalData import views as evaldata_views
 from EvalView import views as evalview_views
 
-import translated_texts
-
-# temporary
-ui_lang = "eng"
-lang_texts = translated_texts._get_lang_texts(translated_texts, ui_lang)
-lang_context = {"ui_lang": ui_lang, **lang_texts}
-
 # HTTP error handlers
 # pylint: disable=invalid-name
 handler404 = 'Dashboard.views._page_not_found'
@@ -46,10 +39,7 @@ urlpatterns = [
     ),
     re_path(
         r'^dashboard/sign-in/$',
-        auth_views.LoginView.as_view(
-            template_name='Dashboard/signin.html',
-            extra_context={**BASE_CONTEXT, **lang_context},
-        ),
+        dashboard_views.signin,
         name='sign-in',
     ),
     re_path(
@@ -61,27 +51,10 @@ urlpatterns = [
     ),
     re_path(
         r'^dashboard/sign-out/$',
-        auth_views.LogoutView.as_view(
-            template_name='Dashboard/signout.html',  # TODO: this does not exist!
-            extra_context=BASE_CONTEXT,
-        ),
+        dashboard_views.signout,
         name='sign-out',
     ),
-    # re_path(
-    #     r'^dashboard/change-password/$',
-    #     auth_views.PasswordChangeView.as_view(
-    #         template_name='Dashboard/change-password.html',
-    #         success_url='/dashboard/',
-    #         extra_context=BASE_CONTEXT,
-    #     ),
-    #     name='change-password',
-    # ),
-    # re_path(
-    #     r'^dashboard/update-profile/$',
-    #     dashboard_views.update_profile,
-    #     name='update-profile',
-    # ),
-        re_path(
+    re_path(
         r'^dashboard/data-sources/$',
         dashboard_views.data_sources,
         name='data-sources',

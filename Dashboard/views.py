@@ -134,37 +134,43 @@ def _get_ui_lang(request):
 
     return ui_lang
 
-# def signin(request, extra_context=None):
-#     LOGGER.info('Rendering sign-in view.')
-#     username = None
-#     password = None
+def signin(request, extra_context=None):
+    logout(request)
+    username = None
+    password = None
 
-#     if request.method == "POST":
-#         username = request.POST.get('username', None)
-#         password1 = request.POST.get('password', None)
+    if request.POST:
+        username = request.POST['username']
+        password = request.POST['password']
 
-#         # Login user and redirect to dashboard page.
-#         user = authenticate(username=username, password=password)
-#         login(request, user)
-#         return redirect('dashboard')
+        user = authenticate(username=username, password=password)
 
-#     # get UI language and the corresponding translated texts
-#     ui_lang = _get_ui_lang(request)
-#     lang_texts = translated_texts._get_lang_texts(translated_texts, ui_lang)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                return redirect('dashboard')
 
-#     context = {
-#         "active_page": "sign-in",
-#         "ui_lang": ui_lang,
-#         **lang_texts,
-#     }
+    # get UI language and the corresponding translated texts
+    ui_lang = _get_ui_lang(request)
+    lang_texts = translated_texts._get_lang_texts(translated_texts, ui_lang)
 
-#     context.update(BASE_CONTEXT)
-#     if extra_context:
-#         context.update(extra_context)
+    context = {
+        "active_page": "sign-in",
+        "ui_lang": ui_lang,
+        **lang_texts,
+    }
 
-#     response = render(request, 'Dashboard/signin.html', context)
-#     response.set_cookie("ui_lang", ui_lang)
-#     return response
+    context.update(BASE_CONTEXT)
+    if extra_context:
+        context.update(extra_context)
+
+    response = render(request, 'Dashboard/signin.html', context)
+    response.set_cookie("ui_lang", ui_lang)
+    return response
+
+def signout(request, extra_context=None):
+    logout(request)
+    return redirect('frontpage')
 
 def frontpage(request, extra_context=None):
     """
