@@ -1,0 +1,43 @@
+.uni-logos {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: center;
+    align-content: center;
+    gap: 3em;
+    place-items: center;
+}
+
+.uni-logo {
+    pointer-events: none;
+    user-select: none;
+}
+
+.um-logo {
+    height: 3.5em;
+    filter: grayscale(100%);
+    opacity: 0.8;
+}
+
+.upv-logo {
+    height: 5em;
+    opacity: 0.7;
+}
+
+@media (max-width: 460px) {
+    .uni-logos {
+        grid-auto-flow: row;
+        gap: 0.5em;
+    }
+}
+
+.jumbotron p {
+    font-size: 16px;
+}
+
+h3 {
+    font-size: 21px;
+}
+
+.jumbotron h1 {
+    font-size: 50px;
+}
