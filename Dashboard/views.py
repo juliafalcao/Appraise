@@ -67,10 +67,19 @@ def _page_not_found(request, template_name='404.html'):
     LOGGER.info(
         'Rendering HTTP 404 for user "%s". Request.path=%s',
         request.user.username or "Anonymous",
-         request.path,
+        request.path,
     )
 
-    return render(request, 'Dashboard/404.html', BASE_CONTEXT)
+    ui_lang = _get_ui_lang(request)
+    lang_texts = translated_texts._get_lang_texts(translated_texts, ui_lang)
+
+    context = {
+        **BASE_CONTEXT,
+        "ui_lang": ui_lang,
+        **lang_texts,
+    }
+
+    return render(request, 'Dashboard/404.html', context)
 
 
 def _server_error(request, template_name='500.html'):
@@ -85,7 +94,16 @@ def _server_error(request, template_name='500.html'):
         request.path,
     )
 
-    return render(request, 'Dashboard/500.html', BASE_CONTEXT)
+    ui_lang = _get_ui_lang(request)
+    lang_texts = translated_texts._get_lang_texts(translated_texts, ui_lang)
+
+    context = {
+        **BASE_CONTEXT,
+        "ui_lang": ui_lang,
+        **lang_texts,
+    }
+
+    return render(request, 'Dashboard/500.html', context)
 
 
 def sso_login(request, username, password):
@@ -113,7 +131,7 @@ def _get_ui_lang(request):
     ui_lang = request.COOKIES.get("ui_lang", None)
 
     if not ui_lang:
-        ui_lang = "eng" # leave English as default
+        ui_lang = "eng" # leave English as default at first
 
         # if user is logged in: check their source language to set as UI language
         if request.user.username:
@@ -327,7 +345,6 @@ def create_profile(request):
             errors = [_languages_error]
 
     # get UI language and the corresponding translated texts
-    print("creaet_profile: _get_ui_lang()...")
     ui_lang = _get_ui_lang(request)
     lang_texts = translated_texts._get_lang_texts(translated_texts, ui_lang)
 
@@ -417,61 +434,12 @@ def dashboard(request):
 
     _t2 = datetime.now()
 
-    # If there is no current task, check if user is done with work agenda.
-    """
-    work_completed = False
-    if not current_task:
-        agendas = TaskAgenda.objects.filter(user=request.user)
-
-        for agenda in agendas:
-            LOGGER.info('Identified work agenda %s', agenda)
-            print('Identified work agenda', agenda)
-
-            tasks_to_complete = []
-            for serialized_open_task in agenda.serialized_open_tasks():
-                open_task = serialized_open_task.get_object_instance()
-
-                # Skip tasks which are not available anymore
-                if open_task is None:
-                    continue
-
-                if open_task.next_item_for_user(request.user) is not None:
-                    current_task = open_task
-                    campaign = agenda.campaign
-                    LOGGER.info(
-                        'Current task type: %s',
-                        open_task.__class__.__name__,
-                    )
-                else:
-                    tasks_to_complete.append(serialized_open_task)
-
-            modified = False
-            for task in tasks_to_complete:
-                modified = agenda.complete_open_task(task) or modified
-
-            if modified:
-                agenda.save()
-
-        if not current_task and agendas.count() > 0:
-            LOGGER.info('Work agendas completed, no more tasks for user')
-            work_completed = True
-    """
-
-    # Otherwise, compute set of language codes eligible for next task.
+    # Compute set of language codes eligible for next task.
 
     # Mapping: task type => campaign name => list of languages
     languages_map = {task_cls: {} for task_cls in TASK_TYPES}
 
     if not current_task:
-        # for code in LANGUAGE_CODES_AND_NAMES:
-        #     if request.user.groups.filter(name=code).exists():
-        #         if not code in languages:
-        #             languages.append(code)
-
-        # if hits < HITS_REQUIRED_BEFORE_ENGLISH_ALLOWED:
-            # if len(languages) > 1 and 'eng' in languages:
-                # languages.remove('eng')
-
         # Remove any language for which no free task is available.
         from Campaign.models import Campaign
 
@@ -565,7 +533,7 @@ def dashboard(request):
     # if work_completed:
         # work_completed = generate_confirmation_token(request.user.username, run_qc=True)
 
-    ui_lang = src
+    ui_lang = _get_ui_lang(request)
     lang_texts = translated_texts._get_lang_texts(translated_texts, ui_lang)
 
     template_context.update(times)
@@ -586,6 +554,7 @@ def dashboard(request):
             'proficiency_level_accepted': proficiency_level_accepted,
             'src': src,
             'tgt': tgt,
+            'ui_lang': ui_lang,
             **lang_texts,
         }
     )
