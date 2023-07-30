@@ -17,38 +17,38 @@
   {% if form.errors %}
   <div class="alert alert-danger alert-dismissible" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <p><strong>Warning!</strong> Your username and password did not match. Please try again.</p>
+    <p><strong>{{error_msg_warning_header}}</strong> {{signin_error_text}}</p>
   </div>
   {% endif %}
 
   <div class="page-header">
-    <h1>User authentication</h1>
-    <p>Please enter your username and password so we can verify your credentials.</p>
+    <h1>{{user_auth_title}}</h1>
+    <p>{{user_auth_subtitle}}</p>
   </div>
   <form class="form-horizontal" method="post" action="{% url 'sign-in' %}">
   {% csrf_token %}
 
     <div class="form-group">
-      <label for="id_username" class="col-sm-4 control-label required">Username</label>
+      <label for="id_username" class="col-sm-4 control-label required">{{username_label_text}}</label>
       <div class="col-sm-4">
         <div class="input-group">
           <input class="form-control" name="username" id="id_username" type="text" size="30" value="{% if username %}{{username}}{% endif %}" aria-describedby="helpUsername" />
         </div>
-        <span id="helpUsername" class="help-block">Please enter your username</span>
+        <span id="helpUsername" class="help-block">{{signin_username_help_text}}</span>
       </div>
     </div>
 
     <div class="form-group">
-      <label for="id_password" class="col-sm-4 control-label required">Password</label>
+      <label for="id_password" class="col-sm-4 control-label required">{{password1_label_text}}</label>
       <div class="col-sm-4">
         <div class="input-group">
           <input class="form-control" name="password" id="id_password" type="password" size="30" aria-describedby="helpPassword" />
         </div>
-        <span id="helpPassword" class="help-block">And also provide your password</span>
+        <span id="helpPassword" class="help-block">{{signin_password_help_text}}</span>
       </div>
     </div>
 
-    <button type="submit" class="col-sm-offset-4 btn btn-primary">Sign in</button>
+    <button type="submit" class="col-sm-offset-4 btn btn-primary">{{signin_button_text}}</button>
     <input type="hidden" name="next" value="{{ next }}" />
 
   </form>

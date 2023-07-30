@@ -60,10 +60,6 @@
 <script>
 
   $(document).ready(function () {
-
-    var language_names = "{{language_names}}";
-    language_names = JSON.parse(language_names.replaceAll("&#x27;", '"'));
-
     var lp_code = "{{lp_code}}";
     if (lp_code != "None") {
       _activate_proficiency_dropdowns(lp_code);
@@ -82,9 +78,11 @@
       $("#proficiency-level-src").prop("disabled", false);
       $("#proficiency-level-tgt").prop("disabled", false);
 
-      // set the language as the "first" (disabled) option of the dropdowns
-      $(".src-language").text(language_names[src] + ":");
-      $(".tgt-language").text(language_names[tgt] + ":");
+      // set the language as the label text before the proficiency dropdown
+      var language_name_src = (src == "eng") ? "{{language_name_english}}" : "{{language_name_spanish}}";
+      var language_name_tgt = (tgt == "mlt") ? "{{language_name_maltese}}" : "{{language_name_basque}}";
+      $(".src-language").text(language_name_src + ":");
+      $(".tgt-language").text(language_name_tgt + ":");
 
       // reset selected index to this first option
       $("#proficiency-level-src").prop("selectedIndex", 0);
@@ -123,119 +121,88 @@
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
       aria-hidden="true">&times;</span></button>
   {% if 'invalid_username' in errors %}
-  <p><strong>Warning!</strong> Invalid or missing username. Please provide a new username.</p>
+  <p><strong>{{error_msg_warning_header}}</strong> {{error_msg_invalid_username}}</p>
   {% elif 'username_already_exists' in errors %}
-  <p><strong>Warning!</strong> The username you have entered already exists. Please choose a new username.</p>
+  <p><strong>{{error_msg_warning_header}}</strong> {{error_msg_username_already_exists}}</p>
   {% elif 'missing_password' in errors %}
-  <p><strong>Warning!</strong> Missing password. Please type your desired password twice, in both fields.</p>
+  <p><strong>{{error_msg_warning_header}}</strong> {{error_msg_missing_password}}</p>
   {% elif 'passwords_not_matching' in errors %}
-  <p><strong>Warning!</strong> The passwords don't match. Please type the desired password in both fields.</p>
+  <p><strong>{{error_msg_warning_header}}</strong> {{error_msg_passwords_not_matching}}</p>
   {% elif 'password_too_short' in errors %}
-  <p><strong>Warning!</strong> The password must be at least 4 characters long. Please try again.</p>
+  <p><strong>{{error_msg_warning_header}}</strong> {{error_msg_password_too_short}}</p>
   {% elif 'no_language_selected' in errors %}
-  <p><strong>Warning!</strong> Please choose at least one language for evaluation.</p>
+  <p><strong>{{error_msg_warning_header}}</strong> {{error_msg_no_lang_selected}}</p>
   {% elif 'missing_proficiency_level' in errors %}
-  <p><strong>Warning!</strong> Please select your proficiency level in all the languages you've marked.</p>
+  <p><strong>{{error_msg_warning_header}}</strong> {{error_msg_missing_poficiency_level}}</p>
   {% else %}
-  <p><strong>Warning!</strong> Something bad happened. Please try again.</p>
+  <p><strong>{{error_msg_warning_header}}</strong> {{error_msg_default}}</p>
   {% endif %}
 </div>
 {% endif %}
 
 <div class="page-header">
-  <h1>Register to participate</h1>
-  <p>Please create an username and a password, and then tell us which languages you can evaluate.</p>
+  <h1>{{create_profile_title}}</h1>
+  <p>{{create_profile_subtitle}}</p>
 </div>
 
 <form class="form-horizontal" method="post" action="{% url 'create-profile' %}">
   {% csrf_token %}
 
   <div class="form-group">
-    <label for="id_username" class="col-sm-4 control-label required">Username</label>
+    <label for="id_username" class="col-sm-4 control-label required">{{username_label_text}}</label>
     <div class="col-sm-4">
       <div class="input-group">
         <input class="form-control" name="username" id="id_username" type="text" aria-describedby="helpUsername" />
       </div>
-      <span id="helpUsername" class="help-block">Please create an username</span>
+      <span id="helpUsername" class="help-block">{{username_help_text}}</span>
     </div>
   </div>
 
   <div class="form-group">
-    <label for="id_password1" class="col-sm-4 control-label required">Password</label>
+    <label for="id_password1" class="col-sm-4 control-label required">{{password1_label_text}}</label>
     <div class="col-sm-4">
       <div class="input-group">
         <input class="form-control" name="password1" id="password1" type="password" />
       </div>
-      <p class="help-block">Please enter your desired password</p>
+      <p class="help-block">{{password1_help_text}}</p>
     </div>
   </div>
 
   <div class="form-group">
-    <label for="id_password2" class="col-sm-4 control-label required">Password (again)</label>
+    <label for="id_password2" class="col-sm-4 control-label required">{{password2_label_text}}</label>
     <div class="col-sm-4">
       <div class="input-group">
         <input class="form-control" name="password2" id="password2" type="password"
           value="{% if password2 %}{{password2}}{% endif %}" />
       </div>
-      <p class="help-block">Please re-type your password</p>
+      <p class="help-block">{{password2_help_text}}</p>
     </div>
   </div>
 
-  <!-- <div class="form-group">
-      <label for="id_languages" class="col-sm-4 control-label required">Languages</label>
-      <div class="col-sm-4">
-        <table class="language-choices-table">
-          {% for code, name in language_choices %}
-          <tr>
-            <td class="language-choices-td">
-              <div class="input-group checkbox">
-                <label>
-                  <input type="checkbox" {% if code in languages %} checked=true {% endif %} name="languages" class="language-checkbox" value="{{code}}">{{name}}</input>
-                </label>
-              </div>
-            </td>
-            <td style="width:60%;">
-              <div class="input-group">
-                <select class="col-sm-2 form-control" name="proficiency-level-{{code}}" id="proficiency-level-{{code}}" {% if code not in languages %} disabled {% endif %}>
-                  {% with current_level=proficiency_levels|get_value_from_dict:code %}
-                  <option disabled {% if level == None %} selected {% endif %} value=>proficiency level</option>
-
-                  {% for level in proficiency_level_choices %}
-                    <option {% if current_level == level %} selected {% endif %} value="{{level}}">{{level}}</option>
-                  {% endfor %}
-                  {% endwith %}
-                </select>
-              </div>
-            </td>
-          </tr>
-          {% endfor %}
-        </table>
-
-        <span id="helpLanguages" class="help-block">Please select the languages you speak, and tell us what you believe is
-          your proficiency level in each of them</span>
-      </div>
-    </div>
-    </div> -->
-
-  <span class="form-instructions">For this project, we wish to evaluate of translations between two pairs of languages: from English into Maltese, and from Spanish into Basque. Please select below which language pair you would like to contribute with, and tell us your proficiency level in each language.</span>
+  <span class="form-instructions">{{lp_help_text}}</span>
 
   <div class="form-group">
-    <label for="id_languages" class="col-sm-4 control-label required">Language pair</label>
-    <div class="col-sm-4">
-      {% for curr_lp_code, curr_lp_name in language_pairs %}
-      <div class="input-group">
-        <label class="language-pair-label form-control" style="display: inline-block;">
-          <input type="radio" {% if curr_lp_code == lp_code %} checked=true {% endif %} name="lp_code" class="language-pair-radio" value="{{curr_lp_code}}" style="vertical-align: middle; margin: 1px;">
-            <text style="vertical-align: middle;">{{curr_lp_name}}</text>
-          </input>
-        </label>
+    <label for="id_languages" class="col-sm-4 control-label required">{{lp_label_text}}</label>
+      <div class="col-sm-4">
+        <div class="input-group">
+          <label class="language-pair-label form-control" style="display: inline-block;">
+            <input type="radio" {% if lp_code == 'eng-mlt' %} checked=true {% endif %} name="lp_code" class="language-pair-radio" value="eng-mlt" style="vertical-align: middle; margin: 1px;">
+              <text style="vertical-align: middle;">{{lp_engmlt_option_text}}</text>
+            </input>
+          </label>
+        </div>
+        <div class="input-group">
+          <label class="language-pair-label form-control" style="display: inline-block;">
+            <input type="radio" {% if lp_code == 'spa-eus' %} checked=true {% endif %} name="lp_code" class="language-pair-radio" value="spa-eus" style="vertical-align: middle; margin: 1px;">
+              <text style="vertical-align: middle;">{{lp_spaeus_option_text}}</text>
+            </input>
+          </label>
+        </div>
       </div>
-      {% endfor %}
     </div>
-  </div>
 
   <div class="form-group proficiency-level-field" hidden>
-    <label for="id_languages" class="col-sm-4 control-label required">Proficiency level</label>
+    <label for="id_languages" class="col-sm-4 control-label required">{{proficiency_level_label_text}}</label>
     <div class="col-sm-4">
       <div class="input-group">
         <table class="proficiency-level-table">
@@ -243,26 +210,30 @@
           <td class="language tgt-language" /> 
           <td class="dropdown">
             <select class="col-sm-2 form-control" name="proficiency-level-tgt" id="proficiency-level-tgt" disabled>
-            {% with current_level=proficiency_levels|get_value_from_dict:'mlt' %}
-              <option = disabled {% if level == None %} selected {% endif %}>select</option>
-              {% for level in proficiency_level_choices %}
-                <option {% if current_level == level %} selected {% endif %} value="{{level}}">{{level}}</option>
-              {% endfor %}
-            {% endwith %}
-          </select>
-        </td>
+              {% with current_level=proficiency_levels|get_value_from_dict:tgt %}
+                <option = disabled {% if level == None %} selected {% endif %}>{{select_option_text}}</option>
+                <option {% if current_level == 'beginner' %} selected {% endif %} value="beginner">{{proficiency_level_beginner}}</option>
+                <option {% if current_level == 'intermediate' %} selected {% endif %} value="intermediate">{{proficiency_level_intermediate}}</option>
+                <option {% if current_level == 'advanced' %} selected {% endif %} value="advanced">{{proficiency_level_advanced}}</option>
+                <option {% if current_level == 'fluent' %} selected {% endif %} value="fluent">{{proficiency_level_fluent}}</option>
+                <option {% if current_level == 'native' %} selected {% endif %} value="native">{{proficiency_level_native}}</option>
+              {% endwith %}
+            </select>
+          </td>
         </tr>
         <tr>
           <td class="language src-language" />
           <td class="dropdown">
           <select class="col-sm-2 form-control" name="proficiency-level-src" id="proficiency-level-src" disabled>
-            {% with current_level=proficiency_levels|get_value_from_dict:'mlt' %}
-              <option disabled {% if level == None %} selected {% endif %}>select</option>
-              {% for level in proficiency_level_choices %}
-                <option {% if current_level == level %} selected {% endif %} value="{{level}}">{{level}}</option>
-              {% endfor %}
-            {% endwith %}
-          </select>
+              {% with current_level=proficiency_levels|get_value_from_dict:src %}
+                <option = disabled {% if level == None %} selected {% endif %}>{{select_option_text}}</option>
+                <option {% if current_level == 'beginner' %} selected {% endif %} value="beginner">{{proficiency_level_beginner}}</option>
+                <option {% if current_level == 'intermediate' %} selected {% endif %} value="intermediate">{{proficiency_level_intermediate}}</option>
+                <option {% if current_level == 'advanced' %} selected {% endif %} value="advanced">{{proficiency_level_advanced}}</option>
+                <option {% if current_level == 'fluent' %} selected {% endif %} value="fluent">{{proficiency_level_fluent}}</option>
+                <option {% if current_level == 'native' %} selected {% endif %} value="native">{{proficiency_level_native}}</option>
+              {% endwith %}
+            </select>
         </td>
         </tr>
         </table>
@@ -270,7 +241,7 @@
     </div>
   </div>
 
-  <button type="submit" class="col-sm-offset-4 btn btn-primary">Create profile</button>
+  <button type="submit" class="col-sm-offset-4 btn btn-primary">{{create_profile_button}}</button>
 
 </form>
 {% endblock %}

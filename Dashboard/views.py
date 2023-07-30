@@ -7,6 +7,7 @@ from datetime import datetime
 from hashlib import md5
 from inspect import currentframe
 from inspect import getframeinfo
+from requests import get
 
 from django.contrib.auth import authenticate
 from django.contrib.auth import login
@@ -26,6 +27,8 @@ from Dashboard.utils import generate_confirmation_token
 from EvalData.models import DirectAssessmentTask
 from EvalData.models import TASK_DEFINITIONS
 from EvalData.models import TaskAgenda
+
+import translated_texts
 
 @register.filter
 def get_value_from_dict(dict_data, key):
@@ -64,7 +67,7 @@ def _page_not_found(request, template_name='404.html'):
     LOGGER.info(
         'Rendering HTTP 404 for user "%s". Request.path=%s',
         request.user.username or "Anonymous",
-        request.path,
+         request.path,
     )
 
     return render(request, 'Dashboard/404.html', BASE_CONTEXT)
@@ -105,6 +108,63 @@ def sso_login(request, username, password):
 
     return redirect('dashboard')
 
+def _get_ui_lang(request):
+    # get from cookie if available
+    ui_lang = request.COOKIES.get("ui_lang", None)
+
+    if not ui_lang:
+        ui_lang = "eng" # leave English as default
+
+        # if user is logged in: check their source language to set as UI language
+        if request.user.username:
+            for _src, _tgt in LANGUAGE_PAIRS:
+                if request.user.groups.filter(name=_src).exists():
+                    ui_lang = _src
+
+        # if anonymous: try and get user's location with the IP
+        else:
+            try:
+                res = get("http://ip-api.com/json")
+                country = res.json()["country"]
+                if country.lower() in ["spain", "france"]:
+                    # including France because of the French Basque Country but the users can always manually change the language if needed
+                    ui_lang = "spa"
+            except Exception as e:
+                print("Error finding country:", e)
+
+    return ui_lang
+
+# def signin(request, extra_context=None):
+#     LOGGER.info('Rendering sign-in view.')
+#     username = None
+#     password = None
+
+#     if request.method == "POST":
+#         username = request.POST.get('username', None)
+#         password1 = request.POST.get('password', None)
+
+#         # Login user and redirect to dashboard page.
+#         user = authenticate(username=username, password=password)
+#         login(request, user)
+#         return redirect('dashboard')
+
+#     # get UI language and the corresponding translated texts
+#     ui_lang = _get_ui_lang(request)
+#     lang_texts = translated_texts._get_lang_texts(translated_texts, ui_lang)
+
+#     context = {
+#         "active_page": "sign-in",
+#         "ui_lang": ui_lang,
+#         **lang_texts,
+#     }
+
+#     context.update(BASE_CONTEXT)
+#     if extra_context:
+#         context.update(extra_context)
+
+#     response = render(request, 'Dashboard/signin.html', context)
+#     response.set_cookie("ui_lang", ui_lang)
+#     return response
 
 def frontpage(request, extra_context=None):
     """
@@ -115,12 +175,23 @@ def frontpage(request, extra_context=None):
         request.user.username or "Anonymous",
     )
 
-    context = {'active_page': 'frontpage'}
+    # get UI language and the corresponding translated texts
+    ui_lang = _get_ui_lang(request)
+    lang_texts = translated_texts._get_lang_texts(translated_texts, ui_lang)
+
+    context = {
+        "active_page": "frontpage",
+        "ui_lang": ui_lang,
+        **lang_texts,
+    }
+
     context.update(BASE_CONTEXT)
     if extra_context:
         context.update(extra_context)
 
-    return render(request, 'Dashboard/frontpage.html', context)
+    response = render(request, 'Dashboard/frontpage.html', context)
+    response.set_cookie("ui_lang", ui_lang)
+    return response
 
 def data_sources(request, extra_context=None):
     """
@@ -170,11 +241,7 @@ def create_profile(request):
     lp_code = None
     languages = []
     proficiency_levels = {}
-
-    language_pairs = [
-        ("eng-mlt", "Maltese and English"),
-        ("spa-eus", "Basque and Spanish"),
-    ]
+    src, tgt = None, None
 
     language_names = LANGUAGE_CODES_AND_NAMES
     proficiency_level_choices = PROFICIENCY_LEVELS
@@ -269,80 +336,33 @@ def create_profile(request):
             focus_input = 'id_languages'
             errors = [_languages_error]
 
+    # get UI language and the corresponding translated texts
+    print("creaet_profile: _get_ui_lang()...")
+    ui_lang = _get_ui_lang(request)
+    lang_texts = translated_texts._get_lang_texts(translated_texts, ui_lang)
+
     context = {
-        'active_page': "OVERVIEW",  # TODO: check
+        'active_page': 'create-profile',
         'errors': errors,
         'focus_input': focus_input,
         'username': username,
         'languages': languages,
         'lp_code': lp_code,
         'proficiency_levels': proficiency_levels,
-        'language_pairs': language_pairs,
+        'src': src,
+        'tgt': tgt,
         'language_names': language_names,
         'proficiency_level_choices': proficiency_level_choices,
         'title': 'Register',
+
+        'ui_lang': ui_lang,
+        **lang_texts,
     }
     context.update(BASE_CONTEXT)
 
-    return render(request, 'Dashboard/create-profile.html', context)
-
-
-# @login_required
-# def update_profile(request):
-#     """
-#     Renders the profile update view.
-#     """
-#     errors = None
-#     languages = set()
-#     language_choices = [x for x in LANGUAGE_CODES_AND_NAMES.items()]
-#     language_choices.sort(key=lambda x: x[1])
-#     focus_input = 'id_projects'
-
-#     if request.method == "POST":
-#         languages = set(request.POST.getlist('languages', None))
-#         if languages:
-#             try:
-#                 # Compute set of evaluation languages for this user.
-#                 for code, _ in language_choices:
-#                     language_group = Group.objects.filter(name=code)
-#                     if language_group.exists():
-#                         language_group = language_group[0]
-#                         if code in languages:
-#                             language_group.user_set.add(request.user)
-#                         language_group.save()
-
-#                 # Redirect to dashboard.
-#                 return redirect('dashboard')
-
-#             # For any other exception, clean up and ask user to retry.
-#             except Exception:
-#                 from traceback import format_exc
-
-#                 print(format_exc())
-
-#                 languages = set()
-
-#         # Detect which input should get focus for next page rendering.
-#         if not languages:
-#             focus_input = 'id_languages'
-#             errors = ['invalid_languages']
-
-#     # Determine user target languages
-#     for group in request.user.groups.all():
-#         if group.name.lower() in [x.lower() for x in LANGUAGE_CODES_AND_NAMES]:
-#             languages.add(group.name.lower())
-
-#     context = {
-#         'active_page': "OVERVIEW",
-#         'errors': errors,
-#         'focus_input': focus_input,
-#         'languages': languages,
-#         'language_choices': language_choices,
-#         'title': 'Update profile',
-#     }
-#     context.update(BASE_CONTEXT)
-
-#     return render(request, 'Dashboard/update-profile.html', context)
+    response = render(request, 'Dashboard/create-profile.html', context)
+    response.set_cookie("ui_lang", ui_lang)
+    return response
 
 @login_required
 def dashboard(request):
@@ -385,10 +405,11 @@ def dashboard(request):
     # set languages in order [src, tgt] according to existing language pairs
     languages = []
 
-    for src, tgt in LANGUAGE_PAIRS:
-        if request.user.groups.filter(name=src).exists() and request.user.groups.filter(name=tgt).exists():
-            languages.extend([src, tgt])
+    for _src, _tgt in LANGUAGE_PAIRS:
+        if request.user.groups.filter(name=_src).exists() and request.user.groups.filter(name=_tgt).exists():
+            languages.extend([_src, _tgt])
 
+    (src, tgt) = languages
     language_names = [LANGUAGE_CODES_AND_NAMES[lang_code] for lang_code in languages]
 
     # check proficiency levels
@@ -554,6 +575,9 @@ def dashboard(request):
     # if work_completed:
         # work_completed = generate_confirmation_token(request.user.username, run_qc=True)
 
+    ui_lang = src
+    lang_texts = translated_texts._get_lang_texts(translated_texts, ui_lang)
+
     template_context.update(times)
     template_context.update(
         {
@@ -572,6 +596,7 @@ def dashboard(request):
             'proficiency_level_accepted': proficiency_level_accepted,
             'src': src,
             'tgt': tgt,
+            **lang_texts,
         }
     )
 

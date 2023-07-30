@@ -23,7 +23,7 @@ LANGUAGE_CODES_AND_NAMES = {
 SIGN_LANGUAGE_CODES = set([])
 
 LANGUAGE_PAIRS = [
-    ["mlt", "eng"],
+    ["eng", "mlt"],
     ["spa", "eus"]
 ]
 

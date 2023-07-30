@@ -99,26 +99,24 @@
 </script>
 
       <div class="jumbotron">
-        <h1>Dashboard</h1>
+        <h1>{{dashboard_title|safe}}</h1>
 
         {% if proficiency_level_accepted %}
           <div class="panel panel-primary" style="margin-top: 20px;">
             <div class="panel-heading">
-              <h3 class="panel-title"><strong>The task</strong></h3>
+              <h3 class="panel-title"><strong>{{task_panel_title|safe}}</strong></h3>
             </div>
             <div class="panel-body">
-              <p>For each item, you will be shown an original sentence in {{language_names|index:0}}, and a translation candidate in {{language_names|index:1}}. You will then be asked to rate the quality of the translation on a scale of 0 to 100, based on how well you believe the translation expresses the full meaning of the original sentence. Let's say a rating of 100 means that the candidate is a perfect translation: it expresses the same thing as the original sentence, in a clear and correct manner. A candidate may "lose points" if it contains grammatical or ortographic mistakes, if it's missing information, if it contains extra information that was not present in the original sentence, if it sounds unnatural or weird, and so on.</p>
-              <p>You cannot edit your rating after you submit it, so please, read both the source sentence and the candidate carefully before you decide on your score.</p>
-
+              {{task_panel_text|safe}}
             </div> <!-- panel-body (first panel) -->
           </div> <!-- panel-primary (first panel) -->
 
           {% if current_task %}
-            <a class="btn btn-primary btn-lg btn-block" href="{% url current_url %}" role="button">Go to task &raquo;</a>
+            <a class="btn btn-primary btn-lg btn-block" href="{% url current_url %}" role="button">{{task_button_text|safe}} &raquo;</a>
           {% elif all_languages %}
             {% with task=all_languages|get_value_from_dict:'direct'|index:0 %}
               {% with tgt=task|index:0 campaign_name=task|index:2 task_type=task|index:3 %}
-                <a class="btn btn-primary btn-lg btn-block" href="{% url task_type tgt campaign_name %}" role="button">Go to task &raquo;</a>
+                <a class="btn btn-primary btn-lg btn-block" href="{% url task_type tgt campaign_name %}" role="button">{{task_button_text|safe}} &raquo;</a>
               {% endwith %}
             {% endwith %}
           {% endif %}
@@ -129,12 +127,12 @@
 
         <div class="panel panel-primary" style="margin-top: 20px;">
           <div class="panel-heading">
-            <h3 class="panel-title"><strong>User status</strong></h3>
+            <h3 class="panel-title"><strong>{{user_status_title|safe}}</strong></h3>
           </div>
           <div class="panel-body">
             {% if proficiency_level_accepted %}
               {% if annotations == 0 %}
-                <p><i>Start participating and evaluating translations to be able to see your user status!</i></p>
+                <p><i>{{user_status_unavailable_text|safe}}</i></p>
               {% else %}
                 <p>
                   <strong>Evaluations done:</strong> {{annotations}}
@@ -154,7 +152,7 @@
         {% if proficiency_level_accepted %}
           <div class="panel panel-primary" style="margin-top: 20px;" id="data-warning"> <!-- data disclaimers panel -->
             <div class="panel-heading">
-              <h3 class="panel-title panel-title-with-langtabs"><strong>Warning</strong></h3>
+              <h3 class="panel-title panel-title-with-langtabs"><strong>{{data_warning_title}}</strong></h3>
               <!-- language tabs -->
               <div class="tab">
                 <button class="tablinks" id="tab-button-eng" onclick="openTab(event, 'eng')" title="English">ENG</button>

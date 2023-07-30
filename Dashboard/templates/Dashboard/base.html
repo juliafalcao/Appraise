@@ -24,9 +24,65 @@
 
     <!-- jQuery v3.2.1 (necessary for Bootstrap's JavaScript plugins) -->
     <script src="{% static 'Dashboard/js/jquery.min.js' %}"></script>
+
+    <script>
+      function _delete_cookie(cookie_key) {
+        let expires = null;
+        const d = new Date();
+        d.setTime(d.getTime() - 2 * 24 * 60 * 60 * 1000);
+        expires = "expires=" + d.toUTCString();
+        document.cookie = cookie_key + "=null;" + expires + ";path=/";
+      }
+
+      function _set_cookie(cookie_key, value) {
+        let expires = null;
+        const d = new Date();
+        d.setTime(d.getTime() + 2 * 24 * 60 * 60 * 1000);
+        document.cookie = cookie_key + "=" + value + ";" + expires + ";path=/";
+      }
+
+      function switchLanguage(event, lang_code) {
+        // delete previous ui_lang cookie because it cannot be overwritten
+        _delete_cookie("ui_lang");
+
+        // set ui_lang cookie
+        _set_cookie("ui_lang", lang_code);
+
+        // reload the page to load new UI language
+        location.reload();
+      }
+
+      </script>
+
 {% block head %}{% endblock %}
   </head>
   <body style="padding-top: 100px">
+  <style>
+  .navbar-langs {
+    padding: 15px 10px 15px 30px;
+    color: #9d9d9d;
+    font-size: 0.9em;
+  }
+  .navbar-langs a {
+    line-height:20px;
+    color: #9d9d9d;
+  }
+
+  .navbar-langs a.active {
+    font-weight: bold;
+  }
+
+  .navbar-langs a:hover {
+    text-decoration: none;
+    color: #fff;
+  } 
+
+  .navbar-langs a:visited,
+  .navbar-langs a::after {
+    text-decoration: none;
+  }
+
+  </style>
 
     <!-- Fixed navbar -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -38,32 +94,39 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          {% comment %} <a class="navbar-brand" href="{% url 'frontpage' %}">Home</a> {% endcomment %}
+          <!-- <a class="navbar-brand" href="{% url 'frontpage' %}">Home</a> -->
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li{% if active_page == 'frontpage' %} class="active"{% endif %}><a href="{% url 'frontpage' %}">Home</a></li>
-            <li{% if active_page == 'dashboard' %} class="active"{% endif %}><a href="{% url 'dashboard' %}">Dashboard</a></li>
-            <li{% if active_page == 'data-sources' %} class="active"{% endif %}><a href="{% url 'data-sources' %}">Data sources</a></li>
-{% if active_page == 'sign-in' %}
-            <li class="active"><a name="#sign-in">Sign in</a></li>
-{% elif active_page == 'register' %}
-            <li class="active"><a name="#register">Register</a></li>
-{% endif %}
+            <li{% if active_page == 'frontpage' %} class="active"{% endif %}><a href="{% url 'frontpage' %}">{{home_title}}</a></li>
+            <li{% if active_page == 'dashboard' %} class="active"{% endif %}><a href="{% url 'dashboard' %}">{{dashboard_title}}</a></li>
+            <!-- <li{% if active_page == 'data-sources' %} class="active"{% endif %}><a href="{% url 'data-sources' %}">Data sources</a></li> -->
+<!-- {% if active_page == 'sign-in' %} -->
+            <!-- <li class="active"><a name="#sign-in">{{sign_in}}</a></li> -->
+<!-- {% elif active_page == 'register' %} -->
+            <!-- <li class="active"><a name="#register">{{register}}</a></li> -->
+<!-- {% endif %} -->
           </ul>
+
+          <div class="nav navbar-nav navbar-right navbar-langs">
+            <a {% if ui_lang == 'eng' %} class="active" {% endif %} href="#" onclick="switchLanguage(event, 'eng')" title="English">ENG</a>
+            &nbsp;/&nbsp;
+            <a {% if ui_lang == 'spa' %} class="active" {% endif %} href="#" onclick="switchLanguage(event, 'spa')" title="Español">SPA</a>
+          </div>
+
 {% if not is_special_page %}
           <ul class="nav navbar-nav navbar-right">
 {% if not request.user.is_authenticated %}
-            <li><a href="{% url 'sign-in' %}">Sign in</a></li>
-            <li><a href="{% url 'create-profile' %}">Register</a></li>
+            <li {% if active_page == 'sign-in' %} class="active" {% endif %}><a href="{% url 'sign-in' %}">{{sign_in}}</a></li>
+            <li {% if active_page == 'create-profile' %} class="active" {% endif %}><a href="{% url 'create-profile' %}">{{register}}</a></li>
 {% else %}
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ request.user.username }}<span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li class="dropdown-header">Account</li>
+                <li class="dropdown-header">{{account}}</li>
                 {% comment %} <li><a href="{% url 'update-profile' %}">Update profile</a></li> {% endcomment %}
                 {% comment %} <li><a href="{% url 'change-password' %}">Change password</a></li> {% endcomment %}
-                <li><a href="{% url 'sign-out' %}">Sign out</a></li>
+                <li><a href="{% url 'sign-out' %}">{{sign_out}}</a></li>
 {% if request.user.is_staff %}
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Management</li>

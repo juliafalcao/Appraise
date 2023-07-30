@@ -18,6 +18,12 @@ from Dashboard import views as dashboard_views
 from EvalData import views as evaldata_views
 from EvalView import views as evalview_views
 
+import translated_texts
+
+# temporary
+ui_lang = "eng"
+lang_texts = translated_texts._get_lang_texts(translated_texts, ui_lang)
+lang_context = {"ui_lang": ui_lang, **lang_texts}
 
 # HTTP error handlers
 # pylint: disable=invalid-name
@@ -42,7 +48,7 @@ urlpatterns = [
         r'^dashboard/sign-in/$',
         auth_views.LoginView.as_view(
             template_name='Dashboard/signin.html',
-            extra_context=BASE_CONTEXT,
+            extra_context={**BASE_CONTEXT, **lang_context},
         ),
         name='sign-in',
     ),

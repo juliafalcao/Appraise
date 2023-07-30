@@ -8,27 +8,25 @@
   font-size: 18px;
 }
 </style>
-
   <div class="jumbotron">
-    <h1>Welcome!</h1>
-    <h3>A crowd-sourced campaign for evaluation of translations</h3>
+    <h1>{{welcome_title}}</h1>
+    <h3>{{welcome_subtitle}}</h3>
 
     <div class="panel panel-primary" style="margin-top: 20px;">
       <div class="panel-heading">
-        <h3 class="panel-title"><strong>The campaign</strong></h3>
+        <h3 class="panel-title"><strong>{{onboarding_panel_title}}</strong></h3>
       </div>
       <div class="panel-body">
-        <p>Are you a bilingual speaker of Maltese and English or a bilingual speaker of Basque and Spanish? If so, we need your help!</p>
-        <p>We are conducting this campaign to evaluate translations from English into Maltese and from Spanish into Basque. Translation is not easy; we want to show you some examples and see what you think about them so that we can help improve them!</p>
+        {{onboarding_text|safe}}
       </div>
     </div>
 
     <div class="col-md-12 col-md-offset-1">
       <div class="col-md-5">
-        <a class="btn btn-default btn-lg btn-block" href="{% url 'dashboard' %}" role="button">Access dashboard &raquo;</a>
+        <a class="btn btn-default btn-lg btn-block" href="{% url 'dashboard' %}" role="button">{{dashboard_button}} &raquo;</a>
       </div>
       <div class="col-md-5">
-        <a class="btn btn-primary btn-lg btn-block" href="{% url 'create-profile' %}" role="button">Register &raquo;</a>
+        <a class="btn btn-primary btn-lg btn-block" href="{% url 'create-profile' %}" role="button">{{register_button}} &raquo;</a>
       </div>
     </div>
 
@@ -37,8 +35,8 @@
   </div> <!-- jumbotron -->
 
   <div class="uni-logos">
-    <img class="uni-logo um-logo" src="{% static 'Dashboard/assets/um-logo.png' %}">
+    <img class="uni-logo um-logo" src="{% static 'Dashboard/assets/um-logo.png' %}" title="University of Malta">
     <br>
-    <img class="uni-logo upv-logo" src="{% static 'Dashboard/assets/upv-logo.png' %}">
+    <img class="uni-logo upv-logo" src="{% static 'Dashboard/assets/upv-logo.png' %}" title="Universidad del País Vasco/Euskal Herriko Unibertsitatea">
   </div>
 {% endblock %}

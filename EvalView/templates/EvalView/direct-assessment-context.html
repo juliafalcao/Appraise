@@ -135,14 +135,7 @@ function update_score()
 
 <div class="row">
 <div class="col-sm-12">
-{% if isCompleteDocument %}
-<p>Below are the sentences you have just rated as a single <strong>document</strong>. Please state how much you agree that:</p>
-<p align="center"><strong>The black text adequately expresses the meaning of the gray text in {{target_language}}.</strong></p>
-{% else %}
-<p>For the pair of sentences below, state <strong>how much you agree</strong> that:</p>
-<p align="center"><strong>The candidate translation adequately expresses the meaning of the original text.</strong></p>
-
-{% endif %}
+  {{task_prompt|safe}}
 </div>
 </div>
 
