@@ -45,6 +45,10 @@ onboarding_panel_title = {
 
 onboarding_text = {
     ENGLISH: """
+    <p>Int kelliem bilingwi tal-Malti u l-Ingliż, jew l-Ispanjol u l-Bask? Jekk iva, għandna bżonn l-għajnuna tiegħek!</p>
+    <p>Aħna riċerkaturi mill-Università ta’ Malta (UM) u mill-Università tal-Pajjiż Bask (UPV/EHU), u qed nagħmlu dan l-istudju sabiex nevalwaw il-kwalità tat-traduzzjonijiet f’żewġ lingwi li ma tantx għandom riżorsi, il-Malti u l-Bask. It-traduzzjoni mhix biċċa xogħol faċli, għalhekk nixtiequ nisimgħu mingħandek: jekk tixtieq tipparteċipa, se nuruk xi sentenzi u nitolbuk tagħtijhom punteġġ, u dan jgħinna ħafna fir-riċerka tagħna biex intejbuhom fil-futur.</p>
+    <p>Jekk trid taqra aktar u tipprova, kompli u oħloq profil — mhux se nitolbuk l-ebda informazzjoni privata, sempliċement għidilna liema lingwi titkellem u inti tista’ tibda!</p>
+    <p style=\"text-align: center;\">—</p>
     <p>Are you a bilingual speaker of Maltese and English, or Spanish and Basque? If so, we need your help!</p>
     <p>We are researchers from the University of Malta (UM) and from the University of the Basque Country (UPV/EHU), and we are conducting this study in order to evaluate the quality of translations into two under-resourced languages, Maltese and Basque. Translation is not an easy task, so we would like to hear from you: if you wish to participate, we will show you some sentences and ask you to rate the translations, and that would help us a lot with our research to improve them in the future.</p>
     <p>If you want to read more and try it out, go on and create a profile — we won’t ask you for any private information, just tell us what languages you speak and you’re good to go!</p>
@@ -86,6 +90,9 @@ task_panel_title = {
 
 task_panel_text = {
     ENGLISH: """
+    <p>Għal kull mistoqsija / prova, se tintwera sentenza oriġinali bl-Ingliż u verzjoni għal traduzzjoni bil-Malti. Imbagħad se tintalab tikklassifika l-kwalità tat-traduzzjoni fuq skala minn 0 sa 100, ibbażat fuq kemm temmen li t-traduzzjoni tesprimi t-tifsira sħiħa tas-sentenza oriġinali. Klassifikazzjoni ta' 100 tfisser li l-verżjoni li qrajt hija traduzzjoni perfetta: tesprimi l-istess ħaġa bħas-sentenza oriġinali, b'mod ċar u korrett. Il-verżjoni għandha tiġi kklassifikata aktar baxxa jekk ikun fiha żbalji grammatikali jew ortografiċi, jekk ikun hemm informazzjoni nieqsa, jekk tinstema' mhux naturali jew stramba, eċċ.</p>
+    <p>Aħna se nżommu kull punteġġ li tissottometti, u tista' tevalwa sentenzi kemm trid inti, imma ovvjament, l-aktar ma tagħmel aħjar! Ma tistax tbiddel l-klassifikazzjoni tiegħek wara li ddaħħala, għalhekk jekk jogħġbok, kun żgur/a li taqra sew is-sentenza oriġinali kif ukoll il-verżjoni għat- traduzzjoni qabel ma tiddeċiedi fuq il-punteġġ tiegħek.</p>
+    <p style=\"text-align: center;\">—</p>
     <p>For each item, you will be shown an original sentence in English and a translation candidate in Maltese. You will then be asked to rate the quality of the translation on a scale of 0 to 100, based on how well you believe the translation expresses the full meaning of the original sentence. A rating of 100 means that the candidate is a perfect translation: it expresses the same thing as the original sentence, in a clear and correct manner. A candidate should be rated lower if it contains grammatical or orthographic errors, if it's missing information, if it sounds unnatural or weird, and so on.</p>
     <p>We will save every score you submit, and you can do as many sentences as you wish, but of course, the more the merrier! You cannot edit your rating after you submit it, so please, make sure to read both the source sentence and the candidate carefully before you decide on your score.</p>
     """,
