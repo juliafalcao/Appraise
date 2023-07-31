@@ -91,9 +91,9 @@ LOG_HANDLER = RotatingFileHandler(
 )
 LOG_HANDLER.setFormatter(LOG_FORMATTER)
 
-LOGIN_URL = 'sign-in/'
-LOGIN_REDIRECT_URL = '/dashboard/' # not used
-LOGOUT_REDIRECT_URL = '/dashboard/' # not used
+LOGIN_URL = "/dashboard/sign-in/" if DEBUG else "/translation-eval/dashboard/sign-in/"
+# LOGIN_REDIRECT_URL = '/dashboard/' # not used
+# LOGOUT_REDIRECT_URL = '/dashboard/' # not used
 
 # Application definition
 
