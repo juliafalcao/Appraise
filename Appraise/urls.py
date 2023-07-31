@@ -54,7 +54,11 @@ urlpatterns = [
         dashboard_views.signout,
         name='sign-out',
     ),
-    re_path(r'^dashboard/$', dashboard_views.dashboard, name='dashboard'),
+    re_path(
+        r'^dashboard/$',
+        dashboard_views.dashboard,
+        name='dashboard'
+    ),
     re_path(
         r'^data-assessment/$',
         evalview_views.data_assessment,
