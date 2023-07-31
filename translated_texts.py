@@ -48,7 +48,7 @@ onboarding_text = {
     <p>Int kelliem bilingwi tal-Malti u l-Ingliż, jew l-Ispanjol u l-Bask? Jekk iva, għandna bżonn l-għajnuna tiegħek!</p>
     <p>Aħna riċerkaturi mill-Università ta’ Malta (UM) u mill-Università tal-Pajjiż Bask (UPV/EHU), u qed nagħmlu dan l-istudju sabiex nevalwaw il-kwalità tat-traduzzjonijiet f’żewġ lingwi li ma tantx għandom riżorsi, il-Malti u l-Bask. It-traduzzjoni mhix biċċa xogħol faċli, għalhekk nixtiequ nisimgħu mingħandek: jekk tixtieq tipparteċipa, se nuruk xi sentenzi u nitolbuk tagħtijhom punteġġ, u dan jgħinna ħafna fir-riċerka tagħna biex intejbuhom fil-futur.</p>
     <p>Jekk trid taqra aktar u tipprova, kompli u oħloq profil — mhux se nitolbuk l-ebda informazzjoni privata, sempliċement għidilna liema lingwi titkellem u inti tista’ tibda!</p>
-    <p style=\"text-align: center;\">—</p>
+    <hr class="ui-lang-divider" />
     <p>Are you a bilingual speaker of Maltese and English, or Spanish and Basque? If so, we need your help!</p>
     <p>We are researchers from the University of Malta (UM) and from the University of the Basque Country (UPV/EHU), and we are conducting this study in order to evaluate the quality of translations into two under-resourced languages, Maltese and Basque. Translation is not an easy task, so we would like to hear from you: if you wish to participate, we will show you some sentences and ask you to rate the translations, and that would help us a lot with our research to improve them in the future.</p>
     <p>If you want to read more and try it out, go on and create a profile — we won’t ask you for any private information, just tell us what languages you speak and you’re good to go!</p>
@@ -57,7 +57,7 @@ onboarding_text = {
     <p>Euskara eta gaztelania, edo maltera eta ingelesa hitz egiten dituzu? Horrela bada, zure laguntza behar dugu!</p>
     <p>Euskal Herriko Unibertsitateko (UPV/EHU) eta Maltako Unibertsitateko (UM) ikertzaileak gara, eta baliabide urriko hizkuntzetara egindako itzulpenen kalitatearen ebaluazioan dihardugu lanean, zehazki euskararako eta malterarako. Itzultzea ez da lan erraza. Hortaz, zure laguntza eske gatoz: parte hartuz gero, esaldi batzuk erakutsiko dizkizugu eta itzulpenak balioztatzeko eskatu. Horrek lagunduko digu etorkizunean itzulpenen kalitatea hobetzen.</p>
     <p>Gure ekimenaz gehiago jakin nahi baduzu eta ekarpena egin, sortu profil bat. Ez dizugu datu pertsonalik eskatuko; zein hizkuntza hitz egiten duzun bakarrik. Anima zaitez!</p>
-    <p style=\"text-align: center;\">—</p>
+    <hr class="ui-lang-divider" />
     <p>¿Hablas euskera y castellano, o maltés e inglés? Si es así, ¡necesitamos tu ayuda!</p>
     <p>Somos investigadores de la Universidad del País Vasco (UPV/EHU) y de la Universidad de Malta (UM), y estamos realizando un estudio para evaluar la calidad de las traducciones a lenguas con pocos recursos, en concreto, al euskera y al maltés. La traducción no es una tarea fácil, por lo que nos gustaría contar con tu participación: te mostraremos unas frases y te pediremos que valores sus traducciones. Eso nos ayudará a mejorar su calidad en el futuro.</p>
     <p>Si quieres saber más sobre esta iniciativa y contribuir a ella, crea tu perfil. No te pediremos datos personales; sólo las lenguas que hablas. ¡Anímate!</p>
@@ -92,14 +92,14 @@ task_panel_text = {
     ENGLISH: """
     <p>Għal kull mistoqsija / prova, se tintwera sentenza oriġinali bl-Ingliż u verzjoni għal traduzzjoni bil-Malti. Imbagħad se tintalab tikklassifika l-kwalità tat-traduzzjoni fuq skala minn 0 sa 100, ibbażat fuq kemm temmen li t-traduzzjoni tesprimi t-tifsira sħiħa tas-sentenza oriġinali. Klassifikazzjoni ta' 100 tfisser li l-verżjoni li qrajt hija traduzzjoni perfetta: tesprimi l-istess ħaġa bħas-sentenza oriġinali, b'mod ċar u korrett. Il-verżjoni għandha tiġi kklassifikata aktar baxxa jekk ikun fiha żbalji grammatikali jew ortografiċi, jekk ikun hemm informazzjoni nieqsa, jekk tinstema' mhux naturali jew stramba, eċċ.</p>
     <p>Aħna se nżommu kull punteġġ li tissottometti, u tista' tevalwa sentenzi kemm trid inti, imma ovvjament, l-aktar ma tagħmel aħjar! Ma tistax tbiddel l-klassifikazzjoni tiegħek wara li ddaħħala, għalhekk jekk jogħġbok, kun żgur/a li taqra sew is-sentenza oriġinali kif ukoll il-verżjoni għat- traduzzjoni qabel ma tiddeċiedi fuq il-punteġġ tiegħek.</p>
-    <p style=\"text-align: center;\">—</p>
+    <hr class="ui-lang-divider" />
     <p>For each item, you will be shown an original sentence in English and a translation candidate in Maltese. You will then be asked to rate the quality of the translation on a scale of 0 to 100, based on how well you believe the translation expresses the full meaning of the original sentence. A rating of 100 means that the candidate is a perfect translation: it expresses the same thing as the original sentence, in a clear and correct manner. A candidate should be rated lower if it contains grammatical or orthographic errors, if it's missing information, if it sounds unnatural or weird, and so on.</p>
     <p>We will save every score you submit, and you can do as many sentences as you wish, but of course, the more the merrier! You cannot edit your rating after you submit it, so please, make sure to read both the source sentence and the candidate carefully before you decide on your score.</p>
     """,
     SPANISH: """
     <p>Ebaluazio-unitate bakoitzerako erakutsiko dizkizugu gaztelaniazko jatorrizko esaldia eta euskarazko itzulpen-hautagai bat. Orduan, itzulpenaren kalitatea 0tik 100era bitarteko eskala batean balioztatzeko eskatuko dizugu, itzulpenak jatorrizko esaldiaren esanahia zein neurritan adierazten duen islatzeko. 100eko puntuazioak esan nahi du hautagaia itzulpen perfektua dela, hau da, jatorrizko esaldiak adierazten duen bera islatzen duela, argi eta zuzen. Itzulpen-hautagaiak informazioa falta badu, jatorra ez bada, esamolde arraroak erabiltzen baditu, akats gramatikalak edo ortografikoak baditu, eta abar, puntuazio baxuagoa esleitu beharko diozu.</p>
     <p>Nahi adina esaldi baliozta ditzakezu, eta guk guztien puntuazioak jasoko ditugu, baina, badakizu, zenbat eta gehiago hainbat eta hobeto! Behin balioztatzea eginda, ez da posible izango aldatzea. Beraz, mesedez, irakurri jatorrizko esaldia eta itzulpen-hautagaia arretaz puntuazioa erabaki aurretik.</p>
-    <p style=\"text-align: center;\">—</p>
+    <hr class="ui-lang-divider" />
     <p>Para cada unidad de evaluación, te mostraremos la frase original en castellano y una propuesta de traducción al euskera. Después, te pediremos que valores la calidad de la traducción en una escala de 0 a 100 para reflejar en qué medida transmite la traducción el significado de la frase original. Una puntuación de 100 significa que la traducción es perfecta, es decir, que refleja, de manera clara y correcta, el contenido de la frase original. Si en la traducción falta información, si no es fluida, utiliza expresiones que no son naturales, tiene errores gramaticales u ortográficos, etc., deberás asignarle una puntuación inferior.</p>
     <p>Puedes valorar tantas frases como quieras, y nosotros guardaremos todas las puntuaciones que nos proporciones, pero, ya sabes, ¡cuantas más mejor! Una vez enviada la valoración, no será posible modificarla. Por lo tanto, por favor, lee la frase original y la propuesta de traducción detenidamente antes de decidir la puntuación.</p>
     """,
@@ -153,11 +153,13 @@ disclaimer_title = {
 
 disclaimer_text = {
     ENGLISH: """
+    <p>ĊAĦDA: Uħud mis-sentenzi li se tara matul dan l-istħarriġ jista' jkun fihom dikjarazzjonijiet offensivi jew mhux xierqa. Parti mid-data li użajna ntgħażlet minn sett ta’ data ta' preġudizzju soċjali , ġabra kbira ta' testi mill-Internet li huma offensivi għal diversi gruppi ta' minoranza, u dan is-sett ta' data nbena sabiex iħarreġ software biex jidentifikaw u jtaffu kontenut offensiv online. Il-bqija tas-sentenzi nġabru bl-istess mod minn diversi sorsi, pubblikazzjonijiet, midja, u l-Internet. L-ebda sentenza ma nkitbet minna, u dawn s-sentenzi ma jesprimux l-fehmiet tal-individwi involuti f’dan il-proġett. L-uniku għan tagħna huwa li nanalizzaw il-kwalità tat-traduzzjonijiet.</p>
+    <hr class="ui-lang-divider" />
     <p>DISCLAIMER: Some of the sentences you will be shown over the course of this task may contain offensive or otherwise inappropriate statements. They may also contain wrong or outdated information about different topics. These sentences were collected from various sources, publications, media, and the Internet. They were not written by us, and do not express the views of anyone involved with this project. Our only goal with this project is to evaluate the quality of the translations.</p>
     """,
     SPANISH: """
     <p>OHARRA: Posible da ebaluazioan zehar erakutsiko dizugun esaldiren batek adierazpen iraingarriak edo nolabait desegokiak diren egiaztapenak izatea. Gaien gaineko informazio okerra edo zaharkitua ere izan dezakete. Esaldiak askotariko iturrietatik jaso ditugu, hainbat argitalpen eta komunikabidetik, internet barne. Ez ditugu guk idatzi, eta ez dute proiektu honetan parte hartzen dugunon iritzia islatzen. Gure helburu bakarra itzulpenen kalitatea ebaluatzea da.</p>
-    <p style=\"text-align: center;\">—</p>
+    <hr class="ui-lang-divider" />
     <p>ATENCIÓN: Es posible que alguna de las frases que te mostremos a lo largo de la evaluación contenga contenido ofensivo o inadecuado. Asimismo, pueden contener información errónea u obsoleta sobre los temas tratados. Las frases se han recopilado de fuentes muy diversas, de múltiples publicaciones y medios de comunicación, incluyendo internet. No han sido redactadas por el grupo de investigación ni reflejan la opinión de quienes participamos en el proyecto. Nuestro único objetivo es evaluar la calidad de las traducciones.</p>
     """
 }
