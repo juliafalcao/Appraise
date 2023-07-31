@@ -16,6 +16,8 @@
 #slider-value {
   font-weight: bold;
   color: #31708f;
+  display: table;
+  margin: .5em auto;
 }
 
 </style>
@@ -189,11 +191,7 @@ function update_score()
   </div>
 
   <div class="col-sm-12">
-    <table class="col-sm-12" style="color: #777;">
-      <tr>
-        <td style="width:100%;text-align: center;"><text id="slider-value">&nbsp;</text></td>
-      </tr>
-    </table>
+    <span id="slider-value">&nbsp;</span>
   </div>
 
 </div>

@@ -1,3 +1,7 @@
+/*
+/var/www/rival/public_html/translation-eval/Dashboard/static/Dashboard/css/custom.css
+*/
+
 .uni-logos {
     display: grid;
     grid-auto-flow: column;
@@ -39,5 +43,5 @@ h3 {
 }
 
 .jumbotron h1 {
-    font-size: 50px;
+    font-size: 55px;
 }
