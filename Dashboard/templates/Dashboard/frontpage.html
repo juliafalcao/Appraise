@@ -12,6 +12,14 @@
         <h3 class="panel-title"><strong>{{onboarding_panel_title}}</strong></h3>
       </div>
       <div class="panel-body">
+
+        {% if ui_lang == 'eng' and ip_location_failed %}
+          <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <i>Si desea ver este sitio web en español y euskera, <a href="#" onclick="switchLanguage(event, 'spa')" >haga clic aquí</a>.</i>
+          </div>
+        {% endif %}
+
         {{onboarding_text|safe}}
       </div>
     </div>

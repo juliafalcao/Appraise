@@ -26,34 +26,8 @@
     <!-- jQuery v3.2.1 (necessary for Bootstrap's JavaScript plugins) -->
     <script src="{% static 'Dashboard/js/jquery.min.js' %}"></script>
 
-    <script>
-      function _delete_cookie(cookie_key) {
-        let expires = null;
-        const d = new Date();
-        d.setTime(d.getTime() - 2 * 24 * 60 * 60 * 1000);
-        expires = "expires=" + d.toUTCString();
-        document.cookie = cookie_key + "=null;" + expires + ";path=/";
-      }
-
-      function _set_cookie(cookie_key, value) {
-        let expires = null;
-        const d = new Date();
-        d.setTime(d.getTime() + 2 * 24 * 60 * 60 * 1000);
-        document.cookie = cookie_key + "=" + value + ";" + expires + ";path=/";
-      }
-
-      function switchLanguage(event, lang_code) {
-        // delete previous ui_lang cookie because it cannot be overwritten
-        _delete_cookie("ui_lang");
-
-        // set ui_lang cookie
-        _set_cookie("ui_lang", lang_code);
-
-        // reload the page to load new UI language
-        location.reload();
-      }
-
-      </script>
+    <!-- switchLanguage() code for the language switch buttons to work -->
+    <script src="{% static 'Dashboard/js/switchLanguage.js' %}"></script>
 
 {% block head %}{% endblock %}
   </head>
