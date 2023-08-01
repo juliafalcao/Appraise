@@ -70,7 +70,7 @@ def _page_not_found(request, template_name='404.html'):
         request.path,
     )
 
-    ui_lang = _get_ui_lang(request)
+    ui_lang, _ = _get_ui_lang(request)
     lang_texts = translated_texts._get_lang_texts(translated_texts, ui_lang)
 
     context = {
@@ -94,7 +94,7 @@ def _server_error(request, template_name='500.html'):
         request.path,
     )
 
-    ui_lang = _get_ui_lang(request)
+    ui_lang, _ = _get_ui_lang(request)
     lang_texts = translated_texts._get_lang_texts(translated_texts, ui_lang)
 
     context = {
@@ -126,7 +126,10 @@ def sso_login(request, username, password):
 
     return redirect('dashboard')
 
-def _get_ui_lang(request):
+def _get_ui_lang(request) -> (str, bool):
+    ui_lang = None
+    ip_location_failed = False
+
     # get from cookie if already defined
     ui_lang = request.COOKIES.get("ui_lang", None)
 
@@ -143,7 +146,7 @@ def _get_ui_lang(request):
         else:
             try:
                 ip = request.META.get("HTTP_X_FORWARDED_FOR", request.META.get("REMOTE_ADDR", None))
-                geoip = GeoIP2("/home/juliafalcao/geoip_dbs")
+                geoip = GeoIP2("~/geoip_dbs")
                 country = geoip.country(ip)["country_name"]
                 print("COUNTRY:", country)
 
@@ -152,8 +155,9 @@ def _get_ui_lang(request):
                     ui_lang = "spa"
             except Exception as e:
                 print("Error finding country:", e)
+                ip_location_failed = True
 
-    return ui_lang
+    return ui_lang, ip_location_failed
 
 def signin(request, extra_context=None):
     logout(request)
@@ -172,7 +176,7 @@ def signin(request, extra_context=None):
                 return redirect('dashboard')
 
     # get UI language and the corresponding translated texts
-    ui_lang = _get_ui_lang(request)
+    ui_lang, _ = _get_ui_lang(request)
     lang_texts = translated_texts._get_lang_texts(translated_texts, ui_lang)
 
     context = {
@@ -191,7 +195,9 @@ def signin(request, extra_context=None):
 
 def signout(request, extra_context=None):
     logout(request)
-    return redirect('frontpage')
+    response = redirect('frontpage')
+    response.delete_cookie("ui_lang")
+    return response
 
 def frontpage(request, extra_context=None):
     """
@@ -203,12 +209,13 @@ def frontpage(request, extra_context=None):
     )
 
     # get UI language and the corresponding translated texts
-    ui_lang = _get_ui_lang(request)
+    ui_lang, ip_location_failed = _get_ui_lang(request)
     lang_texts = translated_texts._get_lang_texts(translated_texts, ui_lang)
 
     context = {
         "active_page": "frontpage",
         "ui_lang": ui_lang,
+        "ip_location_failed": ip_location_failed,
         **lang_texts,
     }
 
@@ -217,7 +224,11 @@ def frontpage(request, extra_context=None):
         context.update(extra_context)
 
     response = render(request, 'Dashboard/frontpage.html', context)
-    response.set_cookie("ui_lang", ui_lang)
+
+    # only in frontpage: do not set the ui_lang cookie yet if failed to get location from IP
+    if not ip_location_failed:
+        response.set_cookie("ui_lang", ui_lang)
+
     return response
 
 def _validate_passwords(password1: str, password2: str) -> (bool, str):
@@ -348,7 +359,7 @@ def create_profile(request):
             errors = [_languages_error]
 
     # get UI language and the corresponding translated texts
-    ui_lang = _get_ui_lang(request)
+    ui_lang, _ = _get_ui_lang(request)
     lang_texts = translated_texts._get_lang_texts(translated_texts, ui_lang)
 
     context = {
@@ -536,7 +547,7 @@ def dashboard(request):
     # if work_completed:
         # work_completed = generate_confirmation_token(request.user.username, run_qc=True)
 
-    ui_lang = _get_ui_lang(request)
+    ui_lang, _ = _get_ui_lang(request)
     lang_texts = translated_texts._get_lang_texts(translated_texts, ui_lang)
 
     template_context.update(times)
@@ -562,7 +573,9 @@ def dashboard(request):
         }
     )
 
-    return render(request, 'Dashboard/dashboard.html', template_context)
+    response = render(request, 'Dashboard/dashboard.html', template_context)
+    response.set_cookie("ui_lang", ui_lang)
+    return response
 
 
 # pylint: disable=missing-docstring
