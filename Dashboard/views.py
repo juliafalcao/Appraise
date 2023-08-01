@@ -7,7 +7,6 @@ from datetime import datetime
 from hashlib import md5
 from inspect import currentframe
 from inspect import getframeinfo
-from requests import get
 
 from django.contrib.auth import authenticate
 from django.contrib.auth import login
@@ -15,6 +14,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
+from django.contrib.gis.geoip2 import GeoIP2
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.template.defaulttags import register
@@ -127,7 +127,7 @@ def sso_login(request, username, password):
     return redirect('dashboard')
 
 def _get_ui_lang(request):
-    # get from cookie if available
+    # get from cookie if already defined
     ui_lang = request.COOKIES.get("ui_lang", None)
 
     if not ui_lang:
@@ -142,8 +142,11 @@ def _get_ui_lang(request):
         # if anonymous: try and get user's location with the IP
         else:
             try:
-                res = get("http://ip-api.com/json")
-                country = res.json()["country"]
+                ip = request.META.get("HTTP_X_FORWARDED_FOR", request.META.get("REMOTE_ADDR", None))
+                geoip = GeoIP2("/home/juliafalcao/geoip_dbs")
+                country = geoip.country(ip)["country_name"]
+                print("COUNTRY:", country)
+
                 if country.lower() in ["spain", "france"]:
                     # including France because of the French Basque Country but the users can always manually change the language if needed
                     ui_lang = "spa"

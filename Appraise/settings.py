@@ -229,3 +229,5 @@ if DEBUG:
     ]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+GEOIP_PATH = "/home/juliafalcao/geoip_dbs"
