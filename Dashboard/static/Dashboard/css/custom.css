@@ -30,15 +30,9 @@ to update:
     opacity: 0.7;
 }
 
-@media (max-width: 460px) {
-    .uni-logos {
-        grid-auto-flow: row;
-        gap: 0.5em;
-    }
-}
-
 .jumbotron p {
     font-size: 15px;
+    margin: 0 0 7px 0; /* reduced line spacing */
 }
 
 h3 {
@@ -57,4 +51,20 @@ h3 {
     width: 90%;
     border: 1px solid #eee;
     margin: 2em;
+}
+
+/* adjustments on mobile screens */
+@media (max-width: 767px) {
+    .uni-logos {
+        grid-auto-flow: row;
+        gap: 0.5em;
+    }
+
+    .jumbotron h1 {
+        font-size: 35px;
+    }
+
+    .btn-lg {
+        margin: 10px auto;
+    }
 }
