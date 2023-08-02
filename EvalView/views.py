@@ -259,7 +259,7 @@ def direct_assessment(request, code=None, campaign_name=None):
         reference_label = 'Reference text in {}'.format(target_language)
         candidate_label = 'Candidate translation in {}'.format(target_language)
 
-    ui_lang = _get_ui_lang(request)
+    ui_lang, _ = _get_ui_lang(request)
     lang_texts = translated_texts._get_lang_texts(translated_texts, ui_lang)
 
     context = {
