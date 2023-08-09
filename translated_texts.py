@@ -34,7 +34,7 @@ welcome_title = {
 }
 
 welcome_subtitle = {
-    ENGLISH: "A crowd-sourced campaign for evaluation of translations",
+    ENGLISH: "A campaign for evaluation of translations",
     SPANISH: "Una campaña de evaluación de traducciones"
 }
 
