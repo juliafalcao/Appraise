@@ -11,27 +11,29 @@ class Command(BaseCommand):
         del args
         del options
 
-        random_letter = choice(list("abcdefghijklmnopqrstuvwxyz"))
+        print("Script deactivated because there is prod data in the database.")
 
-        prompt = f"""
-        Are you sure, 100% sure, fully sure, that you wish to delete EVERYTHING in your database?
-        If so, type the letter '{random_letter}': 
-        """
-        res = input(prompt)
+        # random_letter = choice(list("abcdefghijklmnopqrstuvwxyz"))
 
-        if res == random_letter:
+        # prompt = f"""
+        # Are you sure, 100% sure, fully sure, that you wish to delete EVERYTHING in your database?
+        # If so, type the letter '{random_letter}': 
+        # """
+        # res = input(prompt)
 
-            for model in [
-                DirectAssessmentResult,
-                TextPair,
-                DirectAssessmentTask,
-                CampaignData, # Batch 
-                Metadata,
-                Market,
-                Campaign,
-            ]:
-                print(f"Deleting all instances of {model}...")
-                model.objects.filter().delete()
+        # if res == random_letter:
 
-        else:
-            print("Nevermind!")
+        #     for model in [
+        #         DirectAssessmentResult,
+        #         TextPair,
+        #         DirectAssessmentTask,
+        #         CampaignData, # Batch 
+        #         Metadata,
+        #         Market,
+        #         Campaign,
+        #     ]:
+        #         print(f"Deleting all instances of {model}...")
+        #         model.objects.filter().delete()
+
+        # else:
+        #     print("Nevermind!")
