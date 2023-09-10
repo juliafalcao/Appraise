@@ -1,0 +1,44 @@
+{% extends 'Dashboard/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+.table-users {
+    width: auto;
+}
+
+.outer-report-table td {
+    padding: 1em;
+    vertical-align: top;
+}
+</style>
+
+<div class="jumbotron">
+    <h1>Progress report</h1>
+
+    <p>🔗 <a href="https://nlpgroup.research.um.edu.mt/translation-eval/admin/EvalData/directassessmentresult/">view results in admin panel</a></p>
+    
+    <table class="outer-report-table" style="width: 100%;">
+        <tr>
+            <td><strong>English → Maltese</strong></td>
+            <td><strong>Spanish → Basque</strong></td>
+        </tr>
+        <tr>
+            <td>
+            {{table_users_en_mt|safe}}
+            </td>
+            <td>
+            {{table_users_es_eu|safe}}
+            </td>
+        </tr>
+    </table>
+
+</div> <!-- jumbotron -->
+
+<div class="uni-logos">
+    <img class="uni-logo um-logo" src="{% static 'Dashboard/assets/um-logo.png' %}">
+    <br>
+    <img class="uni-logo upv-logo" src="{% static 'Dashboard/assets/upv-logo.png' %}">
+</div>
+{% endblock %}

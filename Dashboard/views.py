@@ -30,6 +30,14 @@ from EvalData.models import TaskAgenda
 
 import translated_texts
 
+# for the report
+import pandas as pd
+from Campaign.models import *
+from EvalData.models import *
+from Dashboard.models import LANGUAGE_CODES_AND_NAMES, LANGUAGE_PAIRS, PROFICIENCY_LEVELS
+CAMPAIGN_TASK_PAIRS = {(tup[1], tup[2]) for tup in TASK_DEFINITIONS}
+
+
 @register.filter
 def get_value_from_dict(dict_data, key):
     """
@@ -576,6 +584,74 @@ def dashboard(request):
     response = render(request, 'Dashboard/dashboard.html', template_context)
     response.set_cookie("ui_lang", ui_lang)
     return response
+
+@login_required
+def report(request):
+
+    template_context = {"active_page": "report"}
+
+    ui_lang, _ = _get_ui_lang(request)
+    lang_texts = translated_texts._get_lang_texts(translated_texts, ui_lang)
+
+    template_context.update(BASE_CONTEXT)
+    template_context.update({
+        "ui_lang": ui_lang,
+        **lang_texts
+    })
+
+    if not request.user.is_staff:
+        print(f"Non-staff user `{request.user}` tried to access report.")
+        return render(request, 'Dashboard/500.html', template_context)
+
+    # list campaigns
+    all_campaigns = Campaign.objects.all()
+    all_scores = []
+
+    # loop over campaigns
+    for campaign in all_campaigns:
+        # print(f"Querying results for campaign `{campaign}`...")
+
+        # query result scores
+        system_scores = []
+
+        for task_cls, result_cls in CAMPAIGN_TASK_PAIRS:
+            qs_name = task_cls.__name__.lower()
+            qs_attr = f"evaldata_{qs_name}_campaign"
+            qs_obj = getattr(campaign, qs_attr, None)
+
+            if qs_obj and qs_obj.exists():
+                _scores = result_cls.get_system_data(
+                    campaign.id,
+                    extended_csv=True,
+                    add_batch_info=True,
+                )
+                system_scores.extend(_scores)
+
+        all_scores.extend(system_scores)
+
+    # put the scores in a DF
+    columns = ["username", "targetID", "itemID", "itemType", "src", "tgt", "score", "startTime", "endTime", "batchNo", "realItemID"]
+    df_scores = pd.DataFrame(all_scores, columns=columns).sort_values(by="startTime", ascending=False)
+    df_scores = df_scores[["username", "targetID", "itemType", "src", "tgt", "score"]]
+    df_scores["targetID"] = df_scores["targetID"].apply(lambda targetID: targetID.split(".")[0])
+
+    df_scores_en_mt = df_scores[df_scores["src"] == "eng"]
+    df_scores_es_eu = df_scores[df_scores["src"] == "spa"]
+    # format_last_results_table = lambda df: df.head(10).drop(columns=["src", "tgt"]).to_html(index=False, classes="table table-results")
+
+    def get_users_table(df_scores):
+        df_users = df_scores.groupby("username")["username"].count()
+        df_users = df_users.to_frame().rename(columns={"username": "evaluations"})
+        df_users = df_users.reset_index().sort_values(by="evaluations", ascending=False)
+        return df_users.to_html(index=False, classes="table table-users")
+
+    template_context.update({
+        "table_users_en_mt": get_users_table(df_scores_en_mt),
+        "table_users_es_eu": get_users_table(df_scores_es_eu),
+    })
+
+
+    return render(request, 'Dashboard/report.html', template_context)
 
 
 # pylint: disable=missing-docstring
