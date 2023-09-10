@@ -1,3 +1,10 @@
+/*
+to update:
+1. edit in /var/www/rival/public_html/translation-eval/Dashboard/static/Dashboard/css/custom.css
+2. python3 manage.py collectstatis
+3. clean cache and reload page
+*/
+
 .uni-logos {
     display: grid;
     grid-auto-flow: column;
@@ -23,15 +30,9 @@
     opacity: 0.7;
 }
 
-@media (max-width: 460px) {
-    .uni-logos {
-        grid-auto-flow: row;
-        gap: 0.5em;
-    }
-}
-
 .jumbotron p {
-    font-size: 16px;
+    font-size: 15px;
+    margin: 0 0 7px 0; /* reduced line spacing */
 }
 
 h3 {
@@ -39,5 +40,31 @@ h3 {
 }
 
 .jumbotron h1 {
-    font-size: 55px;
+    font-size: 45px;
+}
+
+.btn-lg {
+    font-size: 16px;
+}
+
+.ui-lang-divider {
+    width: 90%;
+    border: 1px solid #eee;
+    margin: 2em;
+}
+
+/* adjustments on mobile screens */
+@media (max-width: 767px) {
+    .uni-logos {
+        grid-auto-flow: row;
+        gap: 0.5em;
+    }
+
+    .jumbotron h1 {
+        font-size: 35px;
+    }
+
+    .btn-lg {
+        margin: 10px auto;
+    }
 }

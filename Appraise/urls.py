@@ -60,6 +60,11 @@ urlpatterns = [
         name='dashboard'
     ),
     re_path(
+        r'^report/$',
+        dashboard_views.report,
+        name='report'
+    ),
+    re_path(
         r'^data-assessment/$',
         evalview_views.data_assessment,
         name='data-assessment',

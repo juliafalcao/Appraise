@@ -258,6 +258,7 @@ class TextPairAdmin(BaseMetadataAdmin):
         'sourceText',
         'targetID',
         'targetText',
+        'activated',
     ] + BaseMetadataAdmin.list_display
     list_filter = [
         'metadata__corpusName',
@@ -461,10 +462,11 @@ class DirectAssessmentResultAdmin(BaseMetadataAdmin):
     list_display = [
         '__str__',
         'score',
-        'start_time',
-        'end_time',
-        'duration',
         'item_type',
+        'createdBy',
+        'duration',
+        # 'start_time',
+        # 'end_time',
     ] + BaseMetadataAdmin.list_display
     list_filter = [
         'item__itemType',
@@ -474,7 +476,7 @@ class DirectAssessmentResultAdmin(BaseMetadataAdmin):
         # nothing model specific
     ] + BaseMetadataAdmin.search_fields  # type: ignore
 
-    readonly_fields = ('item', 'task')
+    readonly_fields = ('item', 'task', 'createdBy')
 
     fieldsets = (
         (None, {'fields': (['score', 'start_time', 'end_time'])}),

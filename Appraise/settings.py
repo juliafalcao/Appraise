@@ -32,7 +32,7 @@ MANAGERS = ADMINS
 
 _SECRET_KEY_DEFAULT = 'j^g&cs_-8-%gwx**xmq64pcm6o2c3ovrxy&%9n@ez#b=qi!uc%'
 SECRET_KEY = os.environ.get('APPRAISE_SECRET_KEY', _SECRET_KEY_DEFAULT)
-if SECRET_KEY == _SECRET_KEY_DEFAULT:
+if SECRET_KEY == _SECRET_KEY_DEFAULT and not DEBUG:
     warnings.warn(
         'Using the default SECRET_KEY value! Set and export APPRAISE_SECRET_KEY envvar instead'
     )
