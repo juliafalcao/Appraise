@@ -33,7 +33,7 @@ class Command(BaseCommand):
 
         # check output-dir
         output_path = options["output_dir"]
-        print("Output directory:", output_path)
+        # print("Output directory:", output_path)
 
         if not os.path.isdir(output_path):
             raise CommandError("The given output directory does not exist.")
@@ -44,7 +44,7 @@ class Command(BaseCommand):
 
         # loop over campaigns
         for campaign in all_campaigns:
-            print(f"Querying results for campaign `{campaign}`...")
+            # print(f"Querying results for campaign `{campaign}`...")
 
             # query result scores
             system_scores = []
@@ -62,19 +62,19 @@ class Command(BaseCommand):
                     )
                     system_scores.extend(_scores)
 
-            if len(system_scores) == 0:
-                print(f"No results found in campaign `{campaign.campaignName}`.")
+            # if len(system_scores) == 0:
+                # print(f"No results found in campaign `{campaign.campaignName}`.")
 
             # put the scores in a DF
             columns = ["username", "targetID", "itemID", "itemType", "src", "tgt", "score", "startTime", "endTime", "batchNo", "realItemID"]
             df_scores = pd.DataFrame(system_scores, columns=columns)
-            print("Scores found:", len(df_scores))
+            # print("Scores found:", len(df_scores))
 
             # create extra fields
             df_scores["deltaTime"] = df_scores.endTime - df_scores.startTime
             df_scores["campaign"] = campaign.campaignName
 
-            print(df_scores.head().to_string())
+            # print(df_scores.head().to_string())
 
             # add to list of DFs per campaign
             dfs_scores.append(df_scores)
@@ -86,7 +86,7 @@ class Command(BaseCommand):
         # save scores DF to CSV
         output_scores_path = os.path.join(output_path, f"results.{timestamp}.csv")
         df_scores.to_csv(output_scores_path, index=False)
-        print(f"Scores saved to `{output_scores_path}`.")
+        # print(f"Scores saved to `{output_scores_path}`.")
 
         # query the users responsible for these scores to get language information
         unique_users = df_scores.username.unique().tolist()
@@ -120,9 +120,9 @@ class Command(BaseCommand):
         
         # store in dataframe and save to CSV
         df_users = pd.DataFrame(rows)
-        print("Unique users:", len(df_users))
-        print(df_users.head().to_string())
+        # print("Unique users:", len(df_users))
+        # print(df_users.head().to_string())
 
         output_users_path =  os.path.join(output_path, f"users.{timestamp}.csv")
         df_users.to_csv(output_users_path, index=False)
-        print(f"Users saved to `{output_users_path}`.")
+        # print(f"Users saved to `{output_users_path}`.")
