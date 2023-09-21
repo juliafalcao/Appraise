@@ -30,8 +30,6 @@
     }
   
     // Show the current tab, and add an "active" class to the button that opened the tab
-    document.getElementById(tabId).style.display = "block";
-
     if (evt) {
       evt.currentTarget.className += " active";
     } else {
@@ -43,8 +41,8 @@
   $(document).ready(function () {
     var languages = eval("{{ languages }}".replaceAll("&#x27;", '"')); // TODO: could probably be better
 
-    /* loop over languages (in list ordered by priority of what to show, local languages first!) */
-    for (const lang_code of ["mlt", "eus", "spa", "eng"]) {
+    /* loop over languages */
+    for (const lang_code of ["spa", "eng"]) {
       if (languages.includes(lang_code)) {
         openTab(null, lang_code);
         break;
