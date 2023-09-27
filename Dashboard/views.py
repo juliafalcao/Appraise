@@ -141,20 +141,21 @@ def _get_ui_lang(request) -> (str, bool):
     # get from cookie if already defined
     ui_lang = request.COOKIES.get("ui_lang", None)
 
-    if not ui_lang:
+    if ui_lang in [None, "eng"]:
         ui_lang = "eng" # leave English as default at first
 
         # if user is logged in: check their source language to set as UI language
         if request.user.username:
+            user_groups = request.user.groups.all()
             for _src, _tgt in LANGUAGE_PAIRS:
-                if request.user.groups.filter(name=_src).exists():
+                if user_groups.filter(name=_src).exists():
                     ui_lang = _src
 
         # if anonymous: try and get user's location with the IP
         else:
             try:
                 ip = request.META.get("HTTP_X_FORWARDED_FOR", request.META.get("REMOTE_ADDR", None))
-                geoip = GeoIP2("~/geoip_dbs")
+                geoip = GeoIP2("/var/www/rival/public_html/translation-eval/geoip_dbs")
                 country = geoip.country(ip)["country_name"]
                 print("COUNTRY:", country)
 
