@@ -32,3 +32,6 @@ MyCampaign/results.csv
 
 # config file
 config.ini
+
+# geoip stuff
+geoipdbs/*
