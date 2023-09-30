@@ -34,4 +34,6 @@ MyCampaign/results.csv
 config.ini
 
 # geoip stuff
-geoipdbs/*
+geoip_dbs/
+geoip_dbs/GeoLite2-City.mmdb
+geoip_dbs/GeoLite2-Country.mmdb
